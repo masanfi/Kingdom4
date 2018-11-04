@@ -12,8 +12,8 @@
 		<xEnd>24</xEnd>
 		<yBegin>10</yBegin>
 		<yEnd>24</yEnd>
-		<fixX>0</fixX>
-		<fixY>0</fixY>
+		<fixX>-1</fixX>
+		<fixY>-1</fixY>
 	</element>
 	<element>
 		<id>2</id>
