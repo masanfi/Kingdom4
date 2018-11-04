@@ -7,6 +7,7 @@
 		<maxAmount>40</maxAmount>
 		<iconPath>tree.png</iconPath>
 		<walkable>no</walkable>
+		<portable>no</portable>
 		<info>I'm a tree, you can't walk through me!</info>
 		<xBegin>10</xBegin>
 		<xEnd>24</xEnd>
@@ -23,6 +24,7 @@
 		<maxAmount>1</maxAmount>
 		<iconPath>castle.png</iconPath>
 		<walkable>no</walkable>
+        <portable>no</portable>
 		<info>Welcome to the castle!</info>
 		<xBegin>50</xBegin>
 		<xEnd>80</xEnd>
