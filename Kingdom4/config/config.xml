@@ -1,0 +1,34 @@
+<root>
+	<element>
+		<id>1</id>
+		<name>Baum</name>
+		<type>tree</type>
+		<minAmount>10</minAmount>
+		<maxAmount>40</maxAmount>
+		<iconPath>tree.png</iconPath>
+		<walkable>no</walkable>
+		<info>I'm a tree, you can't walk through me!</info>
+		<xBegin>10</xBegin>
+		<xEnd>24</xEnd>
+		<yBegin>10</yBegin>
+		<yEnd>24</yEnd>
+		<fixX>-1</fixX>
+		<fixY>-1</fixY>
+	</element>
+	<element>
+		<id>2</id>
+		<name>Schloss</name>
+		<type>castle</type>
+		<minAmount>1</minAmount>
+		<maxAmount>1</maxAmount>
+		<iconPath>castle.png</iconPath>
+		<walkable>no</walkable>
+		<info>Welcome to the castle!</info>
+		<xBegin>50</xBegin>
+		<xEnd>80</xEnd>
+		<yBegin>50</yBegin>
+		<yEnd>80</yEnd>
+		<fixX>100</fixX>
+		<fixY>200</fixY>
+	</element>
+</root>
