@@ -33,4 +33,72 @@
 		<fixX>100</fixX>
 		<fixY>200</fixY>
 	</element>
+	<element>
+		<id>3</id>
+		<name>Blacksmith</name>
+		<type>house</type>
+		<minAmount>1</minAmount>
+		<maxAmount>1</maxAmount>
+		<iconPath>blacksmith.png</iconPath>
+		<walkable>no</walkable>
+        <portable>no</portable>
+		<info>Welcome to the blacksmith!</info>
+		<xBegin>50</xBegin>
+		<xEnd>80</xEnd>
+		<yBegin>50</yBegin>
+		<yEnd>80</yEnd>
+		<fixX>100</fixX>
+		<fixY>200</fixY>
+	</element>
+	<element>
+		<id>4</id>
+		<name>StoneHouse</name>
+		<type>house</type>
+		<minAmount>1</minAmount>
+		<maxAmount>1</maxAmount>
+		<iconPath>stone_house.png</iconPath>
+		<walkable>no</walkable>
+        <portable>no</portable>
+		<info></info>
+		<xBegin>50</xBegin>
+		<xEnd>80</xEnd>
+		<yBegin>50</yBegin>
+		<yEnd>80</yEnd>
+		<fixX>100</fixX>
+		<fixY>200</fixY>
+	</element>
+	<element>
+		<id>4</id>
+		<name>House</name>
+		<type>house</type>
+		<minAmount>1</minAmount>
+		<maxAmount>1</maxAmount>
+		<iconPath>house.png</iconPath>
+		<walkable>no</walkable>
+        <portable>no</portable>
+		<info></info>
+		<xBegin>50</xBegin>
+		<xEnd>80</xEnd>
+		<yBegin>50</yBegin>
+		<yEnd>80</yEnd>
+		<fixX>100</fixX>
+		<fixY>200</fixY>
+	</element>
+	<element>
+		<id>5</id>
+		<name>Knight</name>
+		<type>person</type>
+		<minAmount>1</minAmount>
+		<maxAmount>1</maxAmount>
+		<iconPath>knight.png</iconPath>
+		<walkable>no</walkable>
+        <portable>no</portable>
+		<info>I`m the Black Knight</info>
+		<xBegin>10</xBegin>
+		<xEnd>24</xEnd>
+		<yBegin>10</yBegin>
+		<yEnd>24</yEnd>
+		<fixX>100</fixX>
+		<fixY>200</fixY>
+	</element>
 </root>
