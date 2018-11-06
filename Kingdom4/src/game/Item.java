@@ -17,8 +17,26 @@ public class Item {
     private String info;
     private int minAmount;
     private int maxAmount;
+	private double width;
+	private double height;
 
-    public int getId() {
+    public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -138,11 +156,13 @@ public class Item {
         this.maxAmount = maxAmount;
     }
 
-    @Override
-    public String toString() {
-        return "Item [id=" + id + ", name=" + name + ", type=" + type + ", walkable=" + walkable + ", portable=" + portable + ", xBegin=" + xBegin
-                + ", yBegin=" + yBegin + ", xEnd=" + xEnd + ", yEnd=" + yEnd + ", icon=" + icon + ", fixX=" + fixX
-                + ", fixY=" + fixY + ", info=" + info + ", minAmount=" + minAmount + ", maxAmount="
-                + maxAmount + "]";
-    }
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name + ", type=" + type + ", walkable=" + walkable + ", portable="
+				+ portable + ", xBegin=" + xBegin + ", yBegin=" + yBegin + ", xEnd=" + xEnd + ", yEnd=" + yEnd
+				+ ", icon=" + icon + ", fixX=" + fixX + ", fixY=" + fixY + ", info=" + info + ", minAmount=" + minAmount
+				+ ", maxAmount=" + maxAmount + ", width=" + width + ", height=" + height + "]";
+	}
+
+
 }
