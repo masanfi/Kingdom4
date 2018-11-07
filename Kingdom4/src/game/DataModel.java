@@ -132,13 +132,14 @@ public class DataModel {
     }
 
     private boolean readObjects() {
-        try {
+        try {  	
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            URL file = this.getClass().getResource("config.xml");
-            configFile = builder.parse(new File(file.getFile()));
+            File file = new File("config/config.xml");
+            configFile = builder.parse(file);
             configFile.getDocumentElement().normalize();
         } catch (Exception ex) {
+        	
             System.out.println("Error: " + ex);
             return false;
         }
@@ -148,9 +149,9 @@ public class DataModel {
     }
 
     private void getAllObjects(){
-
+    	
         NodeList objectList = configFile.getElementsByTagName("obstruction");
-
+        //System.out.println(objectList.toString());
         IntStream.range(0, objectList.getLength())
                 .forEach(idx ->{
                     org.w3c.dom.Node nNode = objectList.item(idx);
