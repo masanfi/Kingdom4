@@ -164,7 +164,7 @@ public class DataModel {
                         objekt.setType(eElement.getElementsByTagName("type").item(0).getTextContent());
                         objekt.setIcon(eElement.getElementsByTagName("iconPath").item(0).getTextContent());
                         objekt.setWalkable(eElement.getElementsByTagName("walkable").item(0).getTextContent());
-                        objekt.setWalkable(eElement.getElementsByTagName("portable").item(0).getTextContent());
+                        objekt.setPortable(eElement.getElementsByTagName("portable").item(0).getTextContent());
                         objekt.setMinAmount(Integer.parseInt("0" + eElement.getElementsByTagName("minAmount").item(0).getTextContent()));
                         objekt.setMaxAmount(Integer.parseInt("0" + eElement.getElementsByTagName("maxAmount").item(0).getTextContent()));
                         objekt.setInfo(eElement.getElementsByTagName("info").item(0).getTextContent());
