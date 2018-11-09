@@ -118,7 +118,7 @@ public class DataModel {
         String check = restrictedItems.stream()
                 .filter(elem -> elem.getPoint().equals(checkPoint))
                 .findAny()
-                .map(v -> v.getInfo())
+                .map(Restricted::getInfo)
                 .orElse(null);
 
 
@@ -150,9 +150,9 @@ public class DataModel {
 
     private void getAllObjects(){
     	
-        NodeList objectList = configFile.getElementsByTagName("obstruction");
-        //System.out.println(objectList.toString());
-        IntStream.range(0, objectList.getLength())
+        NodeList objectList = configFile.getElementsByTagName("element");
+
+        IntStream.range(0, objectList.getLength()-1)
                 .forEach(idx ->{
                     org.w3c.dom.Node nNode = objectList.item(idx);
 
@@ -162,15 +162,16 @@ public class DataModel {
                         objekt.setId( Integer.parseInt("0" + eElement.getElementsByTagName("id").item(0).getTextContent()));
                         objekt.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
                         objekt.setType(eElement.getElementsByTagName("type").item(0).getTextContent());
-                        objekt.setIcon(eElement.getElementsByTagName("iconpath").item(0).getTextContent());
+                        objekt.setIcon(eElement.getElementsByTagName("iconPath").item(0).getTextContent());
                         objekt.setWalkable(eElement.getElementsByTagName("walkable").item(0).getTextContent());
-                        objekt.setMinAmount(Integer.parseInt("0" + eElement.getElementsByTagName("minFrequency").item(0).getTextContent()));
-                        objekt.setMaxAmount(Integer.parseInt("0" + eElement.getElementsByTagName("maxFrequency").item(0).getTextContent()));
+                        objekt.setPortable(eElement.getElementsByTagName("portable").item(0).getTextContent());
+                        objekt.setMinAmount(Integer.parseInt("0" + eElement.getElementsByTagName("minAmount").item(0).getTextContent()));
+                        objekt.setMaxAmount(Integer.parseInt("0" + eElement.getElementsByTagName("maxAmount").item(0).getTextContent()));
                         objekt.setInfo(eElement.getElementsByTagName("info").item(0).getTextContent());
-                        objekt.setXBegin(Integer.parseInt("0" + eElement.getElementsByTagName("Xbeginn").item(0).getTextContent()));
-                        objekt.setXEnd(Integer.parseInt("0" + eElement.getElementsByTagName("Xend").item(0).getTextContent()));
-                        objekt.setYBegin(Integer.parseInt("0" + eElement.getElementsByTagName("Ybeginn").item(0).getTextContent()));
-                        objekt.setYEnd(Integer.parseInt("0" + eElement.getElementsByTagName("Yend").item(0).getTextContent()));
+                        objekt.setXBegin(Integer.parseInt("0" + eElement.getElementsByTagName("xBegin").item(0).getTextContent()));
+                        objekt.setXEnd(Integer.parseInt("0" + eElement.getElementsByTagName("xEnd").item(0).getTextContent()));
+                        objekt.setYBegin(Integer.parseInt("0" + eElement.getElementsByTagName("yBegin").item(0).getTextContent()));
+                        objekt.setYEnd(Integer.parseInt("0" + eElement.getElementsByTagName("yEnd").item(0).getTextContent()));
                         objekt.setFixX(Integer.parseInt("0" + eElement.getElementsByTagName("fixX").item(0).getTextContent()));
                         objekt.setFixY(Integer.parseInt("0" + eElement.getElementsByTagName("fixY").item(0).getTextContent()));
                         items.add(objekt);
