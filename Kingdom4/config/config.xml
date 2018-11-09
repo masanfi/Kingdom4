@@ -47,8 +47,8 @@
         <xEnd>80</xEnd>
         <yBegin>50</yBegin>
         <yEnd>80</yEnd>
-        <fixX>100</fixX>
-        <fixY>200</fixY>
+        <fixX>150</fixX>
+        <fixY>450</fixY>
     </element>
     <element>
         <id>4</id>
@@ -64,15 +64,15 @@
         <xEnd>80</xEnd>
         <yBegin>50</yBegin>
         <yEnd>80</yEnd>
-        <fixX>100</fixX>
-        <fixY>200</fixY>
+        <fixX>50</fixX>
+        <fixY>20</fixY>
     </element>
     <element>
         <id>4</id>
         <name>House</name>
         <type>house</type>
         <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
+        <maxAmount>3</maxAmount>
         <iconPath>house.png</iconPath>
         <walkable>no</walkable>
         <portable>no</portable>
@@ -81,11 +81,28 @@
         <xEnd>80</xEnd>
         <yBegin>50</yBegin>
         <yEnd>80</yEnd>
-        <fixX>100</fixX>
-        <fixY>200</fixY>
+        <fixX>300</fixX>
+        <fixY>100</fixY>
     </element>
     <element>
         <id>5</id>
+        <name>FisherHouse</name>
+        <type>house</type>
+        <minAmount>1</minAmount>
+        <maxAmount>1</maxAmount>
+        <iconPath>fisher_house.png</iconPath>
+        <walkable>no</walkable>
+        <portable>no</portable>
+        <info></info>
+        <xBegin>50</xBegin>
+        <xEnd>80</xEnd>
+        <yBegin>50</yBegin>
+        <yEnd>80</yEnd>
+        <fixX>600</fixX>
+        <fixY>100</fixY>
+    </element>
+    <element>
+        <id>6</id>
         <name>Knight</name>
         <type>person</type>
         <minAmount>1</minAmount>
@@ -98,7 +115,7 @@
         <xEnd>24</xEnd>
         <yBegin>10</yBegin>
         <yEnd>24</yEnd>
-        <fixX>100</fixX>
+        <fixX>200</fixX>
         <fixY>200</fixY>
     </element>
 </root>
