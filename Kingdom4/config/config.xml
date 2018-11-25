@@ -538,5 +538,65 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a knight, don't bother me.</information>
+    </element>
+    <element>
+        <id>54</id>
+        <name>castle1</name>
+        <type>building</type>
+        <image>castle_1.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>55</id>
+        <name>castle2</name>
+        <type>building</type>
+        <image>castle_2.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>56</id>
+        <name>castle3</name>
+        <type>building</type>
+        <image>castle_3.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element>
+    <element>
+        <id>57</id>
+        <name>castle4</name>
+        <type>building</type>
+        <image>castle_4.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>58</id>
+        <name>castle5</name>
+        <type>building</type>
+        <image>castle_5.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>59</id>
+        <name>castle6</name>
+        <type>building</type>
+        <image>castle_6.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
     </element>       
 </root>
