@@ -261,13 +261,13 @@
     </element>   
     <element>
         <id>26</id>
-        <name>castle1</name>
-        <type>building</type>
-        <image>castle_lo.png</image>
+        <name>blacksmith</name>
+        <type>figur</type>
+        <image>blacksmith.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
-        <npc>false</npc>
-        <information>I'm a castle, please don't step on me.</information>
+        <npc>true</npc>
+        <information>I'm a blacksmith, please don't step on me.</information>
     </element>  
     <element>
         <id>27</id>
@@ -536,7 +536,7 @@
         <image>knight.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
-        <npc>false</npc>
+        <npc>true</npc>
         <information>I'm a knight, don't bother me.</information>
     </element>
     <element>
