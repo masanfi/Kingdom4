@@ -71,36 +71,4 @@ public class Hero {
         gameEngine.setTimestamp(now);
         gameEngine.movePlayer();
     }
-
-/*    public void move(long now) {
-        gameEngine.notifyObservers();
-
-        if (gameEngine.isTrigger()) {
-            gameEngine.getTriggerField().setFill(Color.BLUE);
-        }
-        else {
-            gameEngine.getTriggerField().setFill(Color.GREEN);
-        }
-
-        gameEngine.setTimestamp(now);
-        long elapsedNanos = gameEngine.getTimestamp() - gameEngine.getLastUpdate() ;
-        if (gameEngine.getLastUpdate() < 0) {
-            gameEngine.setLastUpdate(now);
-            return;
-        }
-
-        double elapsedSeconds = elapsedNanos / 1_000_000_000.0 ;
-        double deltaX = 0 ;
-        double deltaY = 0 ;
-
-        if (gameEngine.getEast()) deltaX += gameEngine.getSpeed() ;
-        if (gameEngine.getWest()) deltaX -= gameEngine.getSpeed() ;
-        if (gameEngine.getSouth()) deltaY += gameEngine.getSpeed() ;
-        if (gameEngine.getNorth()) deltaY -= gameEngine.getSpeed() ;
-
-        gameEngine.getPlayer().setX(clampRange(gameEngine.getPlayer().getX() + deltaX * elapsedSeconds, 0, gameEngine.getBackground().getWidth() - gameEngine.getPlayer().getWidth()));
-        gameEngine.getPlayer().setY(clampRange(gameEngine.getPlayer().getY() + deltaY * elapsedSeconds, 0, gameEngine.getBackground().getHeight() - gameEngine.getPlayer().getHeight()));
-
-        gameEngine.setLastUpdate(now);
-    } */
 }

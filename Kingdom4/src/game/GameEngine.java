@@ -1,6 +1,8 @@
 package game;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -77,6 +79,8 @@ public class GameEngine extends Observable {
     private Pane entities;
     private Pane textOver;
     private double noCollisionX, noCollisionY;
+    private int trophyTreeCounter;
+    private Text text;
 
     public GameEngine() {
 
@@ -389,5 +393,23 @@ public class GameEngine extends Observable {
 
     public Pane getTextOver() {
         return textOver;
+    }
+
+    public void collisionCounter(int object, String name) {
+        if (name.contentEquals("tree")) {
+            System.out.println("Object: " + object);
+            this.trophyTreeCounter++;
+            Platform.runLater(() -> {
+                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyTreeCounter()).asString());
+            });
+        }
+    }
+
+    public int getTrophyTreeCounter() {
+        return trophyTreeCounter;
+    }
+
+    public void setHudText(Text text) {
+        this.text = text;
     }
 }

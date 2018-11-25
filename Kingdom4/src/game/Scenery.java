@@ -1,17 +1,27 @@
 package game;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, textOver;
-
+    private Pane entities, hud ,textOver;
+    private ScrollPane background;
+    private BorderPane playground;
 
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
+
+        background = new ScrollPane();
 
         entities = new Pane();
         gameEngine.setEntities(this.entities);
@@ -21,8 +31,33 @@ public class Scenery {
         //gameEngine.getTextOver().setVisible(false);
 
         gameEngine.getBackground().getChildren().addAll(gameEngine.getEntities(), gameEngine.getTextOver());
+        playground = new BorderPane();
         gameEngine.getEntities().setVisible(false);
-        Scene scene = new Scene(new BorderPane(gameEngine.getBackground()), gameEngine.getPaneWidth(), gameEngine.getPaneHeight());
+
+        hud = new Pane();
+        Rectangle rect = new Rectangle(0, -64, 200, 80);
+        rect.setFill(Color.PURPLE);
+        Text text = new Text("0");
+        gameEngine.setHudText(text);
+        text.setX(10);
+        text.setY(-40);
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font ("Verdana", 20));
+        //text.setFill(Color.WHITE);
+
+        hud.setMinHeight(0);
+        hud.setPrefHeight(0);
+        hud.getChildren().addAll(rect, text);
+
+        background.setContent(gameEngine.getBackground());
+        background.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        background.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
+
+        playground.setCenter(background);
+        playground.setBottom(hud);
+
+        Scene scene = new Scene(playground, gameEngine.getPaneWidth(), gameEngine.getPaneHeight());
         gameEngine.setScene(scene);
     }
 

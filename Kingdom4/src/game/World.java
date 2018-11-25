@@ -82,8 +82,7 @@ public class World {
         if (!item.isWalkable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
             Collision collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
-            System.out.println(collision);
-            //obstacle.setFill(Color.RED);
+            obstacle.setFill(Color.RED);
             this.obstacles.add(obstacle);
             this.collisions.add(collision);
             gameEngine.setObstacle(this.obstacles);

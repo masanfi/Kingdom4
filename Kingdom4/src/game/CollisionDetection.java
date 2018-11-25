@@ -8,7 +8,7 @@ public class CollisionDetection implements IObserver {
 
     boolean isCollision = false;
     int collisions;
-    int objects;
+    int object;
 
     public CollisionDetection(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -18,8 +18,11 @@ public class CollisionDetection implements IObserver {
     @Override
     public void update() {
         collisions = 0;
+        object = 0;
 
         gameEngine.getCollisionObject().forEach(collision->{
+            object++;
+
             double minX = collision.getCoordinates().getX();
             double minY = collision.getCoordinates().getY();
             double width = gameEngine.getTileSize();
@@ -27,9 +30,8 @@ public class CollisionDetection implements IObserver {
 
             Rectangle actionRadius = new Rectangle(minX-1, minY-1, width+2, height+2);
 
-
             if (actionRadius.getBoundsInParent().intersects(gameEngine.getActionSquare().boundsInParentProperty().getValue())) {
-                System.out.println(collision.getName());
+                gameEngine.collisionCounter(object, collision.getName());
                 collisions++;
             }
         });
