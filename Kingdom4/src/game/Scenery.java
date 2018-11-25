@@ -1,10 +1,8 @@
 package game;
 
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.InputEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -43,7 +41,6 @@ public class Scenery {
         text.setY(-40);
         text.setFill(Color.WHITE);
         text.setFont(Font.font ("Verdana", 20));
-        //text.setFill(Color.WHITE);
 
         hud.setMinHeight(0);
         hud.setPrefHeight(0);
