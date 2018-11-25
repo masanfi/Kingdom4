@@ -10,6 +10,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameEngine extends Observable {
@@ -70,6 +71,7 @@ public class GameEngine extends Observable {
     private long timestamp;
     private boolean north, east, south, west, isCollision, isTrigger;
     private Shape trigger;
+    private ArrayList<Collision> collision;
     private ArrayList<Rectangle> obstacle;
     private Rectangle actionSquare;
     private Pane entities;
@@ -214,6 +216,14 @@ public class GameEngine extends Observable {
 
     public void setObstacle(ArrayList<Rectangle> obstacle) {
         this.obstacle = obstacle;
+    }
+
+    public ArrayList<Collision> getCollisionObject() {
+        return collision;
+    }
+
+    public void setCollisionObject(ArrayList<Collision> collision) {
+        this.collision = collision;
     }
 
     public void movePlayer() {

@@ -19,20 +19,19 @@ public class CollisionDetection implements IObserver {
     public void update() {
         collisions = 0;
 
-        gameEngine.getObstacle().forEach(obstacle->{
-            double minX = obstacle.boundsInParentProperty().getValue().getMinX();
-            double minY = obstacle.boundsInParentProperty().getValue().getMinY();
-            double width = obstacle.boundsInParentProperty().getValue().getWidth();
-            double height = obstacle.boundsInParentProperty().getValue().getHeight();
+        gameEngine.getCollisionObject().forEach(collision->{
+            double minX = collision.getCoordinates().getX();
+            double minY = collision.getCoordinates().getY();
+            double width = gameEngine.getTileSize();
+            double height = gameEngine.getTileSize();
 
             Rectangle actionRadius = new Rectangle(minX-1, minY-1, width+2, height+2);
-            //System.out.println(actionRadius.getBoundsInParent().intersects(gameEngine.getActionSquare().boundsInParentProperty().getValue()));
+
 
             if (actionRadius.getBoundsInParent().intersects(gameEngine.getActionSquare().boundsInParentProperty().getValue())) {
+                System.out.println(collision.getName());
                 collisions++;
-                //System.out.println(collisions);
             }
-            //isCollision = actionRadius.getBoundsInParent().intersects(gameEngine.getActionSquare().boundsInParentProperty().getValue());
         });
 
         if (collisions == 0) {
