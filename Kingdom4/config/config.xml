@@ -1,121 +1,532 @@
 <root>
     <element>
+        <id>0</id>
+        <name>grass</name>
+        <type>background</type>
+        <image>grass.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a grass, you can walk on me!</information>
+    </element>
+    <element>
         <id>1</id>
-        <name>Baum</name>
-        <type>tree</type>
-        <minAmount>10</minAmount>
-        <maxAmount>40</maxAmount>
-        <iconPath>tree.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info>I'm a tree, you can't walk through me!</info>
-        <xBegin>10</xBegin>
-        <xEnd>24</xEnd>
-        <yBegin>10</yBegin>
-        <yEnd>24</yEnd>
-        <fixX>0</fixX>
-        <fixY>0</fixY>
+        <name>tree</name>
+        <type>terrain</type>
+        <image>tree.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a tree, you can't walk through me!</information>
     </element>
     <element>
         <id>2</id>
-        <name>Schloss</name>
-        <type>castle</type>
-        <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
-        <iconPath>castle.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info>Welcome to the castle!</info>
-        <xBegin>50</xBegin>
-        <xEnd>80</xEnd>
-        <yBegin>50</yBegin>
-        <yEnd>80</yEnd>
-        <fixX>100</fixX>
-        <fixY>200</fixY>
+        <name>stone</name>
+        <type>terrain</type>
+        <image>stone.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a stone, you can't walk through me!</information>
     </element>
-    <element>
+        <element>
         <id>3</id>
-        <name>Blacksmith</name>
-        <type>house</type>
-        <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
-        <iconPath>blacksmith.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info>Welcome to the blacksmith!</info>
-        <xBegin>50</xBegin>
-        <xEnd>80</xEnd>
-        <yBegin>50</yBegin>
-        <yEnd>80</yEnd>
-        <fixX>150</fixX>
-        <fixY>450</fixY>
+        <name>flowers</name>
+        <type>terrain</type>
+        <image>flowers.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a flower, please don't step on me.</information>
     </element>
     <element>
         <id>4</id>
-        <name>StoneHouse</name>
-        <type>house</type>
-        <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
-        <iconPath>stone_house.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info></info>
-        <xBegin>50</xBegin>
-        <xEnd>80</xEnd>
-        <yBegin>50</yBegin>
-        <yEnd>80</yEnd>
-        <fixX>50</fixX>
-        <fixY>20</fixY>
-    </element>
-    <element>
-        <id>4</id>
-        <name>House</name>
-        <type>house</type>
-        <minAmount>1</minAmount>
-        <maxAmount>3</maxAmount>
-        <iconPath>house.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info></info>
-        <xBegin>50</xBegin>
-        <xEnd>80</xEnd>
-        <yBegin>50</yBegin>
-        <yEnd>80</yEnd>
-        <fixX>300</fixX>
-        <fixY>100</fixY>
+        <name>wall up</name>
+        <type>terrain</type>
+        <image>wall_up.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
     </element>
     <element>
         <id>5</id>
-        <name>FisherHouse</name>
-        <type>house</type>
-        <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
-        <iconPath>fisher_house.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info></info>
-        <xBegin>50</xBegin>
-        <xEnd>80</xEnd>
-        <yBegin>50</yBegin>
-        <yEnd>80</yEnd>
-        <fixX>600</fixX>
-        <fixY>100</fixY>
+        <name>wall down</name>
+        <type>terrain</type>
+        <image>wall_down.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
     </element>
     <element>
         <id>6</id>
-        <name>Knight</name>
-        <type>person</type>
-        <minAmount>1</minAmount>
-        <maxAmount>1</maxAmount>
-        <iconPath>knight.png</iconPath>
-        <walkable>no</walkable>
-        <portable>no</portable>
-        <info>I'm the Black Knight</info>
-        <xBegin>10</xBegin>
-        <xEnd>24</xEnd>
-        <yBegin>10</yBegin>
-        <yEnd>24</yEnd>
-        <fixX>200</fixX>
-        <fixY>200</fixY>
+        <name>wall left</name>
+        <type>terrain</type>
+        <image>wall_left.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
     </element>
+    <element>
+        <id>7</id>
+        <name>wall corner up left</name>
+        <type>terrain</type>
+        <image>wall_corner_up_left.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
+    </element>
+    <element>
+        <id>8</id>
+        <name>wall corner down left</name>
+        <type>terrain</type>
+        <image>wall_corner_down_left.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
+    </element>
+    <element>
+        <id>9</id>
+        <name>Wall end low</name>
+        <type>terrain</type>
+        <image>wall_low.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
+    </element>
+    <element>
+        <id>10</id>
+        <name>Wall end high</name>
+        <type>terrain</type>
+        <image>wall_high.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a wall, you can't walk through me!</information>
+    </element>
+     <element>
+        <id>11</id>
+        <name>river_l</name>
+        <type>terrain</type>
+        <image>river_l.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a river, please don't step on me.</information>
+    </element>
+     <element>
+        <id>12</id>
+        <name>river_r</name>
+        <type>terrain</type>
+        <image>river_r.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a river, please don't step on me.</information>
+    </element>
+    <element>
+        <id>13</id>
+        <name>river_bridge_l</name>
+        <type>terrain</type>
+        <image>river_bridge_l.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a bridge, please step on me.</information>
+    </element>
+     <element>
+        <id>14</id>
+        <name>river_bridge_r</name>
+        <type>terrain</type>
+        <image>river_bridge_r.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a bridge, please step on me.</information>
+    </element>
+    <element>
+        <id>15</id>
+        <name>footpath_horizontal</name>
+        <type>terrain</type>
+        <image>footpath_h.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>16</id>
+        <name>footpath_vertical</name>
+        <type>terrain</type>
+        <image>footpath_v.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>17</id>
+        <name>footpath_corner1</name>
+        <type>terrain</type>
+        <image>footpath_c1.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>18</id>
+        <name>footpath_corner2</name>
+        <type>terrain</type>
+        <image>footpath_c2.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+        <element>
+        <id>19</id>
+        <name>footpath_corner3</name>
+        <type>terrain</type>
+        <image>footpath_c3.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>20</id>
+        <name>footpath_corner4</name>
+        <type>terrain</type>
+        <image>footpath_c4.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>  
+    <element>
+        <id>21</id>
+        <name>footpath_crossing1</name>
+        <type>terrain</type>
+        <image>footpath_x1.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>22</id>
+        <name>footpath_crossing2</name>
+        <type>terrain</type>
+        <image>footpath_x2.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+        <element>
+        <id>23</id>
+        <name>footpath_crossing3</name>
+        <type>terrain</type>
+        <image>footpath_x3.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>24</id>
+        <name>footpath_crossing4</name>
+        <type>terrain</type>
+        <image>footpath_x4.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a footpath, please step on me.</information>
+    </element>
+    <element>
+        <id>25</id>
+        <name>footpath_center4</name>
+        <type>terrain</type>
+        <image>footpath_center.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a towncenter, please don't step on me.</information>
+    </element>   
+    <element>
+        <id>26</id>
+        <name>castle1</name>
+        <type>building</type>
+        <image>castle_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>27</id>
+        <name>castle2</name>
+        <type>building</type>
+        <image>castle_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>28</id>
+        <name>castle3</name>
+        <type>building</type>
+        <image>castle_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>29</id>
+        <name>castle4</name>
+        <type>building</type>
+        <image>castle_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a castle, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>30</id>
+        <name>smith1</name>
+        <type>building</type>
+        <image>smith_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a smith, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>31</id>
+        <name>smith2</name>
+        <type>building</type>
+        <image>smith_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a smith, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>32</id>
+        <name>smith3</name>
+        <type>building</type>
+        <image>smith_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a smith, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>33</id>
+        <name>smith4</name>
+        <type>building</type>
+        <image>smith_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a smith, please don't step on me.</information>
+    </element>
+    <element>
+        <id>34</id>
+        <name>fisher1</name>
+        <type>building</type>
+        <image>fish_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a fisher, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>35</id>
+        <name>fisher2</name>
+        <type>building</type>
+        <image>fish_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a fisher, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>36</id>
+        <name>fisher3</name>
+        <type>building</type>
+        <image>fish_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a fisher, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>37</id>
+        <name>fisher4</name>
+        <type>building</type>
+        <image>fish_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a fisher, please don't step on me.</information>
+    </element>   
+    <element>
+        <id>38</id>
+        <name>stone_house1</name>
+        <type>building</type>
+        <image>stone_house_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>39</id>
+        <name>stone_house2</name>
+        <type>building</type>
+        <image>stone_house_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>40</id>
+        <name>stone_house3</name>
+        <type>building</type>
+        <image>stone_house_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>41</id>
+        <name>stone_house4</name>
+        <type>building</type>
+        <image>stone_house_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>42</id>
+        <name>wood_house1</name>
+        <type>building</type>
+        <image>wood_house_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>43</id>
+        <name>wood_house2</name>
+        <type>building</type>
+        <image>wood_house_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>44</id>
+        <name>wood_house3</name>
+        <type>building</type>
+        <image>wood_house_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>45</id>
+        <name>wood_house4</name>
+        <type>building</type>
+        <image>wood_house_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element>
+    <element>
+        <id>46</id>
+        <name>church1</name>
+        <type>building</type>
+        <image>church_lo.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a church, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>47</id>
+        <name>church2</name>
+        <type>building</type>
+        <image>church_ro.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a church, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>48</id>
+        <name>church3</name>
+        <type>building</type>
+        <image>church_lu.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a church, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>49</id>
+        <name>church4</name>
+        <type>building</type>
+        <image>church_ru.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a house, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>50</id>
+        <name>key</name>
+        <type>object</type>
+        <image>key.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a key, please step on me.</information>
+    </element>
+    <element>
+        <id>51</id>
+        <name>chest</name>
+        <type>object</type>
+        <image>chest.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a chest, please don't step on me.</information>
+    </element>  
+    <element>
+        <id>52</id>
+        <name>rabbit</name>
+        <type>object</type>
+        <image>rabbit.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a rabbit, please step on me.</information>
+    </element>        
 </root>
