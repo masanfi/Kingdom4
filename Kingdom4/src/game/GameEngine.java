@@ -1,3 +1,5 @@
+package game;
+
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
