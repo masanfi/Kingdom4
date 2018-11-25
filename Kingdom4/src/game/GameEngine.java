@@ -81,7 +81,8 @@ public class GameEngine extends Observable {
     private double noCollisionX, noCollisionY;
     private int trophyTreeCounter;
     private Text text;
-
+    private double clampRangeX,clampRangeY;
+    
     public GameEngine() {
 
     }
@@ -230,6 +231,27 @@ public class GameEngine extends Observable {
         this.collision = collision;
     }
 
+    private void setClampX(double x) {
+    	clampRangeX = x ;
+    }
+    
+    public double getClampX() {
+    	return clampRangeX;
+    }
+    
+    private void setClampY(double y) {
+    	clampRangeY = y;
+    }
+    
+    public double getClampY() {
+    	return clampRangeY;
+    }
+
+    public Rectangle getActionSquareFuture() {
+    	Rectangle actionSquareFuture = new Rectangle(getClampX()+80, getClampY()+80, getActionSquare().getWidth(), getActionSquare().getWidth());
+    	return actionSquareFuture;
+    }
+    
     public void movePlayer() {
         this.animatePlayer();
         this.checkForTriggers();
@@ -258,31 +280,21 @@ public class GameEngine extends Observable {
             deltaY -= this.getSpeed();
         }
 
-        double clampRangeX = clampRange(this.getActionSquare().getX() + deltaX * elapsedSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth());
-        double clampRangeY = clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight());
-
+        setClampX(clampRange(this.getActionSquare().getX() + deltaX * elapsedSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
+        setClampY(clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
+        
+        this.notifyObservers();
+        
         if (!isCollision) {
-            this.setNoCollisionX(this.getActionSquare().getX());
-            this.setNoCollisionY(this.getActionSquare().getY());
-        }
-
-        if (!isCollision) {
-            this.getActionSquare().setX(clampRangeX);
+        	this.getActionSquare().setX(clampRangeX);
             this.getActionSquare().setY(clampRangeY);
 
             for (int i = 0; i < this.getPlayer().length; i++) {
                 this.getPlayer()[i].setX(clampRangeX);
                 this.getPlayer()[i].setY(clampRangeY);
             }
-
-        } else {
-            //System.out.println("Collision resolution");
-            this.getActionSquare().setX(this.getNoCollisionX());
-            this.getActionSquare().setY(this.getNoCollisionY());
-            this.setCollision(false);
         }
-
-        this.notifyObservers();
+        
         this.setLastUpdate(this.getTimestamp());
     }
 
