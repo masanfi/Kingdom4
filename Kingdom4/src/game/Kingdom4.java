@@ -40,6 +40,7 @@ public class Kingdom4 extends Application {
         hero.getControls(gameEngine.getScene());
         primaryStage.setTitle("Kingdom 4");
         primaryStage.setScene(gameEngine.getScene());
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         timer.start();
