@@ -1,10 +1,10 @@
 package game;
 
-import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -36,7 +36,7 @@ public class Scenery {
 
         hud = new Pane();
         Rectangle rect = new Rectangle(0, -64, 200, 80);
-        rect.setFill(Color.PURPLE);
+        rect.setFill(Color.DARKGRAY);
         Text text = new Text("0");
         gameEngine.setHudText(text);
         text.setX(10);
@@ -50,10 +50,12 @@ public class Scenery {
         hud.getChildren().addAll(rect, text);
 
         background.setContent(gameEngine.getBackground());
+        background.addEventFilter(InputEvent.ANY, (event)-> {
+                event.consume();
+        });
         background.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
-
         playground.setCenter(background);
         playground.setBottom(hud);
 
