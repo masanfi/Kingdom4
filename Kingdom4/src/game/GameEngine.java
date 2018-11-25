@@ -51,9 +51,6 @@ public class GameEngine extends Observable {
                 {'@','X','X','X','X','X','X','Z',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ','X',' ',' ','§','Y','X','R','r','X','X'},
                 {')','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','&','R','r','X','X'}
         };
-    		
-    		
-         
 
     private final int tileSize = 64 ;
     private final int amountHorizontalTiles = this.getWorld()[0].length;
@@ -82,6 +79,8 @@ public class GameEngine extends Observable {
     private int trophyTreeCounter;
     private Text text;
     private double clampRangeX,clampRangeY;
+    private double actionSquareOffsetX = 16;
+    private double actionSquareOffsetY = 16;
     
     public GameEngine() {
 
@@ -248,7 +247,7 @@ public class GameEngine extends Observable {
     }
 
     public Rectangle getActionSquareFuture() {
-    	Rectangle actionSquareFuture = new Rectangle(getClampX()+80, getClampY()+80, getActionSquare().getWidth(), getActionSquare().getWidth());
+        Rectangle actionSquareFuture = new Rectangle(getClampX() + getActionSquare().getWidth() + 48, getClampY() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
     	return actionSquareFuture;
     }
     
@@ -423,5 +422,13 @@ public class GameEngine extends Observable {
 
     public void setHudText(Text text) {
         this.text = text;
+    }
+
+    public double getActionSquareOffsetX() {
+        return actionSquareOffsetX;
+    }
+
+    public double getActionSquareOffsetY() {
+        return actionSquareOffsetY;
     }
 }
