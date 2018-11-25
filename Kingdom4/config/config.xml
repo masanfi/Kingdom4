@@ -528,5 +528,15 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a rabbit, please step on me.</information>
-    </element>        
+    </element> 
+    <element>
+        <id>53</id>
+        <name>knight</name>
+        <type>figur</type>
+        <image>knight.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a knight, don't bother me.</information>
+    </element>       
 </root>
