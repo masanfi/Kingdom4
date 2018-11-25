@@ -1,5 +1,6 @@
 package game;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.css.Rect;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,13 +36,14 @@ public class World {
     private NodeList objectList;
 
     private ArrayList<Rectangle> obstacles;
+    private ArrayList<Collision> collisions;
 
     public World(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
 
         this.items = new ArrayList<>();
         this.obstacles = new ArrayList<>();
-
+        this.collisions = new ArrayList<>();
 
         tileSize = gameEngine.getTileSize();
         amountHorizontalTiles = gameEngine.getAmountHorizontalTiles();
@@ -78,9 +81,12 @@ public class World {
 
         if (!item.isWalkable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
+            Collision collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
             obstacle.setFill(Color.RED);
             this.obstacles.add(obstacle);
+            this.collisions.add(collision);
             gameEngine.setObstacle(this.obstacles);
+            gameEngine.setCollisionObject(this.collisions);
         }
 
         this.backgroundCollection.get(this.backgroundCollection.size() - 1).relocate(y * tileSize, x * tileSize);

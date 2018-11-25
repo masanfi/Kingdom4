@@ -1,6 +1,8 @@
 package game;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,6 +12,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameEngine extends Observable {
@@ -70,11 +73,14 @@ public class GameEngine extends Observable {
     private long timestamp;
     private boolean north, east, south, west, isCollision, isTrigger;
     private Shape trigger;
+    private ArrayList<Collision> collision;
     private ArrayList<Rectangle> obstacle;
     private Rectangle actionSquare;
     private Pane entities;
     private Pane textOver;
     private double noCollisionX, noCollisionY;
+    private int trophyTreeCounter;
+    private Text text;
 
     public GameEngine() {
 
@@ -214,6 +220,14 @@ public class GameEngine extends Observable {
 
     public void setObstacle(ArrayList<Rectangle> obstacle) {
         this.obstacle = obstacle;
+    }
+
+    public ArrayList<Collision> getCollisionObject() {
+        return collision;
+    }
+
+    public void setCollisionObject(ArrayList<Collision> collision) {
+        this.collision = collision;
     }
 
     public void movePlayer() {
@@ -379,5 +393,23 @@ public class GameEngine extends Observable {
 
     public Pane getTextOver() {
         return textOver;
+    }
+
+    public void collisionCounter(int object, String name) {
+        if (name.contentEquals("tree")) {
+            System.out.println("Object: " + object);
+            this.trophyTreeCounter++;
+            Platform.runLater(() -> {
+                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyTreeCounter()).asString());
+            });
+        }
+    }
+
+    public int getTrophyTreeCounter() {
+        return trophyTreeCounter;
+    }
+
+    public void setHudText(Text text) {
+        this.text = text;
     }
 }
