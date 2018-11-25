@@ -29,9 +29,9 @@ public class Hero {
         this.hero[6] = new ImageView(new Image("right1.png", tileSize, tileSize, true, false));
         this.hero[7] = new ImageView(new Image("right2.png", tileSize, tileSize, true, false));
 
-        actionSquare = new Rectangle(32, 32);
-        actionSquare.setTranslateX(16);
-        actionSquare.setTranslateY(16);
+        actionSquare = new Rectangle(32, 48);
+        actionSquare.setTranslateX(gameEngine.getActionSquareOffsetX());
+        actionSquare.setTranslateY(gameEngine.getActionSquareOffsetY());
         actionSquare.setFill(Color.PURPLE);
         gameEngine.setPlayer(this.hero);
         gameEngine.setGeneralVisibility(false);
