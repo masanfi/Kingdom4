@@ -1,5 +1,3 @@
-package game;
-
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
-
+ 
 public class World {
 
     private GameEngine gameEngine;
@@ -103,41 +101,158 @@ public class World {
                 if (world[x][y] == 'X') {
                     addToPane(x, y, items.get(1), pane);
                 }
-                else if (world[x][y] == 'd') {
-                    addToPane(x, y, items.get(6), pane);
-                }
-                else if (world[x][y] == 'b') {
-                    addToPane(x, y, items.get(7), pane);
-                }
-                else if (world[x][y] == 'q') {
-                    addToPane(x, y, items.get(8), pane);
-                }
-                else if (world[x][y] == 'p') {
-                    addToPane(x, y, items.get(9), pane);
-                }
-                else if (world[x][y] == '-') {
+                else if (world[x][y] == 'Y') {
                     addToPane(x, y, items.get(2), pane);
                 }
-                else if (world[x][y] == 'i') {
+                else if (world[x][y] == 'Z') {
                     addToPane(x, y, items.get(3), pane);
                 }
-                else if (world[x][y] == '=') {
+                else if (world[x][y] == '-') {
                     addToPane(x, y, items.get(4), pane);
                 }
-                else if (world[x][y] == 'I') {
+                else if (world[x][y] == '=') {
                     addToPane(x, y, items.get(5), pane);
                 }
-                else if (world[x][y] == 'f') {
-                    addToPane(x, y, items.get(12), pane);
+                else if (world[x][y] == '@') {
+                    addToPane(x, y, items.get(6), pane);
                 }
-                else if (world[x][y] == '[') {
+                else if (world[x][y] == '(') {
+                    addToPane(x, y, items.get(7), pane);
+                }
+                else if (world[x][y] == ')') {
+                    addToPane(x, y, items.get(8), pane);
+                }
+                else if (world[x][y] == '+') {
+                    addToPane(x, y, items.get(9), pane);
+                }
+                else if (world[x][y] == '&') {
                     addToPane(x, y, items.get(10), pane);
                 }
-                else if (world[x][y] == ']') {
+                else if (world[x][y] == 'R') {
                     addToPane(x, y, items.get(11), pane);
                 }
-                else if (world[x][y] == 's') {
+                else if (world[x][y] == 'r') {
+                    addToPane(x, y, items.get(12), pane);
+                }
+                else if (world[x][y] == 'B') {
                     addToPane(x, y, items.get(13), pane);
+                }
+                else if (world[x][y] == 'b') {
+                    addToPane(x, y, items.get(14), pane);
+                }
+                else if (world[x][y] == 'f') {
+                    addToPane(x, y, items.get(15), pane);
+                }
+                else if (world[x][y] == 'g') {
+                    addToPane(x, y, items.get(16), pane);
+                }
+                else if (world[x][y] == 'h') {
+                    addToPane(x, y, items.get(17), pane);
+                }
+                else if (world[x][y] == 'i') {
+                    addToPane(x, y, items.get(18), pane);
+                }
+                else if (world[x][y] == 'j') {
+                    addToPane(x, y, items.get(19), pane);
+                }
+                else if (world[x][y] == 'k') {
+                    addToPane(x, y, items.get(20), pane);
+                }
+                else if (world[x][y] == 'l') {
+                    addToPane(x, y, items.get(21), pane);
+                }
+                else if (world[x][y] == 'm') {
+                    addToPane(x, y, items.get(22), pane);
+                }
+                else if (world[x][y] == 'n') {
+                    addToPane(x, y, items.get(23), pane);
+                }
+                else if (world[x][y] == 'o') {
+                    addToPane(x, y, items.get(24), pane);
+                }
+                else if (world[x][y] == 'p') {
+                    addToPane(x, y, items.get(25), pane);
+                }
+                else if (world[x][y] == 'M') {
+                    addToPane(x, y, items.get(26), pane);
+                }
+                else if (world[x][y] == 'N') {
+                    addToPane(x, y, items.get(27), pane);
+                }
+                else if (world[x][y] == 'O') {
+                    addToPane(x, y, items.get(28), pane);
+                }
+                else if (world[x][y] == 'P') {
+                    addToPane(x, y, items.get(29), pane);
+                }
+                else if (world[x][y] == 'Q') {
+                    addToPane(x, y, items.get(30), pane);
+                }
+                else if (world[x][y] == 'S') {
+                    addToPane(x, y, items.get(31), pane);
+                }
+                else if (world[x][y] == 'T') {
+                    addToPane(x, y, items.get(32), pane);
+                }
+                else if (world[x][y] == 'U') {
+                    addToPane(x, y, items.get(33), pane);
+                }
+                else if (world[x][y] == 'A') {
+                    addToPane(x, y, items.get(34), pane);
+                }
+                else if (world[x][y] == '/') {
+                    addToPane(x, y, items.get(35), pane);
+                }
+                else if (world[x][y] == 'C') {
+                    addToPane(x, y, items.get(36), pane);
+                }
+                else if (world[x][y] == 'D') {
+                    addToPane(x, y, items.get(37), pane);
+                }
+                else if (world[x][y] == 'E') {
+                    addToPane(x, y, items.get(38), pane);
+                }
+                else if (world[x][y] == 'F') {
+                    addToPane(x, y, items.get(39), pane);
+                }
+                else if (world[x][y] == 'G') {
+                    addToPane(x, y, items.get(40), pane);
+                }
+                else if (world[x][y] == 'H') {
+                    addToPane(x, y, items.get(41), pane);
+                }
+                else if (world[x][y] == 'I') {
+                    addToPane(x, y, items.get(42), pane);
+                }
+                else if (world[x][y] == 'J') {
+                    addToPane(x, y, items.get(43), pane);
+                }
+                else if (world[x][y] == 'K') {
+                    addToPane(x, y, items.get(44), pane);
+                }
+                else if (world[x][y] == 'L') {
+                    addToPane(x, y, items.get(45), pane);
+                }
+                else if (world[x][y] == 'V') {
+                    addToPane(x, y, items.get(46), pane);
+                }
+                else if (world[x][y] == 'W') {
+                    addToPane(x, y, items.get(47), pane);
+                }
+                else if (world[x][y] == '%') {
+                    addToPane(x, y, items.get(48), pane);
+                }
+                else if (world[x][y] == '#') {
+                    addToPane(x, y, items.get(49), pane);
+                }
+                else if (world[x][y] == '!') {
+                    addToPane(x, y, items.get(50), pane);
+                }
+                else if (world[x][y] == '$') {
+                    addToPane(x, y, items.get(51), pane);
+                }
+                else if (world[x][y] == '§') {
+                    addToPane(x, y, items.get(52), pane);
                 }
                 else {
                     addToPane(x, y, items.get(0), pane);
