@@ -29,7 +29,7 @@ public class CollisionDetection implements IObserver {
             double height = gameEngine.getTileSize();
             
             Rectangle actionSquareFuture = gameEngine.getActionSquareFuture();
-            Rectangle actionRadius = new Rectangle(minX-1, minY-1, width+2, height+2);
+            Rectangle actionRadius = new Rectangle(minX+1, minY+1, width, height);
 
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
             	gameEngine.collisionCounter(object, collision.getName());
