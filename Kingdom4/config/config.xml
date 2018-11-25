@@ -584,7 +584,7 @@
         <name>castle5</name>
         <type>building</type>
         <image>castle_5.png</image>
-        <walkable>false</walkable>
+        <walkable>true</walkable>
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a castle, please don't step on me.</information>
@@ -594,7 +594,7 @@
         <name>castle6</name>
         <type>building</type>
         <image>castle_6.png</image>
-        <walkable>false</walkable>
+        <walkable>true</walkable>
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a castle, please don't step on me.</information>
