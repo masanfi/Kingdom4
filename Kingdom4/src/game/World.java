@@ -262,6 +262,9 @@ public class World {
                 else if (world[x][y] == '§') {
                     addToPane(x, y, items.get(52), pane);
                 }
+                else if (world[x][y] == '1') {
+                    addToPane(x, y, items.get(53), pane);
+                }
                 else {
                     addToPane(x, y, items.get(0), pane);
                 }
