@@ -63,9 +63,9 @@ public class GameEngine extends Observable {
     private final int paneHeight = 640;
 
     private final int speed = 200 ; // pixels / second
-    private final double animationSpeed = .15;
+    private final double animationSpeed = 0.15;
     private double animationTimer = 0;
-    private int currentHero;
+    private int currentHero = 0;
     private ImageView[] player;
     private Scene scene;
     private Pane background;
@@ -85,7 +85,9 @@ public class GameEngine extends Observable {
     private double clampRangeX,clampRangeY;
     private double actionSquareOffsetX = 16;
     private double actionSquareOffsetY = 16;
-    
+    private String primaryDirection = "south";
+    private String lastDirection;
+
     public GameEngine() {
 
     }
@@ -250,6 +252,22 @@ public class GameEngine extends Observable {
     	return clampRangeY;
     }
 
+    public void setLastDirection(String lastDirection) {
+        this.lastDirection = lastDirection;
+    }
+
+    public String getLastDirection() {
+        return lastDirection;
+    }
+
+    public void setPrimaryDirection(String primaryDirection) {
+        this.primaryDirection = primaryDirection;
+    }
+
+    public String getPrimaryDirection() {
+        return primaryDirection;
+    }
+
     public Rectangle getActionSquareFuture() {
         Rectangle actionSquareFuture = new Rectangle(getClampX() + getActionSquare().getWidth() + 48, getClampY() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
     	return actionSquareFuture;
@@ -258,6 +276,7 @@ public class GameEngine extends Observable {
     public void movePlayer() {
         this.animatePlayer();
         this.checkForTriggers();
+        this.setLastDirection(this.getPrimaryDirection());
 
         this.setTimestamp(this.getTimestamp());
         long elapsedNanos = this.getTimestamp() - this.getLastUpdate() ;
@@ -369,20 +388,99 @@ public class GameEngine extends Observable {
 
     public void animatePlayer() {
         if (north) {
-                setGeneralVisibility(false);
+            if (!getLastDirection().equals("north")) {
+                this.setGeneralVisibility(false);
                 this.getPlayer()[2].setVisible(true);
+                this.setAnimationTimer(this.getAnimationSpeed());
             }
-        if (south) {
-            setGeneralVisibility(false);
-            this.getPlayer()[0].setVisible(true);
+            if (north && !south) {
+                this.setAnimationTimer(this.getAnimationTimer() + ((this.getTimestamp() - this.getLastUpdate()) / 1_000_000_000.0));
+                if (this.getAnimationTimer() > this.getAnimationSpeed()) {
+                    if (this.getCurrentHero() == 2) {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(3);
+                        this.getPlayer()[3].setVisible(true);
+                    } else {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(2);
+                        this.getPlayer()[2].setVisible(true);
+                    }
+                    this.setAnimationTimer(0);
+                }
+            }
+            this.setPrimaryDirection("north");
         }
-        if (west) {
-            setGeneralVisibility(false);
-            this.getPlayer()[4].setVisible(true);
-        }
+
         if (east) {
-            setGeneralVisibility(false);
-            this.getPlayer()[6].setVisible(true);
+            if (!getLastDirection().equals("east")) {
+                this.setGeneralVisibility(false);
+                this.getPlayer()[6].setVisible(true);
+                this.setAnimationTimer(this.getAnimationSpeed());
+            }
+            if (east && !west) {
+                this.setAnimationTimer(this.getAnimationTimer() + ((this.getTimestamp() - this.getLastUpdate()) / 1_000_000_000.0));
+                if (this.getAnimationTimer() > this.getAnimationSpeed()) {
+                    if (this.getCurrentHero() == 6) {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(7);
+                        this.getPlayer()[7].setVisible(true);
+                    } else {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(6);
+                        this.getPlayer()[6].setVisible(true);
+                    }
+                    this.setAnimationTimer(0);
+                }
+            }
+            this.setPrimaryDirection("east");
+        }
+
+        if (south) {
+            if (!getLastDirection().equals("south")) {
+                this.setGeneralVisibility(false);
+                this.getPlayer()[0].setVisible(true);
+                this.setAnimationTimer(this.getAnimationSpeed());
+            }
+            if (south && !north) {
+                this.setAnimationTimer(this.getAnimationTimer() + ((this.getTimestamp() - this.getLastUpdate()) / 1_000_000_000.0));
+                if (this.getAnimationTimer() > this.getAnimationSpeed()) {
+                    if (this.getCurrentHero() == 0) {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(1);
+                        this.getPlayer()[1].setVisible(true);
+                    } else {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(0);
+                        this.getPlayer()[0].setVisible(true);
+                    }
+                    this.setAnimationTimer(0);
+                }
+            }
+            this.setPrimaryDirection("south");
+        }
+
+        if (west) {
+            if (!getLastDirection().equals("west")) {
+                this.setGeneralVisibility(false);
+                this.getPlayer()[4].setVisible(true);
+                this.setAnimationTimer(this.getAnimationSpeed());
+            }
+            if (west && !east) {
+                this.setAnimationTimer(this.getAnimationTimer() + ((this.getTimestamp() - this.getLastUpdate()) / 1_000_000_000.0));
+                if (this.getAnimationTimer() > this.getAnimationSpeed()) {
+                    if (this.getCurrentHero() == 4) {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(5);
+                        this.getPlayer()[5].setVisible(true);
+                    } else {
+                        this.setGeneralVisibility(false);
+                        this.setCurrentHero(4);
+                        this.getPlayer()[4].setVisible(true);
+                    }
+                    this.setAnimationTimer(0);
+                }
+            }
+            this.setPrimaryDirection("west");
         }
     }
 
@@ -434,5 +532,25 @@ public class GameEngine extends Observable {
 
     public double getActionSquareOffsetY() {
         return actionSquareOffsetY;
+    }
+
+    public int getCurrentHero() {
+        return currentHero;
+    }
+
+    public void setCurrentHero(int currentHero) {
+        this.currentHero = currentHero;
+    }
+
+    public double getAnimationTimer() {
+        return animationTimer;
+    }
+
+    public void setAnimationTimer(double animationTimer) {
+        this.animationTimer = animationTimer;
+    }
+
+    public double getAnimationSpeed() {
+        return animationSpeed;
     }
 }
