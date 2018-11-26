@@ -598,5 +598,35 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a castle, please don't step on me.</information>
-    </element>       
+    </element>
+    <element>
+        <id>60</id>
+        <name>tree2</name>
+        <type>terrain</type>
+        <image>tree2.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a tree, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>61</id>
+        <name>tree3</name>
+        <type>terrain</type>
+        <image>tree3.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a tree, please don't step on me.</information>
+    </element>
+    <element>
+        <id>62</id>
+        <name>flower2</name>
+        <type>terrain</type>
+        <image>flower2.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a flower, please step on me.</information>
+    </element>         
 </root>
