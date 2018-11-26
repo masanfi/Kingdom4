@@ -283,6 +283,15 @@ public class World {
                 else if (world[x][y] == 'c') {
                     addToPane(x, y, items.get(59), pane);
                 }
+                else if (world[x][y] == 'x') {
+                    addToPane(x, y, items.get(60), pane);
+                }
+                else if (world[x][y] == 'y') {
+                    addToPane(x, y, items.get(61), pane);
+                }
+                else if (world[x][y] == 'z') {
+                    addToPane(x, y, items.get(62), pane);
+                }
                 else {
                     addToPane(x, y, items.get(0), pane);
                 }
