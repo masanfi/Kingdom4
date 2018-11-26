@@ -267,27 +267,27 @@
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
-        <information>I'm a blacksmith, please don't step on me.</information>
+        <information>I'm the blacksmith, talk to me.</information>
     </element>  
     <element>
         <id>27</id>
-        <name>castle2</name>
-        <type>building</type>
-        <image>castle_ro.png</image>
+        <name>fishmen</name>
+        <type>figur</type>
+        <image>fishmen.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
-        <npc>false</npc>
-        <information>I'm a castle, please don't step on me.</information>
+        <npc>true</npc>
+        <information>I'm the fishmen, talk to me.</information>
     </element> 
     <element>
         <id>28</id>
-        <name>castle3</name>
-        <type>building</type>
-        <image>castle_lu.png</image>
+        <name>wisemen</name>
+        <type>figur</type>
+        <image>wisemen.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
-        <npc>false</npc>
-        <information>I'm a castle, please don't step on me.</information>
+        <npc>true</npc>
+        <information>I'm the old wise men, talk to me.</information>
     </element> 
     <element>
         <id>29</id>
