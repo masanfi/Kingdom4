@@ -33,7 +33,7 @@
         <id>3</id>
         <name>flowers</name>
         <type>terrain</type>
-        <image>flowers.png</image>
+        <image>flower1.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
         <npc>false</npc>
@@ -273,7 +273,7 @@
         <id>27</id>
         <name>fishmen</name>
         <type>figur</type>
-        <image>fishmen.png</image>
+        <image>fisherman.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
@@ -283,7 +283,7 @@
         <id>28</id>
         <name>wisemen</name>
         <type>figur</type>
-        <image>wisemen.png</image>
+        <image>wiseman.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
