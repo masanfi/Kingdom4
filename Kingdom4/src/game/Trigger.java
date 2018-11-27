@@ -1,22 +1,27 @@
 package game;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class Trigger {
+public class Trigger implements IEvent {
 
-    private GameEngine gameEngine;
-    private Shape trigger;
+    private String name;
+    private Point2D coordinates;
 
-    public Trigger(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
+    public Trigger(String name, Point2D coordinates) {
+        this.name = name;
+        this.coordinates = coordinates;
+    }
 
-        this.trigger = new Rectangle(64, 64);
-        this.trigger.setFill(Color.PURPLE);
-        this.trigger.setLayoutX(960);
-        this.trigger.setLayoutY(576);
+    @Override
+    public String getName() {
+        return name;
+    }
 
-        gameEngine.setTriggerField(this.trigger);
+    @Override
+    public Point2D getCoordinates() {
+        return coordinates;
     }
 }

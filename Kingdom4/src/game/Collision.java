@@ -2,7 +2,7 @@ package game;
 
 import javafx.geometry.Point2D;
 
-public class Collision {
+public class Collision implements IEvent {
 
     private String name;
     private Point2D coordinates;
@@ -16,16 +16,8 @@ public class Collision {
         return name;
     }
 
-    public void setType(String type) {
-        this.name = type;
-    }
-
     public Point2D getCoordinates() {
         return coordinates;
-    }
-
-    public void setCoordinates(Point2D coordinates) {
-        this.coordinates = coordinates;
     }
 
     @Override

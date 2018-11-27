@@ -73,8 +73,8 @@ public class GameEngine extends Observable {
     private long lastUpdate;
     private long timestamp;
     private boolean north, east, south, west, isCollision, isTrigger;
-    private Shape trigger;
-    private ArrayList<Collision> collision;
+    private ArrayList<Trigger> trigger;
+    private ArrayList<IEvent> collision;
     private ArrayList<Rectangle> obstacle;
     private Rectangle actionSquare;
     private Pane entities;
@@ -196,14 +196,6 @@ public class GameEngine extends Observable {
         return west;
     }
 
-    public void setTriggerField(Shape trigger) {
-        this.trigger = trigger;
-    }
-
-    public Shape getTriggerField() {
-        return trigger;
-    }
-
     public void setTrigger(boolean isTrigger) {
         this.isTrigger = isTrigger;
     }
@@ -228,11 +220,11 @@ public class GameEngine extends Observable {
         this.obstacle = obstacle;
     }
 
-    public ArrayList<Collision> getCollisionObject() {
+    public ArrayList<IEvent> getCollisionObject() {
         return collision;
     }
 
-    public void setCollisionObject(ArrayList<Collision> collision) {
+    public void setCollisionObject(ArrayList<IEvent> collision) {
         this.collision = collision;
     }
 
@@ -275,7 +267,6 @@ public class GameEngine extends Observable {
     
     public void movePlayer() {
         this.animatePlayer();
-        this.checkForTriggers();
         this.setLastDirection(this.getPrimaryDirection());
 
         this.setTimestamp(this.getTimestamp());
@@ -306,6 +297,8 @@ public class GameEngine extends Observable {
         setClampY(clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
         
         this.notifyObservers();
+
+        this.checkForTriggers();
         
         if (!isCollision) {
         	this.getActionSquare().setX(clampRangeX);
@@ -338,18 +331,7 @@ public class GameEngine extends Observable {
 
     private void checkForTriggers() {
         if (this.isTrigger()) {
-            this.getTriggerField().setFill(Color.PURPLE);
-            Rectangle rect = new Rectangle(750, 400, 200, 80);
-            rect.setFill(Color.PURPLE);
-            Text text = new Text(765, 445, "Trigger detected!");
-            text.setFont(Font.font ("Verdana", 20));
-            text.setFill(Color.WHITE);
-            this.getTextOver().getChildren().addAll(rect, text);
-            this.getTextOver().setVisible(true);
-        }
-        else {
-            this.getTriggerField().setFill(Color.GREEN);
-            this.getTextOver().setVisible(false);
+            System.out.println("Something's happening!");
         }
     }
 
@@ -552,5 +534,13 @@ public class GameEngine extends Observable {
 
     public double getAnimationSpeed() {
         return animationSpeed;
+    }
+
+    public void setTriggerObject(ArrayList<Trigger> trigger) {
+        this.trigger = trigger;
+    }
+
+    public ArrayList<Trigger> getTriggerObject() {
+        return trigger;
     }
 }
