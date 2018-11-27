@@ -273,7 +273,7 @@
         <id>27</id>
         <name>fishmen</name>
         <type>figur</type>
-        <image>fishmen.png</image>
+        <image>fishman.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
@@ -283,7 +283,7 @@
         <id>28</id>
         <name>wisemen</name>
         <type>figur</type>
-        <image>wisemen.png</image>
+        <image>wiseman.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
