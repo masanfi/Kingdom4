@@ -6,6 +6,8 @@ public class TriggerDetection implements IObserver {
 
     GameEngine gameEngine;
 
+    int triggers;
+
     public TriggerDetection(GameEngine subject) {
         this.gameEngine = subject;
         this.gameEngine.registerObserver(this);
@@ -13,12 +15,27 @@ public class TriggerDetection implements IObserver {
 
     @Override
     public void update() {
-        double minX = gameEngine.getTriggerField().boundsInParentProperty().getValue().getMinX();
-        double minY = gameEngine.getTriggerField().boundsInParentProperty().getValue().getMinY();
-        double width = gameEngine.getTriggerField().boundsInParentProperty().getValue().getWidth();
-        double height = gameEngine.getTriggerField().boundsInParentProperty().getValue().getHeight();
-        Rectangle actionRadius = new Rectangle(minX-1, minY-1, width+2, height+2);
+        triggers = 0;
 
-        gameEngine.setTrigger(actionRadius.getBoundsInParent().intersects(gameEngine.getActionSquare().boundsInParentProperty().getValue()));
+        gameEngine.getTriggerObject().forEach(trigger->{
+            double minX = trigger.getCoordinates().getX();
+            double minY = trigger.getCoordinates().getY();
+            double width = gameEngine.getTileSize();
+            double height = gameEngine.getTileSize();
+
+            Rectangle actionSquareFuture = gameEngine.getActionSquareFuture();
+            Rectangle actionRadius = new Rectangle(minX+2, minY+2, width+4, height+4);
+
+            if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
+                triggers++;
+            }
+        });
+
+        if (triggers == 0) {
+            gameEngine.setTrigger(false);
+        }
+        else {
+            gameEngine.setTrigger(true);
+        }
     }
 }

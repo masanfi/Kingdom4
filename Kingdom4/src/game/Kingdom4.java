@@ -18,9 +18,6 @@ public class Kingdom4 extends Application {
         new CollisionDetection(gameEngine);
         new TriggerDetection(gameEngine);
 
-        //new Obstacle(gameEngine);
-        new Trigger(gameEngine);
-
         world = new World(gameEngine);
         scenery = new Scenery(gameEngine);
 

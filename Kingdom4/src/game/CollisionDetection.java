@@ -6,7 +6,6 @@ public class CollisionDetection implements IObserver {
 
     GameEngine gameEngine;
 
-    boolean isCollision = false;
     int collisions;
     int object;
 

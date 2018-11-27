@@ -36,7 +36,8 @@ public class World {
     private NodeList objectList;
 
     private ArrayList<Rectangle> obstacles;
-    private ArrayList<Collision> collisions;
+    private ArrayList<IEvent> collisions;
+    private ArrayList<Trigger> triggers;
 
     public World(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -44,6 +45,7 @@ public class World {
         this.items = new ArrayList<>();
         this.obstacles = new ArrayList<>();
         this.collisions = new ArrayList<>();
+        this.triggers = new ArrayList<>();
 
         tileSize = gameEngine.getTileSize();
         amountHorizontalTiles = gameEngine.getAmountHorizontalTiles();
@@ -71,15 +73,33 @@ public class World {
 
     public void buildWorld() {
         this.setObstacles();
-
-        gameEngine.getEntities().getChildren().addAll(gameEngine.getTriggerField());
     }
 
     private void addToPane(int x, int y, Item item, Pane pane) {
         ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         this.backgroundCollection.add(image);
 
-        if (!item.isWalkable()) {
+        if (item.isNpc()) {
+            Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
+            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            obstacle.setFill(Color.PURPLE);
+            this.collisions.add(trigger);
+            this.obstacles.add(obstacle);
+            this.triggers.add(trigger);
+            gameEngine.setObstacle(this.obstacles);
+            gameEngine.setTriggerObject(this.triggers);
+            gameEngine.setCollisionObject(this.collisions);
+        }
+        else if (item.isPortable()) {
+            Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
+            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            obstacle.setFill(Color.CYAN);
+            this.obstacles.add(obstacle);
+            this.triggers.add(trigger);
+            gameEngine.setObstacle(this.obstacles);
+            gameEngine.setTriggerObject(this.triggers);
+        }
+        else if (!item.isWalkable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
             Collision collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
             obstacle.setFill(Color.RED);
