@@ -628,5 +628,15 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a flower, please step on me.</information>
-    </element>         
+    </element>   
+    <element>
+        <id>63</id>
+        <name>angel</name>
+        <type>terrain</type>
+        <image>angel.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a fishing rod, please don't step on me.</information>
+    </element>       
 </root>
