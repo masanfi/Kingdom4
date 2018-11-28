@@ -1,21 +1,39 @@
 package game;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Scenery {
 
     private GameEngine gameEngine;
     private Pane entities, hud ,textOver;
+    private StackPane intro;
     private ScrollPane background;
     private BorderPane playground;
-
+    private MediaPlayer player;
+    
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
 
@@ -69,5 +87,58 @@ public class Scenery {
             gameEngine.getPlayer()[i].setTranslateY(64);
             gameEngine.getBackground().getChildren().add(gameEngine.getPlayer()[i]);
         }
+    }
+    
+    
+    public void renderIntro(Stage primaryStage) {
+    	intro = new StackPane();
+        intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+        
+        int paneWidth = gameEngine.getPaneWidth();
+    	int paneHeight = gameEngine.getPaneHeight();
+        
+    	TextField playerNameField = new TextField();
+    	playerNameField.setMaxWidth(200);
+    	playerNameField.setText("Enter Playername ...");
+    	
+        Button startGameButton = new Button("Start Game");
+        VBox vbox = new VBox(20,playerNameField,startGameButton);
+        startGameButton.setOnAction(e -> 
+        {
+        	gameEngine.setPlayerName(playerNameField.getText());
+        	
+        	WritableImage wi = new WritableImage(paneWidth, paneHeight);
+        	
+            Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
+            ImageView firstImageView= new ImageView(firstImage);
+            
+            //wi = new WritableImage(paneWidth, paneHeight);
+            Image secondImage = gameEngine.getScene().snapshot(wi);
+            ImageView secondImageView= new ImageView(secondImage);
+            
+            firstImageView.setTranslateX(0);
+            secondImageView.setTranslateX(paneWidth);
+            
+            StackPane pane= new StackPane(firstImageView,secondImageView);
+            pane.setPrefSize(paneWidth,paneHeight);
+            pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
+            intro.getChildren().setAll(pane);
+            
+
+            Timeline timeline = new Timeline();
+            KeyValue kv = new KeyValue(secondImageView.translateXProperty(), 0, Interpolator.EASE_BOTH);
+            KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+            timeline.getKeyFrames().add(kf);
+            timeline.setOnFinished(t->{
+            	intro.getChildren().setAll(vbox);
+                primaryStage.setScene(gameEngine.getScene());
+            });
+            timeline.play();
+        });
+        
+        vbox.setAlignment(Pos.CENTER);
+        intro.getChildren().addAll(vbox);
+    	Scene scene = new Scene(intro, paneWidth, paneHeight);
+        gameEngine.setIntro(scene);
     }
 }
