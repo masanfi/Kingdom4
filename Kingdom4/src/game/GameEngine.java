@@ -68,6 +68,7 @@ public class GameEngine extends Observable {
     private int currentHero = 0;
     private ImageView[] player;
     private Scene scene;
+    private Scene intro;
     private Pane background;
     private Rectangle clip;
     private long lastUpdate;
@@ -87,6 +88,7 @@ public class GameEngine extends Observable {
     private double actionSquareOffsetY = 16;
     private String primaryDirection = "south";
     private String lastDirection;
+    private String playerName;
 
     public GameEngine() {
 
@@ -96,6 +98,14 @@ public class GameEngine extends Observable {
         return tileSize;
     }
 
+    public void setPlayerName(String playerName) {
+    	this.playerName = playerName;
+    }
+    
+    public String getPlayerName() {
+    	return playerName;
+    }
+    
     public int getAmountHorizontalTiles() {
         return amountHorizontalTiles;
     }
@@ -130,6 +140,14 @@ public class GameEngine extends Observable {
 
     public Scene getScene() {
         return scene;
+    }
+    
+    public void setIntro(Scene scene) {
+        this.intro = scene;
+    }
+
+    public Scene getIntro() {
+        return intro;
     }
 
     public void setBackground(Pane background) {
