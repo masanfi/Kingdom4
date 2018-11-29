@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameEngine extends Observable {
 
@@ -89,8 +90,10 @@ public class GameEngine extends Observable {
     private String primaryDirection = "south";
     private String lastDirection;
     private String playerName;
+    ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
+        trophyCollisionWithTrees = new ArrayList<>();
 
     }
 
@@ -509,13 +512,18 @@ public class GameEngine extends Observable {
     }
 
     public void collisionCounter(int object, String name) {
-        if (name.contentEquals("tree")) {
-            System.out.println("Object: " + object);
-            this.trophyTreeCounter++;
+        if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
+            if (!this.getTrophyCollisionsWithTrees().contains(object)) {
+                this.getTrophyCollisionsWithTrees().add(object);
+            }
             Platform.runLater(() -> {
-                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyTreeCounter()).asString());
+                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
             });
         }
+    }
+
+    private ArrayList<Integer> getTrophyCollisionsWithTrees() {
+        return trophyCollisionWithTrees;
     }
 
     public int getTrophyTreeCounter() {
