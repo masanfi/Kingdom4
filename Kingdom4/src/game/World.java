@@ -315,6 +315,9 @@ public class World {
                 else if (world[x][y] == 'w') {
                     addToPane(x, y, items.get(63), pane);
                 }
+                else if (world[x][y] == '6') {
+                    addToPane(x, y, items.get(64), pane);
+                }
                 else {
                     addToPane(x, y, items.get(0), pane);
                 }

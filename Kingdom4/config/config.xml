@@ -638,5 +638,15 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a fishing rod, please don't step on me.</information>
+    </element> 
+    <element>
+        <id>64</id>
+        <name>lady</name>
+        <type>figur</type>
+        <image>lady_red.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>true</npc>
+        <information>I'm a lady, kneel down.</information>
     </element>       
 </root>
