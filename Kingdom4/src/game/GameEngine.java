@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -89,24 +90,35 @@ public class GameEngine extends Observable {
     private double actionSquareOffsetY = 16;
     private String primaryDirection = "south";
     private String lastDirection;
+
+    private String userName;
+    private Stage primaryStage;
+
     private String playerName;
     ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
-
     }
 
+    public void setPriStage(Stage primaryStage) {
+    	this.primaryStage=primaryStage;
+    }
+    
+    public Stage getPriStage() {
+    	return primaryStage;
+    }
+    
     public int getTileSize() {
         return tileSize;
     }
 
-    public void setPlayerName(String playerName) {
-    	this.playerName = playerName;
+    public void setUserName(String userName) {
+    	this.userName = userName;
     }
     
-    public String getPlayerName() {
-    	return playerName;
+    public String getUserName() {
+    	return userName;
     }
     
     public int getAmountHorizontalTiles() {
@@ -352,7 +364,8 @@ public class GameEngine extends Observable {
 
     private void checkForTriggers() {
         if (this.isTrigger()) {
-            System.out.println("Something's happening!");
+        	
+        	System.out.println("Something's happening!");
         }
     }
 

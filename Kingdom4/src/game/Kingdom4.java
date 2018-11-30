@@ -27,10 +27,10 @@ public class Kingdom4 extends Application {
     private GameEngine gameEngine;
     private Scenery scenery;
 
-    @Override
     public void start(Stage primaryStage) {
     	
         gameEngine = new GameEngine();
+        gameEngine.setPriStage(primaryStage);
         new CollisionDetection(gameEngine);
         new TriggerDetection(gameEngine);
 
@@ -53,7 +53,7 @@ public class Kingdom4 extends Application {
         hero.getControls(gameEngine.getScene());
         primaryStage.setTitle("Kingdom 4");
 
-        scenery.renderIntro(primaryStage);
+        scenery.renderIntro();
         primaryStage.setScene(gameEngine.getIntro());
 
         primaryStage.setResizable(false);

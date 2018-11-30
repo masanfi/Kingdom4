@@ -79,6 +79,17 @@ public class World {
         ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         this.backgroundCollection.add(image);
 
+        //Provisorisches Finale
+        Trigger finale = new Trigger("Finale", new Point2D(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize()));
+        Rectangle finaleObstacle = new Rectangle(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
+        finaleObstacle.setFill(Color.PURPLE);
+        this.obstacles.add(finaleObstacle);
+        this.triggers.add(finale);
+        gameEngine.setObstacle(this.obstacles);
+        gameEngine.setTriggerObject(this.triggers);
+        //Provisorisches FInale
+        
+        
         if (item.isNpc()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
             Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
