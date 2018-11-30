@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameEngine extends Observable {
 
@@ -24,9 +25,9 @@ public class GameEngine extends Observable {
             {'@',' ','Z','Y','z',' ','Y','x',' ',' ','Z',' ',' ',' ',' ',' ','x','z',' ','Y',' ','X',' ','z',' ','Z',' ',' ','R','r','X',' '},
             {'@',' ',' ','X',' ',' ','X',' ',' ',' ',' ','M','N',' ','Y',' ',' ','z',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','R','r','Y','X'},
             {'@',' ',' ',' ',' ',' ',' ','Z',' ',' ',' ','O','P',' ',' ',' ','Z','I','J',' ','X','x','z',' ',' ',' ','A','/','R','r','z',' '},
-            {'@','z',' ',' ','Z',' ',' ',' ',' ',' ',' ','a','c','z',' ',' ',' ','K','L',' ','x','x','X',' ','y','X','C','D','R','r',' ',' '},
+            {'@','z',' ',' ','Z',' ',' ',' ',' ',' ',' ','a','c','5',' ',' ',' ','K','L',' ','x','x','X',' ','y','X','C','D','R','r',' ',' '},
             {'@',' ',' ',' ','Z','Z',' ',' ',' ','X',' ',' ','g',' ',' ',' ',' ','g',' ','X','x','Y',' ',' ',' ','3','g','$','R','r','Y',' '},
-            {'@','X','x',' ',' ','z','X',' ',' ',' ',' ',' ','g','x',' ',' ',' ','g',' ',' ','h','f','f','f','f','f','j',' ','R','r',' ','X'},
+            {'@','X','x',' ',' ','z','X',' ',' ',' ',' ',' ','g','x','z',' ',' ','g',' ',' ','h','f','f','f','f','f','j',' ','R','r',' ','X'},
             {'@','Y','X','z',' ',' ','Y','x','X',' ',' ','Y','g',' ',' ',' ','X','g',' ','Z','g',' ',' ',' ',' ',' ','z','Y','R','r',' ','X'},
             {'@',' ',' ','x',' ',' ','E','F',' ',' ',' ',' ','m','f','f','f','f','l','f','f','o',' ','X','X',' ',' ','Z',' ','R','r','X','X'},
             {'@',' ','X','x',' ',' ','G','H',' ',' ',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','g','Y','X',' ',' ',' ',' ',' ','R','r',' ','Z'},
@@ -89,8 +90,16 @@ public class GameEngine extends Observable {
     private double actionSquareOffsetY = 16;
     private String primaryDirection = "south";
     private String lastDirection;
+
     private String userName;
     private Stage primaryStage;
+
+    private String playerName;
+    ArrayList<Integer> trophyCollisionWithTrees;
+
+    public GameEngine() {
+        trophyCollisionWithTrees = new ArrayList<>();
+    }
 
     public void setPriStage(Stage primaryStage) {
     	this.primaryStage=primaryStage;
@@ -516,13 +525,18 @@ public class GameEngine extends Observable {
     }
 
     public void collisionCounter(int object, String name) {
-        if (name.contentEquals("tree")) {
-            System.out.println("Object: " + object);
-            this.trophyTreeCounter++;
+        if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
+            if (!this.getTrophyCollisionsWithTrees().contains(object)) {
+                this.getTrophyCollisionsWithTrees().add(object);
+            }
             Platform.runLater(() -> {
-                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyTreeCounter()).asString());
+                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
             });
         }
+    }
+
+    private ArrayList<Integer> getTrophyCollisionsWithTrees() {
+        return trophyCollisionWithTrees;
     }
 
     public int getTrophyTreeCounter() {

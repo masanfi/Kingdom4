@@ -291,13 +291,13 @@
     </element> 
     <element>
         <id>29</id>
-        <name>castle4</name>
-        <type>building</type>
-        <image>castle_ru.png</image>
+        <name>lady</name>
+        <type>figur</type>
+        <image>lady_red.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
-        <npc>false</npc>
-        <information>I'm a castle, please don't step on me.</information>
+        <npc>true</npc>
+        <information>I'm a lady, kneel down.</information>
     </element>  
     <element>
         <id>30</id>
