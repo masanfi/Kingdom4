@@ -11,9 +11,8 @@ import java.util.List;
 
 public class JavaClient {
 
-	private static final int port = 1234;
-	private static final String server = "localhost";
-	// private String message;
+	private static final int port = 3856;
+	private static final String server = "cloud.kleiner-heuler.de";
 
 	@SuppressWarnings("resource")
 	public static List<String> sendMessage(String message)

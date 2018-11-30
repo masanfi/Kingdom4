@@ -33,6 +33,7 @@ public class Scenery {
     private ScrollPane background;
     private BorderPane playground;
     private MediaPlayer player;
+    private Boolean gameReady = false;
     
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -89,10 +90,14 @@ public class Scenery {
         }
     }
     
+    public void setGameReady(Boolean x) {
+    	this.gameReady=x;
+    }
     
-    public void renderIntro(Stage primaryStage) {
+    public void renderIntro() {
     	intro = new StackPane();
         intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+        Stage primaryStage = gameEngine.getPriStage();
         
         int paneWidth = gameEngine.getPaneWidth();
     	int paneHeight = gameEngine.getPaneHeight();
@@ -105,14 +110,14 @@ public class Scenery {
         VBox vbox = new VBox(20,playerNameField,startGameButton);
         startGameButton.setOnAction(e -> 
         {
-        	gameEngine.setPlayerName(playerNameField.getText());
+        	gameEngine.setUserName(playerNameField.getText());
         	
         	WritableImage wi = new WritableImage(paneWidth, paneHeight);
         	
             Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
             ImageView firstImageView= new ImageView(firstImage);
             
-            //wi = new WritableImage(paneWidth, paneHeight);
+            wi = new WritableImage(paneWidth, paneHeight);
             Image secondImage = gameEngine.getScene().snapshot(wi);
             ImageView secondImageView= new ImageView(secondImage);
             
@@ -132,6 +137,7 @@ public class Scenery {
             timeline.setOnFinished(t->{
             	intro.getChildren().setAll(vbox);
                 primaryStage.setScene(gameEngine.getScene());
+            	//this.setGameReady(true);
             });
             timeline.play();
         });
@@ -140,5 +146,12 @@ public class Scenery {
         intro.getChildren().addAll(vbox);
     	Scene scene = new Scene(intro, paneWidth, paneHeight);
         gameEngine.setIntro(scene);
+        /*
+        while(true) {
+        	if(gameReady) {
+        		return true;
+        	}
+        }
+        */
     }
 }
