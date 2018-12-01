@@ -30,7 +30,7 @@ public class Kingdom4 extends Application {
     public void start(Stage primaryStage) {
     	
         gameEngine = new GameEngine();
-        gameEngine.setPriStage(primaryStage);
+        gameEngine.setPrimaryStage(primaryStage);
         new CollisionDetection(gameEngine);
         new TriggerDetection(gameEngine);
 
