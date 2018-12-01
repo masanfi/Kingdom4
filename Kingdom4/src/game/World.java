@@ -80,7 +80,7 @@ public class World {
         this.backgroundCollection.add(image);
 
         //Provisorisches Finale
-        Trigger finale = new Trigger("Finale", new Point2D(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize()));
+        Trigger finale = new Trigger("Finale", new Point2D(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
         Rectangle finaleObstacle = new Rectangle(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
         finaleObstacle.setFill(Color.PURPLE);
         this.obstacles.add(finaleObstacle);
@@ -92,7 +92,7 @@ public class World {
         
         if (item.isNpc()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.PURPLE);
             this.collisions.add(trigger);
             this.obstacles.add(obstacle);
@@ -103,7 +103,7 @@ public class World {
         }
         else if (item.isPortable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.CYAN);
             this.obstacles.add(obstacle);
             this.triggers.add(trigger);
