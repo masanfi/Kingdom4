@@ -6,6 +6,8 @@ public class TriggerDetection implements IObserver {
 
     GameEngine gameEngine;
 
+    Trigger trigger;
+
     int triggers;
 
     public TriggerDetection(GameEngine subject) {
@@ -27,14 +29,17 @@ public class TriggerDetection implements IObserver {
             Rectangle actionRadius = new Rectangle(minX+2, minY+2, width+4, height+4);
 
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
+                this.trigger = trigger;
                 triggers++;
             }
         });
 
         if (triggers == 0) {
+            gameEngine.checkForTriggers(null);
             gameEngine.setTrigger(false);
         }
         else {
+            gameEngine.checkForTriggers(trigger);
             gameEngine.setTrigger(true);
         }
     }

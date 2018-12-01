@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,44 +21,44 @@ import java.util.List;
 
 public class GameEngine extends Observable {
 
-	private final char[][] world =
-		{
-            {'(','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','+','R','r',' ','Z'},
-            {'@',' ','Z','Y','z',' ','Y','x',' ',' ','Z',' ',' ',' ',' ',' ','x','z',' ','Y',' ','X',' ','z',' ','Z',' ',' ','R','r','X',' '},
-            {'@',' ',' ','X',' ',' ','X',' ',' ',' ',' ','M','N',' ','Y',' ',' ','z',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','R','r','Y','X'},
-            {'@',' ',' ',' ',' ',' ',' ','Z',' ',' ',' ','O','P',' ',' ',' ','Z','I','J',' ','X','x','z',' ',' ',' ','A','/','R','r','z',' '},
-            {'@','z',' ',' ','Z',' ',' ',' ',' ',' ',' ','a','c','5',' ',' ',' ','K','L',' ','x','x','X',' ','y','X','C','D','R','r',' ',' '},
-            {'@',' ',' ',' ','Z','Z',' ',' ',' ','X',' ',' ','g',' ',' ',' ',' ','g',' ','X','x','Y',' ',' ',' ','3','g','$','R','r','Y',' '},
-            {'@','X','x',' ',' ','z','X',' ',' ',' ',' ',' ','g','x','z',' ',' ','g',' ',' ','h','f','f','f','f','f','j',' ','R','r',' ','X'},
-            {'@','Y','X','z',' ',' ','Y','x','X',' ',' ','Y','g',' ',' ',' ','X','g',' ','Z','g',' ',' ',' ',' ',' ','z','Y','R','r',' ','X'},
-            {'@',' ',' ','x',' ',' ','E','F',' ',' ',' ',' ','m','f','f','f','f','l','f','f','o',' ','X','X',' ',' ','Z',' ','R','r','X','X'},
-            {'@',' ','X','x',' ',' ','G','H',' ',' ',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','g','Y','X',' ',' ',' ',' ',' ','R','r',' ','Z'},
-            {'@',' ',' ',' ',' ',' ',' ','g','Z',' ','z',' ','g',' ',' ','Z','Y','x',' ',' ','g',' ','Z','z',' ',' ',' ',' ','R','r',' ',' '},
-            {'@','Z',' ',' ',' ',' ',' ','k','f','f','f','f','o','z','x','X','x','Y',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
-            {'@',' ','z',' ',' ',' ',' ',' ',' ',' ','X',' ','g',' ',' ','X','x',' ',' ',' ','g','z',' ',' ','X',' ',' ',' ','R','r','z',' '},
-            {'@','X','X',' ',' ',' ','X',' ',' ',' ',' ',' ','g',' ',' ',' ','X','X',' ',' ','g',' ',' ','Y','x',' ','z','X','R','r',' ',' '},
-            {'@','x','Y',' ',' ',' ',' ',' ',' ','z','z',' ','g',' ','X','x',' ',' ','h','f','j',' ',' ',' ',' ',' ',' ','Z','R','r',' ',' '},
-            {'@','z','Y',' ','Z','x','X','V','W',' ',' ',' ','g',' ','z','x',' ',' ','g',' ','X','X',' ',' ',' ',' ',' ',' ','R','r','X',' '},
-            {'@',' ',' ',' ',' ','X','x','%','#',' ',' ',' ','g',' ',' ',' ',' ',' ','g','Y',' ',' ',' ',' ',' ',' ',' ','X','R','r','Y',' '},
-            {'@',' ',' ',' ',' ','z',' ','g','X','x','Z','Z','g','Z','Z',' ',' ','Z','g',' ','z',' ',' ',' ',' ','Z',' ',' ','R','r',' ','Z'},
-            {'@',' ',' ',' ',' ',' ',' ','g',' ','Y','Z','h','l','i','Z',' ',' ','X','g','Z','z',' ','X',' ',' ',' ','x',' ','R','r',' ','z'},
-            {'@','Z','Q','S','X','y','Y','m','f','f','f','o','p','m','f','f','f','f','j','Y',' ',' ','Z',' ',' ',' ',' ','x','R','r','Y',' '},
-            {'@',' ','T','U','2',' ',' ','g',' ',' ','Z','k','n','j','Z',' ',' ',' ',' ',' ',' ','E','F',' ',' ',' ',' ',' ','R','r',' ',' '},
-            {'@',' ',' ','g',' ',' ',' ','g',' ',' ','Z','Z','g','Z','Z',' ',' ','z','X',' ',' ','G','H',' ',' ',' ','X',' ','R','r',' ',' '},
-            {'@','X',' ','k','f','f','f','j',' ','I','J','X','g',' ',' ','z',' ',' ',' ',' ',' ',' ','g',' ',' ',' ',' ','Y','R','r',' ','X'},
-            {'@','Z','X',' ','x','Y','X','Y',' ','K','L',' ','g','4',' ','Y',' ',' ',' ','x','Y',' ','g',' ',' ',' ','Z','Z','R','r',' ','x'},
-            {'@','x','x','Z',' ','x','X','x','X','g',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','X','Z','g','Z',' ',' ','z',' ','R','r','Z',' '},
-            {'@','y',' ','X',' ','X','X','z','Y','k','f','f','l','f','f','f','f','f','f','f','f','f','l','f','f','f','f','1','B','b','f','f'},
-            {'@','X',' ',' ',' ','Z',' ',' ',' ','X',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','w','R','r',' ','X'},
-            {'@','Z','X',' ','X','X','x','Y','x','x','Z','X',' ',' ','z','Y',' ',' ','Z','X','X',' ',' ',' ',' ',' ','x','Z','R','r',' ','Y'},
-            {'@','x','X','z','Y','Y','x','X',' ',' ','z','Y','X','X','Y','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','Y','R','r','z','Z'},
-            {'@','Y','x','X',' ',' ',' ','Z','X','x',' ',' ',' ','Z','x','Y','z',' ',' ',' ',' ',' ',' ','z',' ',' ',' ','Y','R','r',' ',' '},
-            {'@','!','x','x',' ','X','Z','X',' ','Y','X','Y','X','Z','x','x','X',' ',' ',' ','z',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
-            {'@',' ',' ','X',' ','X','z',' ',' ','Z','z','Z','X','Y',' ','X',' ','Z',' ',' ',' ','Y','Z','X',' ',' ',' ',' ','R','r',' ','X'},
-            {'@','x',' ',' ','Z','x','X','Y',' ','X',' ','x','x','Z',' ',' ','X','Z','X',' ','Z','x',' ',' ','Z',' ','Y','X','R','r','X','x'},
-            {'@','X','x','y','x','x','X','Z',' ','X',' ','z',' ',' ','y',' ',' ',' ','x',' ',' ','X','y',' ',' ','§','Y','x','R','r','X','x'},
-            {')','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','&','R','r','x','X'}
-    };
+    private final char[][] world =
+            {
+                    {'(','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','+','R','r',' ','Z'},
+                    {'@',' ','Z','Y','z',' ','Y','x',' ',' ','Z',' ',' ',' ',' ',' ','x','z',' ','Y',' ','X',' ','z',' ','Z',' ',' ','R','r','X',' '},
+                    {'@',' ',' ','X',' ',' ','X',' ',' ',' ',' ','M','N',' ','Y',' ',' ','z',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','R','r','Y','X'},
+                    {'@',' ',' ',' ',' ',' ',' ','Z',' ',' ',' ','O','P',' ',' ',' ','Z','I','J',' ','X','x','z',' ',' ',' ','A','/','R','r','z',' '},
+                    {'@','z',' ',' ','Z',' ',' ',' ',' ',' ',' ','a','c','5',' ',' ',' ','K','L',' ','x','x','X',' ','y','X','C','D','R','r',' ',' '},
+                    {'@',' ',' ',' ','Z','Z',' ',' ',' ','X',' ',' ','g',' ',' ',' ',' ','g',' ','X','x','Y',' ',' ',' ','3','g','$','R','r','Y',' '},
+                    {'@','X','x',' ',' ','z','X',' ',' ',' ',' ',' ','g','x','z',' ',' ','g',' ',' ','h','f','f','f','f','f','j',' ','R','r',' ','X'},
+                    {'@','Y','X','z',' ',' ','Y','x','X',' ',' ','Y','g',' ',' ',' ','X','g',' ','Z','g',' ',' ',' ',' ',' ','z','Y','R','r',' ','X'},
+                    {'@',' ',' ','x',' ',' ','E','F',' ',' ',' ',' ','m','f','f','f','f','l','f','f','o',' ','X','X',' ',' ','Z',' ','R','r','X','X'},
+                    {'@',' ','X','x',' ',' ','G','H',' ',' ',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','g','Y','X',' ',' ',' ',' ',' ','R','r',' ','Z'},
+                    {'@',' ',' ',' ',' ',' ',' ','g','Z',' ','z',' ','g',' ',' ','Z','Y','x',' ',' ','g',' ','Z','z',' ',' ',' ',' ','R','r',' ',' '},
+                    {'@','Z',' ',' ',' ',' ',' ','k','f','f','f','f','o','z','x','X','x','Y',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
+                    {'@',' ','z',' ',' ',' ',' ',' ',' ',' ','X',' ','g',' ',' ','X','x',' ',' ',' ','g','z',' ',' ','X',' ',' ',' ','R','r','z',' '},
+                    {'@','X','X',' ',' ',' ','X',' ',' ',' ',' ',' ','g',' ',' ',' ','X','X',' ',' ','g',' ',' ','Y','x',' ','z','X','R','r',' ',' '},
+                    {'@','x','Y',' ',' ',' ',' ',' ',' ','z','z',' ','g',' ','X','x',' ',' ','h','f','j',' ',' ',' ',' ',' ',' ','Z','R','r',' ',' '},
+                    {'@','z','Y',' ','Z','x','X','V','W',' ',' ',' ','g',' ','z','x',' ',' ','g',' ','X','X',' ',' ',' ',' ',' ',' ','R','r','X',' '},
+                    {'@',' ',' ',' ',' ','X','x','%','#',' ',' ',' ','g',' ',' ',' ',' ',' ','g','Y',' ',' ',' ',' ',' ',' ',' ','X','R','r','Y',' '},
+                    {'@',' ',' ',' ',' ','z',' ','g','X','x','Z','Z','g','Z','Z',' ',' ','Z','g',' ','z',' ',' ',' ',' ','Z',' ',' ','R','r',' ','Z'},
+                    {'@',' ',' ',' ',' ',' ',' ','g',' ','Y','Z','h','l','i','Z',' ',' ','X','g','Z','z',' ','X',' ',' ',' ','x',' ','R','r',' ','z'},
+                    {'@','Z','Q','S','X','y','Y','m','f','f','f','o','p','m','f','f','f','f','j','Y',' ',' ','Z',' ',' ',' ',' ','x','R','r','Y',' '},
+                    {'@',' ','T','U','2',' ',' ','g',' ',' ','Z','k','n','j','Z',' ',' ',' ',' ',' ',' ','E','F',' ',' ',' ',' ',' ','R','r',' ',' '},
+                    {'@',' ',' ','g',' ',' ',' ','g',' ',' ','Z','Z','g','Z','Z',' ',' ','z','X',' ',' ','G','H',' ',' ',' ','X',' ','R','r',' ',' '},
+                    {'@','X',' ','k','f','f','f','j',' ','I','J','X','g',' ',' ','z',' ',' ',' ',' ',' ',' ','g',' ',' ',' ',' ','Y','R','r',' ','X'},
+                    {'@','Z','X',' ','x','Y','X','Y',' ','K','L',' ','g','4',' ','Y',' ',' ',' ','x','Y',' ','g',' ',' ',' ','Z','Z','R','r',' ','x'},
+                    {'@','x','x','Z',' ','x','X','x','X','g',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','X','Z','g','Z',' ',' ','z',' ','R','r','Z',' '},
+                    {'@','y',' ','X',' ','X','X','z','Y','k','f','f','l','f','f','f','f','f','f','f','f','f','l','f','f','f','f','1','B','b','f','f'},
+                    {'@','X',' ',' ',' ','Z',' ',' ',' ','X',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','w','R','r',' ','X'},
+                    {'@','Z','X',' ','X','X','x','Y','x','x','Z','X',' ',' ','z','Y',' ',' ','Z','X','X',' ',' ',' ',' ',' ','x','Z','R','r',' ','Y'},
+                    {'@','x','X','z','Y','Y','x','X',' ',' ','z','Y','X','X','Y','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','Y','R','r','z','Z'},
+                    {'@','Y','x','X',' ',' ',' ','Z','X','x',' ',' ',' ','Z','x','Y','z',' ',' ',' ',' ',' ',' ','z',' ',' ',' ','Y','R','r',' ',' '},
+                    {'@','!','x','x',' ','X','Z','X',' ','Y','X','Y','X','Z','x','x','X',' ',' ',' ','z',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
+                    {'@',' ',' ','X',' ','X','z',' ',' ','Z','z','Z','X','Y',' ','X',' ','Z',' ',' ',' ','Y','Z','X',' ',' ',' ',' ','R','r',' ','X'},
+                    {'@','x',' ',' ','Z','x','X','Y',' ','X',' ','x','x','Z',' ',' ','X','Z','X',' ','Z','x',' ',' ','Z',' ','Y','X','R','r','X','x'},
+                    {'@','X','x','y','x','x','X','Z',' ','X',' ','z',' ',' ','y',' ',' ',' ','x',' ',' ','X','y',' ',' ','§','Y','x','R','r','X','x'},
+                    {')','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','&','R','r','x','X'}
+            };
 
     private final int tileSize = 64 ;
     private final int amountHorizontalTiles = this.getWorld()[0].length;
@@ -102,25 +104,25 @@ public class GameEngine extends Observable {
     }
 
     public void setPriStage(Stage primaryStage) {
-    	this.primaryStage=primaryStage;
+        this.primaryStage=primaryStage;
     }
-    
+
     public Stage getPriStage() {
-    	return primaryStage;
+        return primaryStage;
     }
-    
+
     public int getTileSize() {
         return tileSize;
     }
 
     public void setUserName(String userName) {
-    	this.userName = userName;
+        this.userName = userName;
     }
-    
+
     public String getUserName() {
-    	return userName;
+        return userName;
     }
-    
+
     public int getAmountHorizontalTiles() {
         return amountHorizontalTiles;
     }
@@ -156,7 +158,7 @@ public class GameEngine extends Observable {
     public Scene getScene() {
         return scene;
     }
-    
+
     public void setIntro(Scene scene) {
         this.intro = scene;
     }
@@ -262,19 +264,19 @@ public class GameEngine extends Observable {
     }
 
     private void setClampX(double x) {
-    	clampRangeX = x ;
+        clampRangeX = x ;
     }
-    
+
     public double getClampX() {
-    	return clampRangeX;
+        return clampRangeX;
     }
-    
+
     private void setClampY(double y) {
-    	clampRangeY = y;
+        clampRangeY = y;
     }
-    
+
     public double getClampY() {
-    	return clampRangeY;
+        return clampRangeY;
     }
 
     public void setLastDirection(String lastDirection) {
@@ -295,9 +297,9 @@ public class GameEngine extends Observable {
 
     public Rectangle getActionSquareFuture() {
         Rectangle actionSquareFuture = new Rectangle(getClampX() + getActionSquare().getWidth() + 48, getClampY() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
-    	return actionSquareFuture;
+        return actionSquareFuture;
     }
-    
+
     public void movePlayer() {
         this.animatePlayer();
         this.setLastDirection(this.getPrimaryDirection());
@@ -328,13 +330,13 @@ public class GameEngine extends Observable {
 
         setClampX(clampRange(this.getActionSquare().getX() + deltaX * elapsedSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
         setClampY(clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
-        
+
         this.notifyObservers();
 
-        this.checkForTriggers();
-        
+        //this.checkForTriggers();
+
         if (!isCollision) {
-        	this.getActionSquare().setX(clampRangeX);
+            this.getActionSquare().setX(clampRangeX);
             this.getActionSquare().setY(clampRangeY);
 
             for (int i = 0; i < this.getPlayer().length; i++) {
@@ -342,7 +344,7 @@ public class GameEngine extends Observable {
                 this.getPlayer()[i].setY(clampRangeY);
             }
         }
-        
+
         this.setLastUpdate(this.getTimestamp());
     }
 
@@ -362,10 +364,44 @@ public class GameEngine extends Observable {
         return noCollisionY;
     }
 
-    private void checkForTriggers() {
-        if (this.isTrigger()) {
-        	
-        	System.out.println("Something's happening!");
+    public void showSpeechBubble(Trigger trigger, Color backgroundColor, Color textColor) {
+        String textString = "";
+        Polygon littlePointer = new Polygon();
+        littlePointer.getPoints().addAll(new Double[]{trigger.getCoordinates().getX() + 55, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 36 });
+        littlePointer.setFill(backgroundColor);
+        Rectangle bubble = new Rectangle(trigger.getCoordinates().getX() + this.getTileSize(), trigger.getCoordinates().getY() + 20, 200, 100);
+        bubble.setFill(backgroundColor);
+        if (trigger.getName().contentEquals("lady")) {
+            textString = "Willkommen im\nKönigreich Faboma,\n" + this.getUserName() + "!";
+        }
+        else if (trigger.getName().contentEquals("wiseman")) {
+            textString = "Mein Sohn!\nDie Schule des Lebens\nhat niemals Ferien.";
+        }
+        Text text = new Text(trigger.getCoordinates().getX() + 74, trigger.getCoordinates().getY() + 46, textString);
+        text.setFont(Font.font ("Verdana", 16));
+        text.setFill(textColor);
+        this.getTextOver().getChildren().addAll(littlePointer, bubble, text);
+        this.getTextOver().setVisible(true);
+    }
+
+    public void checkForTriggers(Trigger trigger) {
+        if (trigger != null) {
+            if (this.isTrigger()) {
+                if (trigger.isNpc()) {
+                    if (trigger.getName().contentEquals("lady")) {
+                        showSpeechBubble(trigger, Color.RED, Color.WHITE);
+                    }
+                    else if (trigger.getName().contentEquals("wiseman")) {
+                        showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
+                    }
+                }
+                else {
+                    System.out.println("Something's happening!");
+                }
+            }
+        }
+        else {
+            this.getTextOver().setVisible(false);
         }
     }
 
