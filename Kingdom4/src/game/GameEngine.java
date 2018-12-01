@@ -90,22 +90,22 @@ public class GameEngine extends Observable {
     private double actionSquareOffsetY = 16;
     private String primaryDirection = "south";
     private String lastDirection;
-
     private String userName;
     private Stage primaryStage;
+    private int lastCollisionObject=0;
+    private long lastCollisionTime=0;
 
-    private String playerName;
     ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
     }
 
-    public void setPriStage(Stage primaryStage) {
+    public void setPrimaryStage(Stage primaryStage) {
     	this.primaryStage=primaryStage;
     }
     
-    public Stage getPriStage() {
+    public Stage getPrimaryStage() {
     	return primaryStage;
     }
     
@@ -523,15 +523,22 @@ public class GameEngine extends Observable {
     public Pane getTextOver() {
         return textOver;
     }
-
+    
     public void collisionCounter(int object, String name) {
         if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
-            if (!this.getTrophyCollisionsWithTrees().contains(object)) {
+           if(object != lastCollisionObject) {
+        	// if (!this.getTrophyCollisionsWithTrees().contains(object)) {
                 this.getTrophyCollisionsWithTrees().add(object);
+            }else {
+            	if((System.currentTimeMillis()-lastCollisionTime)>1000) {
+            		this.getTrophyCollisionsWithTrees().add(object);
+            	}
             }
             Platform.runLater(() -> {
                 text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
             });
+            lastCollisionObject = object;
+            lastCollisionTime = System.currentTimeMillis();
         }
     }
 

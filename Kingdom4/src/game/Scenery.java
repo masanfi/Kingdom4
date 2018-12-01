@@ -97,7 +97,7 @@ public class Scenery {
     public void renderIntro() {
     	intro = new StackPane();
         intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
-        Stage primaryStage = gameEngine.getPriStage();
+        Stage primaryStage = gameEngine.getPrimaryStage();
         
         int paneWidth = gameEngine.getPaneWidth();
     	int paneHeight = gameEngine.getPaneHeight();

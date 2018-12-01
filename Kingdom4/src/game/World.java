@@ -87,7 +87,7 @@ public class World {
         this.triggers.add(finale);
         gameEngine.setObstacle(this.obstacles);
         gameEngine.setTriggerObject(this.triggers);
-        //Provisorisches FInale
+        //Provisorisches Finale
         
         
         if (item.isNpc()) {
