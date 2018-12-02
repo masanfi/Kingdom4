@@ -94,6 +94,8 @@ public class Scenery {
     	this.gameReady=x;
     }
     
+   
+    
     public void renderIntro() {
     	intro = new StackPane();
         intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
@@ -129,7 +131,6 @@ public class Scenery {
             pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
             intro.getChildren().setAll(pane);
             
-
             Timeline timeline = new Timeline();
             KeyValue kv = new KeyValue(secondImageView.translateXProperty(), 0, Interpolator.EASE_BOTH);
             KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
@@ -137,7 +138,6 @@ public class Scenery {
             timeline.setOnFinished(t->{
             	intro.getChildren().setAll(vbox);
                 primaryStage.setScene(gameEngine.getScene());
-            	//this.setGameReady(true);
             });
             timeline.play();
         });
@@ -146,12 +146,5 @@ public class Scenery {
         intro.getChildren().addAll(vbox);
     	Scene scene = new Scene(intro, paneWidth, paneHeight);
         gameEngine.setIntro(scene);
-        /*
-        while(true) {
-        	if(gameReady) {
-        		return true;
-        	}
-        }
-        */
     }
 }

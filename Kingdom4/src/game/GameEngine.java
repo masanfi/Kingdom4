@@ -3,9 +3,19 @@ package game;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -17,7 +27,12 @@ import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import highscore.Highscore;
 
 public class GameEngine extends Observable {
 
@@ -96,13 +111,26 @@ public class GameEngine extends Observable {
     private Stage primaryStage;
     private int lastCollisionObject=0;
     private long lastCollisionTime=0;
-
+    private long startTime=0;
+    private long endTime=0;
+    private Boolean triggerStop = false;
+    
     ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
     }
 
+    public void setStartTime() {
+    	this.startTime = System.currentTimeMillis();
+    }
+    
+    public void setEndTime(long time) {
+    	if(this.endTime == 0) {
+    		this.endTime = time;
+    	}
+    }
+    
     public void setPrimaryStage(Stage primaryStage) {
     	this.primaryStage=primaryStage;
     }
@@ -330,7 +358,7 @@ public class GameEngine extends Observable {
 
         setClampX(clampRange(this.getActionSquare().getX() + deltaX * elapsedSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
         setClampY(clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
-
+        
         this.notifyObservers();
 
         //this.checkForTriggers();
@@ -384,9 +412,94 @@ public class GameEngine extends Observable {
         this.getTextOver().setVisible(true);
     }
 
+    private void setTriggerStop() {
+    	triggerStop=true;
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private void beginnFinale() {
+    	
+    	//Nach betreten des Finals Triggers sind alle weiteren TRigger ausgeschaltet!!!   	
+    	setTriggerStop();
+    	
+    	//Highscore Übermitteln
+    	//List<Highscore> hs = new ArrayList<Highscore>();
+    	final ObservableList<Highscore> hs = FXCollections.observableArrayList();
+    	
+    	try {
+    		//System.out.println();
+        	JavaClient.sendMessage(getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  System.currentTimeMillis());
+        }catch(Exception e) {
+        	System.out.println(e.getMessage());
+        }
+    	
+    	//Heighscore holen
+    	try {
+    		List<String> highscore = JavaClient.sendMessage("getHighScore");
+    		highscore.forEach(item ->{
+    			//System.out.println(item + "\n\n");
+    			String[] hsLine = item.split("\\|", -1);
+    			hs.add(new Highscore(hsLine[0],Integer.parseInt(hsLine[1]), Integer.parseInt(hsLine[2]), Long.parseLong(hsLine[3])));
+    		});
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}
+    	//highscore aufbereiten
+
+         Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
+             .thenComparing(Highscore::getDuration)
+             .thenComparing(Highscore::getUserName)
+             .thenComparing(Highscore::getHighScoreTime));
+
+       //Endscene zeigen Sollte ausgelagert werden !!!!!
+         
+         GridPane grid = new GridPane();
+		// weisen das Padding (interner Abstand) zu
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		// und fügen einen kleinen Außenabstand hinzu
+		grid.setVgap(10);
+		grid.setHgap(10);
+
+		TableView table = new TableView();
+		table.setEditable(true);
+
+		TableColumn userNameCol = new TableColumn("Username");
+		TableColumn counterCol = new TableColumn("Counter");
+		TableColumn durationCol = new TableColumn("Duration");
+		TableColumn dateCol = new TableColumn("Highscore Date");
+
+		table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
+		table.setMinWidth(paneWidth-20);
+		double cellWidth = (paneWidth)/4;
+		userNameCol.setMinWidth(cellWidth);
+		userNameCol.setCellValueFactory(
+            new PropertyValueFactory<>("userName"));
+		counterCol.setMinWidth(cellWidth);
+		counterCol.setCellValueFactory(
+            new PropertyValueFactory<>("counter"));
+		durationCol.setMinWidth(cellWidth);
+		durationCol.setCellValueFactory(
+            new PropertyValueFactory<>("duration"));
+		dateCol.setMinWidth(cellWidth);
+		dateCol.setCellValueFactory(
+            new PropertyValueFactory<>("highScoreTime"));
+	
+		table.setItems(hs);
+
+		GridPane.setConstraints(table, 0,25);
+		grid.getChildren().addAll(table);
+
+    	Stage primaryStage = getPrimaryStage();
+        grid.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+    	Scene scene = new Scene(grid, paneWidth, paneHeight);
+    	scene.setFill(Color.BLACK);
+    	primaryStage.setScene(scene);
+    	
+    }
+    
     public void checkForTriggers(Trigger trigger) {
         if (trigger != null) {
-            if (this.isTrigger()) {
+            if (this.isTrigger() && !triggerStop) {
                 if (trigger.isNpc()) {
                     if (trigger.getName().contentEquals("lady")) {
                         showSpeechBubble(trigger, Color.RED, Color.WHITE);
@@ -394,6 +507,10 @@ public class GameEngine extends Observable {
                     else if (trigger.getName().contentEquals("wiseman")) {
                         showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
                     }
+                }else if(trigger.getName().equalsIgnoreCase("finale")){
+                	setEndTime(System.currentTimeMillis());
+                	System.out.println("Finale oh oh");
+                	beginnFinale();
                 }
                 else {
                     System.out.println("Something's happening!");
