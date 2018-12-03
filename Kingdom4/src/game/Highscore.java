@@ -1,4 +1,4 @@
-package highscore;
+package game;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;

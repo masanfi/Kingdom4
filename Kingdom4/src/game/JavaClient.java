@@ -23,6 +23,7 @@ public class JavaClient {
 		InetAddress host = InetAddress.getByName(server);
 
 		Socket socket = new Socket(host.getHostName(), port);
+		socket.setSoTimeout(2000);
 		ObjectOutputStream socketOutput = new ObjectOutputStream(socket.getOutputStream());
 		socketOutput.writeObject("" + message);
 		ObjectInputStream socketInput = new ObjectInputStream(socket.getInputStream());
