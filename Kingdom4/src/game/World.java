@@ -80,8 +80,8 @@ public class World {
         this.backgroundCollection.add(image);
 
         //Provisorisches Finale
-        Trigger finale = new Trigger("Finale", new Point2D(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
-        Rectangle finaleObstacle = new Rectangle(2 * gameEngine.getTileSize(), 4 * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
+        Trigger finale = new Trigger("Finale", new Point2D(1700,1600), item.isWalkable(), item.isPortable(), item.isNpc());
+        Rectangle finaleObstacle = new Rectangle(1700,1600, gameEngine.getTileSize(), gameEngine.getTileSize());
         finaleObstacle.setFill(Color.PURPLE);
         this.obstacles.add(finaleObstacle);
         this.triggers.add(finale);
