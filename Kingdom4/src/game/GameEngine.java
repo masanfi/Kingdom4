@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -31,8 +32,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import highscore.Highscore;
 
 public class GameEngine extends Observable {
 
@@ -418,7 +417,8 @@ public class GameEngine extends Observable {
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	private void beginnFinale() {
-    	
+    	Boolean connectError = false;
+    	Scene scene;
     	//Nach betreten des Finals Triggers sind alle weiteren TRigger ausgeschaltet!!!   	
     	setTriggerStop();
     	
@@ -431,6 +431,7 @@ public class GameEngine extends Observable {
         	JavaClient.sendMessage(getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  System.currentTimeMillis());
         }catch(Exception e) {
         	System.out.println(e.getMessage());
+        	connectError = true;
         }
     	
     	//Heighscore holen
@@ -443,55 +444,64 @@ public class GameEngine extends Observable {
     		});
     	}catch(Exception e) {
     		System.out.println(e.getMessage());
+    		connectError = true;
     	}
-    	//highscore aufbereiten
-
-         Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
-             .thenComparing(Highscore::getDuration)
-             .thenComparing(Highscore::getUserName)
-             .thenComparing(Highscore::getHighScoreTime));
-
-       //Endscene zeigen Sollte ausgelagert werden !!!!!
-         
-         GridPane grid = new GridPane();
-		// weisen das Padding (interner Abstand) zu
-		grid.setPadding(new Insets(10, 10, 10, 10));
-		// und fügen einen kleinen Außenabstand hinzu
-		grid.setVgap(10);
-		grid.setHgap(10);
-
-		TableView table = new TableView();
-		table.setEditable(true);
-
-		TableColumn userNameCol = new TableColumn("Username");
-		TableColumn counterCol = new TableColumn("Counter");
-		TableColumn durationCol = new TableColumn("Duration");
-		TableColumn dateCol = new TableColumn("Highscore Date");
-
-		table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
-		table.setMinWidth(paneWidth-20);
-		double cellWidth = (paneWidth)/4;
-		userNameCol.setMinWidth(cellWidth);
-		userNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("userName"));
-		counterCol.setMinWidth(cellWidth);
-		counterCol.setCellValueFactory(
-            new PropertyValueFactory<>("counter"));
-		durationCol.setMinWidth(cellWidth);
-		durationCol.setCellValueFactory(
-            new PropertyValueFactory<>("duration"));
-		dateCol.setMinWidth(cellWidth);
-		dateCol.setCellValueFactory(
-            new PropertyValueFactory<>("highScoreTime"));
-	
-		table.setItems(hs);
-
-		GridPane.setConstraints(table, 0,25);
-		grid.getChildren().addAll(table);
-
     	Stage primaryStage = getPrimaryStage();
-        grid.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
-    	Scene scene = new Scene(grid, paneWidth, paneHeight);
+    	if(connectError) {
+    		TextArea textArea = new TextArea();
+    		textArea.setText("HighScore kann nicht abgerufen werden\n Dein Ergebnis:\n"+ getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  System.currentTimeMillis());
+            VBox vbox = new VBox(textArea);
+
+            scene = new Scene(vbox, 200, 100);
+    	}else {
+	    	//highscore aufbereiten
+	
+	         Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
+	             .thenComparing(Highscore::getDuration)
+	             .thenComparing(Highscore::getUserName)
+	             .thenComparing(Highscore::getHighScoreTime));
+	
+	       //Endscene zeigen Sollte ausgelagert werden !!!!!
+	         
+	         GridPane grid = new GridPane();
+			// weisen das Padding (interner Abstand) zu
+			grid.setPadding(new Insets(10, 10, 10, 10));
+			// und fügen einen kleinen Außenabstand hinzu
+			grid.setVgap(10);
+			grid.setHgap(10);
+	
+			TableView table = new TableView();
+			table.setEditable(true);
+	
+			TableColumn userNameCol = new TableColumn("Username");
+			TableColumn counterCol = new TableColumn("Counter");
+			TableColumn durationCol = new TableColumn("Duration");
+			TableColumn dateCol = new TableColumn("Highscore Date");
+	
+			table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
+			table.setMinWidth(paneWidth-20);
+			double cellWidth = (paneWidth)/4;
+			userNameCol.setMinWidth(cellWidth);
+			userNameCol.setCellValueFactory(
+	            new PropertyValueFactory<>("userName"));
+			counterCol.setMinWidth(cellWidth);
+			counterCol.setCellValueFactory(
+	            new PropertyValueFactory<>("counter"));
+			durationCol.setMinWidth(cellWidth);
+			durationCol.setCellValueFactory(
+	            new PropertyValueFactory<>("duration"));
+			dateCol.setMinWidth(cellWidth);
+			dateCol.setCellValueFactory(
+	            new PropertyValueFactory<>("highScoreTime"));
+		
+			table.setItems(hs);
+	
+			GridPane.setConstraints(table, 0,25);
+			grid.getChildren().addAll(table);
+	
+	        grid.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+	    	scene = new Scene(grid, paneWidth, paneHeight);
+    	}
     	scene.setFill(Color.BLACK);
     	primaryStage.setScene(scene);
     	
