@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,20 +14,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.scene.shape.TriangleMesh;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -88,7 +82,7 @@ public class GameEngine extends Observable {
     private Scene scene;
     private Scene intro;
     private Pane background;
-    private Rectangle clip;
+    private Rectangle camera;
     private long lastUpdate;
     private long timestamp;
     private boolean north, east, south, west, isCollision, isTrigger;
@@ -101,7 +95,7 @@ public class GameEngine extends Observable {
     private double noCollisionX, noCollisionY;
     private int trophyTreeCounter;
     private Text text;
-    private double clampRangeX,clampRangeY;
+    private double viewFactorX, viewFactorY;
     private double actionSquareOffsetX = 16;
     private double actionSquareOffsetY = 16;
     private String primaryDirection = "south";
@@ -202,12 +196,12 @@ public class GameEngine extends Observable {
         return background;
     }
 
-    public void setClip(Rectangle clip) {
-        this.clip = clip;
+    public void setCamera(Rectangle camera) {
+        this.camera = camera;
     }
 
-    public Rectangle getClip() {
-        return clip;
+    public Rectangle getCamera() {
+        return camera;
     }
 
     public void setLastUpdate(long lastUpdate) {
@@ -290,20 +284,20 @@ public class GameEngine extends Observable {
         this.collision = collision;
     }
 
-    private void setClampX(double x) {
-        clampRangeX = x ;
+    private void setViewFactorX(double x) {
+        viewFactorX = x ;
     }
 
-    public double getClampX() {
-        return clampRangeX;
+    public double getViewFactorY() {
+        return viewFactorX;
     }
 
-    private void setClampY(double y) {
-        clampRangeY = y;
+    private void setViewFactorY(double y) {
+        viewFactorY = y;
     }
 
-    public double getClampY() {
-        return clampRangeY;
+    public double getViewFactorX() {
+        return viewFactorY;
     }
 
     public void setLastDirection(String lastDirection) {
@@ -323,7 +317,7 @@ public class GameEngine extends Observable {
     }
 
     public Rectangle getActionSquareFuture() {
-        Rectangle actionSquareFuture = new Rectangle(getClampX() + getActionSquare().getWidth() + 48, getClampY() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
+        Rectangle actionSquareFuture = new Rectangle(getViewFactorY() + getActionSquare().getWidth() + 48, getViewFactorX() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
         return actionSquareFuture;
     }
 
@@ -332,15 +326,15 @@ public class GameEngine extends Observable {
         this.setLastDirection(this.getPrimaryDirection());
 
         this.setTimestamp(this.getTimestamp());
-        long elapsedNanos = this.getTimestamp() - this.getLastUpdate() ;
+        long elapsedTimeInNanoseconds = this.getTimestamp() - this.getLastUpdate();
         if (this.getLastUpdate() < 0) {
             this.setLastUpdate(this.getTimestamp());
             return;
         }
 
-        double elapsedSeconds = elapsedNanos / 1_000_000_000.0 ;
-        double deltaX = 0 ;
-        double deltaY = 0 ;
+        double elapsedTimeInSeconds = elapsedTimeInNanoseconds / 1_000_000_000.0;
+        double deltaX = 0;
+        double deltaY = 0;
 
         if (this.getEast()) {
             deltaX += this.getSpeed();
@@ -355,20 +349,20 @@ public class GameEngine extends Observable {
             deltaY -= this.getSpeed();
         }
 
-        setClampX(clampRange(this.getActionSquare().getX() + deltaX * elapsedSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
-        setClampY(clampRange(this.getActionSquare().getY() + deltaY * elapsedSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
+        setViewFactorX(viewFactor(this.getActionSquare().getX() + deltaX * elapsedTimeInSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
+        setViewFactorY(viewFactor(this.getActionSquare().getY() + deltaY * elapsedTimeInSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
         
         this.notifyObservers();
 
         //this.checkForTriggers();
 
         if (!isCollision) {
-            this.getActionSquare().setX(clampRangeX);
-            this.getActionSquare().setY(clampRangeY);
+            this.getActionSquare().setX(viewFactorX);
+            this.getActionSquare().setY(viewFactorY);
 
             for (int i = 0; i < this.getPlayer().length; i++) {
-                this.getPlayer()[i].setX(clampRangeX);
-                this.getPlayer()[i].setY(clampRangeY);
+                this.getPlayer()[i].setX(viewFactorX);
+                this.getPlayer()[i].setY(viewFactorY);
             }
         }
 
@@ -544,24 +538,24 @@ public class GameEngine extends Observable {
         }
     }
 
-    private double clampRange(double value, double min, double max) {
+    private double viewFactor(double value, double min, double max) {
         if (value < min) return min ;
         if (value > max) return max ;
         return value ;
     }
 
     public void moveCamera() {
-        clip = new Rectangle();
-        this.setClip(clip);
+        camera = new Rectangle();
+        this.setCamera(camera);
 
-        this.getClip().widthProperty().bind(this.getScene().widthProperty());
-        this.getClip().heightProperty().bind(this.getScene().heightProperty());
+        this.getCamera().widthProperty().bind(this.getScene().widthProperty());
+        this.getCamera().heightProperty().bind(this.getScene().heightProperty());
 
-        this.getClip().xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(this.getActionSquare().getX() - this.getScene().getWidth() / 2, 0, this.getBackground().getWidth() - this.getScene().getWidth()),
+        this.getCamera().xProperty().bind(Bindings.createDoubleBinding(
+                () -> viewFactor(this.getActionSquare().getX() - this.getScene().getWidth() / 2, 0, this.getBackground().getWidth() - this.getScene().getWidth()),
                 this.getActionSquare().xProperty(), this.getScene().widthProperty()));
-        this.getClip().yProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(this.getActionSquare().getY() - this.getScene().getHeight() / 2, 0, this.getBackground().getHeight() - this.getScene().getHeight()),
+        this.getCamera().yProperty().bind(Bindings.createDoubleBinding(
+                () -> viewFactor(this.getActionSquare().getY() - this.getScene().getHeight() / 2, 0, this.getBackground().getHeight() - this.getScene().getHeight()),
                 this.getActionSquare().yProperty(), this.getScene().heightProperty()));
     }
 
@@ -704,14 +698,16 @@ public class GameEngine extends Observable {
            if(object != lastCollisionObject) {
         	// if (!this.getTrophyCollisionsWithTrees().contains(object)) {
                 this.getTrophyCollisionsWithTrees().add(object);
-            }else {
-            	if((System.currentTimeMillis()-lastCollisionTime)>1000) {
+            } else {
+            	if((System.currentTimeMillis() - lastCollisionTime) > 1000) {
             		this.getTrophyCollisionsWithTrees().add(object);
             	}
             }
+
             Platform.runLater(() -> {
                 text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
             });
+
             lastCollisionObject = object;
             lastCollisionTime = System.currentTimeMillis();
         }
