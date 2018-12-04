@@ -404,6 +404,12 @@ public class GameEngine extends Observable {
         else if (trigger.getName().contentEquals("wiseman")) {
             textString = "Mein Sohn!\nDie Schule des Lebens\nhat niemals Ferien.";
         }
+        else if (trigger.getName().contentEquals("blacksmith")) {
+            textString = "Harrr! Hast du\nheute schon dein\nKinderbier getrunken?";
+        }
+        else if (trigger.getName().contentEquals("fishman")) {
+            textString = "Wenn du so\nprogrammierst, wie\ndu aussiehst, ist die\nWelt verloren!";
+        }
         Text text = new Text(trigger.getCoordinates().getX() + 74, trigger.getCoordinates().getY() + 46, textString);
         text.setFont(Font.font ("Verdana", 16));
         text.setFill(textColor);
@@ -516,6 +522,12 @@ public class GameEngine extends Observable {
                     }
                     else if (trigger.getName().contentEquals("wiseman")) {
                         showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
+                    }
+                    else if (trigger.getName().contentEquals("blacksmith")) {
+                        showSpeechBubble(trigger, Color.BROWN, Color.WHITE);
+                    }
+                    else if (trigger.getName().contentEquals("fishman")) {
+                        showSpeechBubble(trigger, Color.DARKBLUE, Color.WHITE);
                     }
                 }else if(trigger.getName().equalsIgnoreCase("finale")){
                 	setEndTime(System.currentTimeMillis());
