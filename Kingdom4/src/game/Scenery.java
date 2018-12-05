@@ -36,6 +36,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ *
+ * Creates different scenes that are switched during the game-play.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class Scenery {
 
     private GameEngine gameEngine;
@@ -92,6 +103,9 @@ public class Scenery {
         gameEngine.setScene(scene);
     }
 
+    /**
+     * This sets the action square and our hero on the field.
+     */
     public void setPlayerOnField() {
         gameEngine.getEntities().getChildren().add(gameEngine.getActionSquare());
         gameEngine.getActionSquare().relocate(64, 64);
@@ -109,7 +123,7 @@ public class Scenery {
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
     /**
-     * method witch prepare the outro as Scene 
+     * This prepares the final outro as a scene
      * 
      * @param hs
      * @param connectError
@@ -186,7 +200,7 @@ public class Scenery {
     }
     
     /**
-     * render the Intro of the game
+     * This renders the intro of Kingdom 4.
      */
     public void renderIntro() {
     	intro = new StackPane();

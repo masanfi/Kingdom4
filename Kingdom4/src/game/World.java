@@ -15,6 +15,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
+/**
+ *
+ * Toolkit to initialize the world
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 0.9
+ *
+ */
  
 public class World {
 
@@ -57,12 +68,18 @@ public class World {
 
     }
 
-    public void setClip() {
+    /**
+     * This sets the camera to the camera rectangle.
+     */
+    public void setCamera() {
         gameEngine.getBackground().setClip(gameEngine.getCamera());
         gameEngine.getBackground().translateXProperty().bind(gameEngine.getCamera().xProperty().multiply(-1));
         gameEngine.getBackground().translateYProperty().bind(gameEngine.getCamera().yProperty().multiply(-1));
     }
 
+    /**
+     * This adds obstacles to the Entitiy pane.
+     */
     private void setObstacles() {
         gameEngine.getObstacle().forEach(obstacle->{
             gameEngine.getEntities().getChildren().add(obstacle);
@@ -73,6 +90,13 @@ public class World {
         this.setObstacles();
     }
 
+    /**
+     * This adds an item to different lists, depending on the nature of the object to be added.
+     * @param x
+     * @param y
+     * @param item
+     * @param pane
+     */
     private void addToPane(int x, int y, Item item, Pane pane) {
         ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         this.backgroundCollection.add(image);
@@ -122,6 +146,10 @@ public class World {
         pane.getChildren().add(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
     }
 
+    /**
+     * This creates the background based on the level provided in the Level class.
+     * @return
+     */
     private Pane createBackground() {
         Pane pane = new Pane();
 
@@ -333,6 +361,9 @@ public class World {
         return pane ;
     }
 
+    /**
+     * This reads all objects from an XML file.
+     */
     private void readObjects() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -347,6 +378,9 @@ public class World {
         getAllObjects();
     }
 
+    /**
+     * This processes all objects read in in the readObjects method.
+     */
     private void getAllObjects() {
         objectList = configFile.getElementsByTagName("element");
 

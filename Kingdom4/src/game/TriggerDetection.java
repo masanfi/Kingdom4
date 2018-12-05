@@ -2,6 +2,17 @@ package game;
 
 import javafx.scene.shape.Rectangle;
 
+/**
+ *
+ * This detects triggers in the game world.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 0.9
+ *
+ */
+
 public class TriggerDetection implements IObserver {
 
     GameEngine gameEngine;
