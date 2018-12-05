@@ -1,7 +1,6 @@
 package game;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,7 +9,6 @@ import javafx.scene.shape.Rectangle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.css.Rect;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -60,9 +58,9 @@ public class World {
     }
 
     public void setClip() {
-        gameEngine.getBackground().setClip(gameEngine.getClip());
-        gameEngine.getBackground().translateXProperty().bind(gameEngine.getClip().xProperty().multiply(-1));
-        gameEngine.getBackground().translateYProperty().bind(gameEngine.getClip().yProperty().multiply(-1));
+        gameEngine.getBackground().setClip(gameEngine.getCamera());
+        gameEngine.getBackground().translateXProperty().bind(gameEngine.getCamera().xProperty().multiply(-1));
+        gameEngine.getBackground().translateYProperty().bind(gameEngine.getCamera().yProperty().multiply(-1));
     }
 
     private void setObstacles() {
