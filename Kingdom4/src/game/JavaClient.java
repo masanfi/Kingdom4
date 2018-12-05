@@ -1,13 +1,4 @@
 package game;
-/**
- * Überschrift  :  JavaClient - SocketClass
- * Datei        :  JavaClient.java
- * Beschreibung :  Static Class opens Socket to Connect with Server - you send and get messages
- * Copyright    :  Copyright (c) 2018 Fantastic4. All Rights Reserved.
- * @author Fantastic4
- * @version 1.0
- */
-
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,6 +8,17 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *
+ * Static Class opens Socket to Connect with Server - you send and get messages.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
 
 public class JavaClient {
 

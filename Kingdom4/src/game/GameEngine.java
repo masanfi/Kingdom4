@@ -5,16 +5,10 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -23,14 +17,20 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
+/**
+ *
+ * This is the core class and the heart of the game. It is the toolkit for all the mechanics and both the object and the value store.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class GameEngine extends Observable {
-
-    
-
     private final int tileSize = 64 ;
     private final int amountHorizontalTiles = this.getWorld()[0].length;
     private final int amountVerticalTiles = this.getWorld().length;
@@ -290,11 +290,18 @@ public class GameEngine extends Observable {
         return primaryDirection;
     }
 
+    /**
+     * Generates a action square that implements the movement the player has made to check if there were any collisions on our hero's way.
+     * @return the future action square
+     */
     public Rectangle getActionSquareFuture() {
         Rectangle actionSquareFuture = new Rectangle(getViewFactorY() + getActionSquare().getWidth() + 48, getViewFactorX() + getActionSquare().getHeight() + 48, getActionSquare().getWidth(), getActionSquare().getWidth());
         return actionSquareFuture;
     }
 
+    /**
+     * Moves what we love most: Our hero.
+     */
     public void movePlayer() {
         this.animatePlayer();
         this.setLastDirection(this.getPrimaryDirection());
@@ -323,6 +330,7 @@ public class GameEngine extends Observable {
             deltaY -= this.getSpeed();
         }
 
+        // This sets the movement the user has made
         setViewFactorX(viewFactor(this.getActionSquare().getX() + deltaX * elapsedTimeInSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
         setViewFactorY(viewFactor(this.getActionSquare().getY() + deltaY * elapsedTimeInSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
         
@@ -330,6 +338,7 @@ public class GameEngine extends Observable {
 
         //this.checkForTriggers();
 
+        // Processes the isCollision flag set by the collision detection.
         if (!isCollision) {
             this.getActionSquare().setX(viewFactorX);
             this.getActionSquare().setY(viewFactorY);
@@ -359,6 +368,12 @@ public class GameEngine extends Observable {
         return noCollisionY;
     }
 
+    /**
+     * Shows a speech bubble of a conversation.
+     * @param trigger
+     * @param backgroundColor
+     * @param textColor
+     */
     public void showSpeechBubble(Trigger trigger, Color backgroundColor, Color textColor) {
         String textString = "";
         Polygon littlePointer = new Polygon();
@@ -390,10 +405,9 @@ public class GameEngine extends Observable {
     }
     
     /**
-     * Diese Methode sort dafür das Ende des Spiels vorzubereiten 
-     * und gibt das Outro wieder
+     * This method prepares the outro and plays it.
      */
-	private void beginnFinale() {
+	private void beginFinale() {
     	Boolean connectError = false;
     	Scene scene;
     	long timestamp = System.currentTimeMillis();
@@ -434,7 +448,11 @@ public class GameEngine extends Observable {
     	primaryStage.setScene(scene);
     	
     }
-    
+
+    /**
+     * This method checks for any triggers that are being passed.
+     * @param trigger
+     */
     public void checkForTriggers(Trigger trigger) {
         if (trigger != null) {
             if (this.isTrigger() && !triggerStop) {
@@ -454,7 +472,7 @@ public class GameEngine extends Observable {
                 }else if(trigger.getName().equalsIgnoreCase("finale")){
                 	setEndTime(System.currentTimeMillis());
                 	System.out.println("Finale oh oh");
-                	beginnFinale();
+                	beginFinale();
                 }
                 else {
                     System.out.println("Something's happening!");
@@ -466,12 +484,22 @@ public class GameEngine extends Observable {
         }
     }
 
+    /**
+     * Helper method for the camera movement.
+     * @param value
+     * @param min
+     * @param max
+     * @return
+     */
     private double viewFactor(double value, double min, double max) {
         if (value < min) return min ;
         if (value > max) return max ;
         return value ;
     }
 
+    /**
+     * Moves and pans the camera over the playground.
+     */
     public void moveCamera() {
         camera = new Rectangle();
         this.setCamera(camera);
@@ -499,6 +527,9 @@ public class GameEngine extends Observable {
         return actionSquare;
     }
 
+    /**
+     * Animates our hero.
+     */
     public void animatePlayer() {
         if (north) {
             if (!getLastDirection().equals("north")) {
@@ -620,7 +651,12 @@ public class GameEngine extends Observable {
     public Pane getTextOver() {
         return textOver;
     }
-    
+
+    /**
+     * This counts the collisions for the fun of counting.
+     * @param object
+     * @param name
+     */
     public void collisionCounter(int object, String name) {
         if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
 

@@ -1,5 +1,16 @@
 package game;
 
+/**
+ *
+ * This allows to create an item object that represents the different attributes a field in the game world can have.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class Item {
 
     private int id;

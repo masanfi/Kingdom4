@@ -1,14 +1,16 @@
 package game;
+
 /**
- * 
- * Überschrift  :  Level - LevelClass
- * Datei        :  Level.java
- * Beschreibung :  Static Class generates the Level
- * Copyright    :  Copyright (c) 2018 Fantastic4. All Rights Reserved.
- * @author Fantastic4
+ *
+ * Static class that provides the level structure for the World class.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
  * @version 1.0
  *
  */
+
 public class Level {
 
 	
@@ -52,7 +54,7 @@ public class Level {
         };
 	
 	/**
-	 * static getter to offer the world
+	 * static getter method that provides the level
 	 * @return word char array
 	 */
 	public static char[][] getLevel(){
