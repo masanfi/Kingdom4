@@ -35,44 +35,7 @@ import java.util.List;
 
 public class GameEngine extends Observable {
 
-    private final char[][] world =
-            {
-                    {'(','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','+','R','r',' ','Z'},
-                    {'@',' ','Z','Y','z',' ','Y','x',' ',' ','Z',' ',' ',' ',' ',' ','x','z',' ','Y',' ','X',' ','z',' ','Z',' ',' ','R','r','X',' '},
-                    {'@',' ',' ','X',' ',' ','X',' ',' ',' ',' ','M','N',' ','Y',' ',' ','z',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','R','r','Y','X'},
-                    {'@',' ',' ',' ',' ',' ',' ','Z',' ',' ',' ','O','P',' ',' ',' ','Z','I','J',' ','X','x','z',' ',' ',' ','A','/','R','r','z',' '},
-                    {'@','z',' ',' ','Z',' ',' ',' ',' ',' ',' ','a','c','5',' ',' ',' ','K','L',' ','x','x','X',' ','y','X','C','D','R','r',' ',' '},
-                    {'@',' ',' ',' ','Z','Z',' ',' ',' ','X',' ',' ','g',' ',' ',' ',' ','g',' ','X','x','Y',' ',' ',' ','3','g','$','R','r','Y',' '},
-                    {'@','X','x',' ',' ','z','X',' ',' ',' ',' ',' ','g','x','z',' ',' ','g',' ',' ','h','f','f','f','f','f','j',' ','R','r',' ','X'},
-                    {'@','Y','X','z',' ',' ','Y','x','X',' ',' ','Y','g',' ',' ',' ','X','g',' ','Z','g',' ',' ',' ',' ',' ','z','Y','R','r',' ','X'},
-                    {'@',' ',' ','x',' ',' ','E','F',' ',' ',' ',' ','m','f','f','f','f','l','f','f','o',' ','X','X',' ',' ','Z',' ','R','r','X','X'},
-                    {'@',' ','X','x',' ',' ','G','H',' ',' ',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','g','Y','X',' ',' ',' ',' ',' ','R','r',' ','Z'},
-                    {'@',' ',' ',' ',' ',' ',' ','g','Z',' ','z',' ','g',' ',' ','Z','Y','x',' ',' ','g',' ','Z','z',' ',' ',' ',' ','R','r',' ',' '},
-                    {'@','Z',' ',' ',' ',' ',' ','k','f','f','f','f','o','z','x','X','x','Y',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
-                    {'@',' ','z',' ',' ',' ',' ',' ',' ',' ','X',' ','g',' ',' ','X','x',' ',' ',' ','g','z',' ',' ','X',' ',' ',' ','R','r','z',' '},
-                    {'@','X','X',' ',' ',' ','X',' ',' ',' ',' ',' ','g',' ',' ',' ','X','X',' ',' ','g',' ',' ','Y','x',' ','z','X','R','r',' ',' '},
-                    {'@','x','Y',' ',' ',' ',' ',' ',' ','z','z',' ','g',' ','X','x',' ',' ','h','f','j',' ',' ',' ',' ',' ',' ','Z','R','r',' ',' '},
-                    {'@','z','Y',' ','Z','x','X','V','W',' ',' ',' ','g',' ','z','x',' ',' ','g',' ','X','X',' ',' ',' ',' ',' ',' ','R','r','X',' '},
-                    {'@',' ',' ',' ',' ','X','x','%','#',' ',' ',' ','g',' ',' ',' ',' ',' ','g','Y',' ',' ',' ',' ',' ',' ',' ','X','R','r','Y',' '},
-                    {'@',' ',' ',' ',' ','z',' ','g','X','x','Z','Z','g','Z','Z',' ',' ','Z','g',' ','z',' ',' ',' ',' ','Z',' ',' ','R','r',' ','Z'},
-                    {'@',' ',' ',' ',' ',' ',' ','g',' ','Y','Z','h','l','i','Z',' ',' ','X','g','Z','z',' ','X',' ',' ',' ','x',' ','R','r',' ','z'},
-                    {'@','Z','Q','S','X','y','Y','m','f','f','f','o','p','m','f','f','f','f','j','Y',' ',' ','Z',' ',' ',' ',' ','x','R','r','Y',' '},
-                    {'@',' ','T','U','2',' ',' ','g',' ',' ','Z','k','n','j','Z',' ',' ',' ',' ',' ',' ','E','F',' ',' ',' ',' ',' ','R','r',' ',' '},
-                    {'@',' ',' ','g',' ',' ',' ','g',' ',' ','Z','Z','g','Z','Z',' ',' ','z','X',' ',' ','G','H',' ',' ',' ','X',' ','R','r',' ',' '},
-                    {'@','X',' ','k','f','f','f','j',' ','I','J','X','g',' ',' ','z',' ',' ',' ',' ',' ',' ','g',' ',' ',' ',' ','Y','R','r',' ','X'},
-                    {'@','Z','X',' ','x','Y','X','Y',' ','K','L',' ','g','4',' ','Y',' ',' ',' ','x','Y',' ','g',' ',' ',' ','Z','Z','R','r',' ','x'},
-                    {'@','x','x','Z',' ','x','X','x','X','g',' ',' ','g',' ',' ',' ',' ',' ',' ',' ','X','Z','g','Z',' ',' ','z',' ','R','r','Z',' '},
-                    {'@','y',' ','X',' ','X','X','z','Y','k','f','f','l','f','f','f','f','f','f','f','f','f','l','f','f','f','f','1','B','b','f','f'},
-                    {'@','X',' ',' ',' ','Z',' ',' ',' ','X',' ','x',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','w','R','r',' ','X'},
-                    {'@','Z','X',' ','X','X','x','Y','x','x','Z','X',' ',' ','z','Y',' ',' ','Z','X','X',' ',' ',' ',' ',' ','x','Z','R','r',' ','Y'},
-                    {'@','x','X','z','Y','Y','x','X',' ',' ','z','Y','X','X','Y','X',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','x','Y','R','r','z','Z'},
-                    {'@','Y','x','X',' ',' ',' ','Z','X','x',' ',' ',' ','Z','x','Y','z',' ',' ',' ',' ',' ',' ','z',' ',' ',' ','Y','R','r',' ',' '},
-                    {'@','!','x','x',' ','X','Z','X',' ','Y','X','Y','X','Z','x','x','X',' ',' ',' ','z',' ',' ',' ',' ',' ',' ',' ','R','r',' ',' '},
-                    {'@',' ',' ','X',' ','X','z',' ',' ','Z','z','Z','X','Y',' ','X',' ','Z',' ',' ',' ','Y','Z','X',' ',' ',' ',' ','R','r',' ','X'},
-                    {'@','x',' ',' ','Z','x','X','Y',' ','X',' ','x','x','Z',' ',' ','X','Z','X',' ','Z','x',' ',' ','Z',' ','Y','X','R','r','X','x'},
-                    {'@','X','x','y','x','x','X','Z',' ','X',' ','z',' ',' ','y',' ',' ',' ','x',' ',' ','X','y',' ',' ','§','Y','x','R','r','X','x'},
-                    {')','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','&','R','r','x','X'}
-            };
+    
 
     private final int tileSize = 64 ;
     private final int amountHorizontalTiles = this.getWorld()[0].length;
@@ -113,13 +76,24 @@ public class GameEngine extends Observable {
     private long startTime=0;
     private long endTime=0;
     private Boolean triggerStop = false;
-    
+    private Scenery scenery;
+    private GridPane outro;
+    private static final char[][] world = Level.getLevel();
+        
     ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
     }
 
+    public void setScenery(Scenery scenery) {
+    	this.scenery = scenery;
+    }
+    
+    public Scenery getScenery() {
+    	return scenery;
+    }
+    
     public void setStartTime() {
     	this.startTime = System.currentTimeMillis();
     }
@@ -415,26 +389,29 @@ public class GameEngine extends Observable {
     	triggerStop=true;
     }
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    /**
+     * Diese Methode sort dafür das Ende des Spiels vorzubereiten 
+     * und gibt das Outro wieder
+     */
 	private void beginnFinale() {
     	Boolean connectError = false;
     	Scene scene;
-    	//Nach betreten des Finals Triggers sind alle weiteren TRigger ausgeschaltet!!!   	
+    	long timestamp = System.currentTimeMillis();
+    	
+    	//Nach betreten des Finals Triggers sind alle weiteren Trigger ausgeschaltet!!!   	
     	setTriggerStop();
     	
     	//Highscore Übermitteln
-    	//List<Highscore> hs = new ArrayList<Highscore>();
     	final ObservableList<Highscore> hs = FXCollections.observableArrayList();
     	
     	try {
-    		//System.out.println();
-        	JavaClient.sendMessage(getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  System.currentTimeMillis());
+        	JavaClient.sendMessage(getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  timestamp);
         }catch(Exception e) {
         	System.out.println(e.getMessage());
         	connectError = true;
         }
     	
-    	//Heighscore holen
+    	//Highscore holen
     	try {
     		List<String> highscore = JavaClient.sendMessage("getHighScore");
     		highscore.forEach(item ->{
@@ -446,63 +423,14 @@ public class GameEngine extends Observable {
     		System.out.println(e.getMessage());
     		connectError = true;
     	}
-    	Stage primaryStage = getPrimaryStage();
+    	
+    	//Wenn keine Highscore abgerufen werde kann wird das aktuelle Ergebnis ausgegeben
     	if(connectError) {
-    		TextArea textArea = new TextArea();
-    		textArea.setText("HighScore kann nicht abgerufen werden\n Dein Ergebnis:\n"+ getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  System.currentTimeMillis());
-            VBox vbox = new VBox(textArea);
+    		hs.add(new Highscore(getUserName(),getTrophyCollisionsWithTrees().size(), (endTime-startTime), timestamp));
 
-            scene = new Scene(vbox, 200, 100);
-    	}else {
-	    	//highscore aufbereiten
-	
-	         Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
-	             .thenComparing(Highscore::getDuration)
-	             .thenComparing(Highscore::getUserName)
-	             .thenComparing(Highscore::getHighScoreTime));
-	
-	       //Endscene zeigen Sollte ausgelagert werden !!!!!
-	         
-	         GridPane grid = new GridPane();
-			// weisen das Padding (interner Abstand) zu
-			grid.setPadding(new Insets(10, 10, 10, 10));
-			// und fügen einen kleinen Außenabstand hinzu
-			grid.setVgap(10);
-			grid.setHgap(10);
-	
-			TableView table = new TableView();
-			table.setEditable(true);
-	
-			TableColumn userNameCol = new TableColumn("Username");
-			TableColumn counterCol = new TableColumn("Counter");
-			TableColumn durationCol = new TableColumn("Duration");
-			TableColumn dateCol = new TableColumn("Highscore Date");
-	
-			table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
-			table.setMinWidth(paneWidth-20);
-			double cellWidth = (paneWidth)/4;
-			userNameCol.setMinWidth(cellWidth);
-			userNameCol.setCellValueFactory(
-	            new PropertyValueFactory<>("userName"));
-			counterCol.setMinWidth(cellWidth);
-			counterCol.setCellValueFactory(
-	            new PropertyValueFactory<>("counter"));
-			durationCol.setMinWidth(cellWidth);
-			durationCol.setCellValueFactory(
-	            new PropertyValueFactory<>("duration"));
-			dateCol.setMinWidth(cellWidth);
-			dateCol.setCellValueFactory(
-	            new PropertyValueFactory<>("highScoreTime"));
-		
-			table.setItems(hs);
-	
-			GridPane.setConstraints(table, 0,25);
-			grid.getChildren().addAll(table);
-	
-	        grid.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
-	    	scene = new Scene(grid, paneWidth, paneHeight);
     	}
-    	scene.setFill(Color.BLACK);
+    	//Endscene wird in der Scenery erstellt und hier ausgegeben
+		scene = scenery.renderOutro(hs,connectError);
     	primaryStage.setScene(scene);
     	
     }
@@ -689,14 +617,15 @@ public class GameEngine extends Observable {
     
     public void collisionCounter(int object, String name) {
         if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
-           if(object != lastCollisionObject) {
-        	// if (!this.getTrophyCollisionsWithTrees().contains(object)) {
-                this.getTrophyCollisionsWithTrees().add(object);
-            }else {
-            	if((System.currentTimeMillis()-lastCollisionTime)>1000) {
-            		this.getTrophyCollisionsWithTrees().add(object);
-            	}
+        	if((System.currentTimeMillis()-lastCollisionTime)>1000) {
+        		if(object != lastCollisionObject) {
+        			// if (!this.getTrophyCollisionsWithTrees().contains(object)) {
+        			this.getTrophyCollisionsWithTrees().add(object);
+        		}
+        	//}else {
+            //		this.getTrophyCollisionsWithTrees().add(object);
             }
+            
             Platform.runLater(() -> {
                 text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
             });

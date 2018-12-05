@@ -1,15 +1,25 @@
 package game;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -21,6 +31,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -30,10 +41,12 @@ public class Scenery {
     private GameEngine gameEngine;
     private Pane entities, hud ,textOver;
     private StackPane intro;
+    private GridPane outro;
     private ScrollPane background;
     private BorderPane playground;
     private MediaPlayer player;
     private Boolean gameReady = false;
+    
     
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -94,8 +107,87 @@ public class Scenery {
     	this.gameReady=x;
     }
     
-   
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    /**
+     * method witch prepare the outro as Scene 
+     * 
+     * @param hs
+     * @param connectError
+     * @return Outro as Scene
+     */
+	public Scene renderOutro(ObservableList<Highscore> hs, Boolean connectError) {
+    	int paneWidth = gameEngine.getPaneWidth();
+    	int paneHeight = gameEngine.getPaneHeight();
+    	
+    	outro = new GridPane();
+    	outro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+    	Text t = new Text();
+    	if(connectError) {
+	    	//Texthinweis
+    		DropShadow ds = new DropShadow();
+    		ds.setOffsetY(3.0f);
+    		ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
+    		 
+    		
+    		t.setEffect(ds);
+    		t.setCache(true);
+    		t.setX(10.0f);
+    		t.setY(270.0f);
+    		t.setFill(Color.RED);
+    		t.setText("Failed connect to Server ...");
+    		t.setFont(Font.font(null, FontWeight.BOLD, 32));
+    		
+    	}
+    	
+    	//Sort the highscore
+		Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
+             .thenComparing(Highscore::getDuration)
+             .thenComparing(Highscore::getUserName)
+             .thenComparing(Highscore::getHighScoreTime));
+
+		outro.setPadding(new Insets(10, 10, 10, 10));
+		outro.setVgap(10);
+		outro.setHgap(10);
+
+		//table for Highscore
+		TableView table = new TableView();
+		table.setEditable(true);
+
+		TableColumn userNameCol = new TableColumn("Username");
+		TableColumn counterCol = new TableColumn("Counter");
+		TableColumn durationCol = new TableColumn("Duration");
+		TableColumn dateCol = new TableColumn("Highscore Date");
+
+		table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
+		table.setMinWidth(paneWidth-20);
+		double cellWidth = (paneWidth)/4;
+		userNameCol.setMinWidth(cellWidth);
+		userNameCol.setCellValueFactory(
+            new PropertyValueFactory<>("userName"));
+		counterCol.setMinWidth(cellWidth);
+		counterCol.setCellValueFactory(
+            new PropertyValueFactory<>("counter"));
+		durationCol.setMinWidth(cellWidth);
+		durationCol.setCellValueFactory(
+            new PropertyValueFactory<>("duration"));
+		dateCol.setMinWidth(cellWidth);
+		dateCol.setCellValueFactory(
+            new PropertyValueFactory<>("highScoreTime"));
+	
+		table.setItems(hs);
+
+		GridPane.setConstraints(table, 0,25);
+		outro.getChildren().addAll(table,t);
+
+        outro.setStyle("-fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+        //return eady scene
+    	Scene scene = new Scene(outro, paneWidth, paneHeight);
+    	return scene;
+    }
     
+    /**
+     * render the Intro of the game
+     */
     public void renderIntro() {
     	intro = new StackPane();
         intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
@@ -110,6 +202,8 @@ public class Scenery {
     	
         Button startGameButton = new Button("Start Game");
         VBox vbox = new VBox(20,playerNameField,startGameButton);
+        
+        //this action fade the game with the intro, we try to change it as blend effect
         startGameButton.setOnAction(e -> 
         {
         	gameEngine.setUserName(playerNameField.getText());
