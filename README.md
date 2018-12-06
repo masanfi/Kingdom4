@@ -2,7 +2,7 @@
 Episode 42: The secrets of Faboma
 
 ____________________
-What`s this about?
+What's this about?
 ____________________
 
 Game development with Java for a module of Beuth University
@@ -14,7 +14,7 @@ Task description:
 - using generally accepted best practices (design patterns, OO code conventions, file formats, version management)
 
 ____________________
-Release date: When it`s done.
+Release date: When it's done.
 ____________________
 
 Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
