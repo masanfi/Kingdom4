@@ -4,21 +4,44 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ *
+ * This makes the magic happen.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class Kingdom4 extends Application {
+
+    // Define variables that will be initialized later on
 
 	private World world;
 	private Hero hero;
 	private GameEngine gameEngine;
 	private Scenery scenery;
-	
+
+    /**
+     * method start
+     *
+     * Initializes variables, starts detection routines
+     *
+     * @param primaryStage
+     */
+
 	@Override
 	public void start(Stage primaryStage) {
 
 		gameEngine = new GameEngine();
 		gameEngine.setStartTime();
 		gameEngine.setPrimaryStage(primaryStage);
-		
+
+		// Initialize Collision Detection
 		new CollisionDetection(gameEngine);
+		// Initialize Trigger Detection
 		new TriggerDetection(gameEngine);
 
 		world = new World(gameEngine);
@@ -28,9 +51,10 @@ public class Kingdom4 extends Application {
 		hero = new Hero(gameEngine);
 		world.buildWorld();
 		scenery.setPlayerOnField();
-		world.setClip();
+		world.setCamera();
 		gameEngine.setLastUpdate(-1);
 
+		// Initialize animation thread
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {

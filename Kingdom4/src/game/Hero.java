@@ -6,6 +6,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ *
+ * This is to worship the hero we at Fantastic 4 studios love and appreciate.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class Hero {
 
     private GameEngine gameEngine;
@@ -17,6 +28,7 @@ public class Hero {
         this.gameEngine = gameEngine;
         tileSize = gameEngine.getTileSize();
 
+        // initialize image array with our beloved hero from different perspectives
         this.hero = new ImageView[8];
         this.hero[0] = new ImageView(new Image("front1.png", tileSize, tileSize, true, false));
         this.hero[1] = new ImageView(new Image("front2.png", tileSize, tileSize, true, false));
@@ -27,6 +39,7 @@ public class Hero {
         this.hero[6] = new ImageView(new Image("right1.png", tileSize, tileSize, true, false));
         this.hero[7] = new ImageView(new Image("right2.png", tileSize, tileSize, true, false));
 
+        // create an action square that is used for the collision detection
         actionSquare = new Rectangle(32, 48);
         actionSquare.setTranslateX(gameEngine.getActionSquareOffsetX());
         actionSquare.setTranslateY(gameEngine.getActionSquareOffsetY());
@@ -36,9 +49,14 @@ public class Hero {
         gameEngine.getPlayer()[0].setVisible(true);
         gameEngine.setActionSquare(actionSquare);
 
+        // moves camera over the world
         gameEngine.moveCamera();
     }
 
+    /**
+     * Defines the controls for the game.
+     * @param scene
+     */
     public void getControls(Scene scene) {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -65,6 +83,10 @@ public class Hero {
         });
     }
 
+    /**
+     * This method moves our hero.
+     * @param now
+     */
     public void move(long now) {
         gameEngine.setTimestamp(now);
         gameEngine.movePlayer();

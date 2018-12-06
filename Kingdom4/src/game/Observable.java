@@ -3,6 +3,17 @@ package game;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *
+ * Implements the interface IObservable and provides methods to register and notify observers.
+ * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
+
 public class Observable implements IObservable {
     List<IObserver> observers;
 
