@@ -146,6 +146,8 @@ public class World {
         pane.getChildren().add(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
     }
 
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     /**
      * This creates the background based on the level provided in the Level class.
      * @return

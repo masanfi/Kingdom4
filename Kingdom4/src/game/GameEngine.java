@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -7,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -16,8 +18,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+
+public class GameEngine extends Observable {
 
 /**
  *
@@ -29,7 +31,6 @@ import java.util.List;
  * @version 1.0
  *
  */
-
 public class GameEngine extends Observable {
     private final int tileSize = 64 ;
     private final int amountHorizontalTiles = this.getWorld()[0].length;
@@ -55,7 +56,6 @@ public class GameEngine extends Observable {
     private Rectangle actionSquare;
     private Pane entities;
     private Pane textOver;
-    private double noCollisionX, noCollisionY;
     private int trophyTreeCounter;
     private Text text;
     private double viewFactorX, viewFactorY;
@@ -71,7 +71,6 @@ public class GameEngine extends Observable {
     private long endTime=0;
     private Boolean triggerStop = false;
     private Scenery scenery;
-    private GridPane outro;
     private static final char[][] world = Level.getLevel();
         
     ArrayList<Integer> trophyCollisionWithTrees;
@@ -350,22 +349,6 @@ public class GameEngine extends Observable {
         }
 
         this.setLastUpdate(this.getTimestamp());
-    }
-
-    private void setNoCollisionX(double x) {
-        this.noCollisionX = x;
-    }
-
-    private void setNoCollisionY(double y) {
-        this.noCollisionY = y;
-    }
-
-    private double getNoCollisionX() {
-        return noCollisionX;
-    }
-
-    private double getNoCollisionY() {
-        return noCollisionY;
     }
 
     /**

@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
@@ -24,10 +23,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.InputEvent;
-import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -130,40 +130,38 @@ public class Scenery {
      * @return Outro as Scene
      */
 	public Scene renderOutro(ObservableList<Highscore> hs, Boolean connectError) {
-    	int paneWidth = gameEngine.getPaneWidth();
-    	int paneHeight = gameEngine.getPaneHeight();
-    	
-    	outro = new GridPane();
-    	outro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
-    	Text t = new Text();
-    	if(connectError) {
-	    	//Texthinweis
-    		DropShadow ds = new DropShadow();
-    		ds.setOffsetY(3.0f);
-    		ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
-    		 
-    		
-    		t.setEffect(ds);
-    		t.setCache(true);
-    		t.setX(10.0f);
-    		t.setY(270.0f);
-    		t.setFill(Color.RED);
-    		t.setText("Failed connect to Server ...");
-    		t.setFont(Font.font(null, FontWeight.BOLD, 32));
-    		
-    	}
-    	
-    	//Sort the highscore
-		Collections.sort(hs , Comparator.comparing(Highscore::getCounter)
-             .thenComparing(Highscore::getDuration)
-             .thenComparing(Highscore::getUserName)
-             .thenComparing(Highscore::getHighScoreTime));
+		int paneWidth = gameEngine.getPaneWidth();
+		int paneHeight = gameEngine.getPaneHeight();
+
+		outro = new GridPane();
+		outro.setStyle(
+				" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+		Text t = new Text();
+		if (connectError) {
+			// Texthinweis
+			DropShadow ds = new DropShadow();
+			ds.setOffsetY(3.0f);
+			ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
+
+			t.setEffect(ds);
+			t.setCache(true);
+			t.setX(10.0f);
+			t.setY(270.0f);
+			t.setFill(Color.RED);
+			t.setText("Failed connect to Server ...");
+			t.setFont(Font.font(null, FontWeight.BOLD, 32));
+
+		}
+
+		// Sort the highscore
+		Collections.sort(hs, Comparator.comparing(Highscore::getCounter).thenComparing(Highscore::getDuration)
+				.thenComparing(Highscore::getUserName).thenComparing(Highscore::getHighScoreTime));
 
 		outro.setPadding(new Insets(10, 10, 10, 10));
 		outro.setVgap(10);
 		outro.setHgap(10);
 
-		//table for Highscore
+		// table for Highscore
 		TableView table = new TableView();
 		table.setEditable(true);
 
@@ -172,22 +170,18 @@ public class Scenery {
 		TableColumn durationCol = new TableColumn("Duration");
 		TableColumn dateCol = new TableColumn("Highscore Date");
 
-		table.getColumns().addAll(userNameCol,counterCol,durationCol,dateCol);
-		table.setMinWidth(paneWidth-20);
-		double cellWidth = (paneWidth)/4;
+		table.getColumns().addAll(userNameCol, counterCol, durationCol, dateCol);
+		table.setMinWidth(paneWidth - 20);
+		double cellWidth = (paneWidth) / 4;
 		userNameCol.setMinWidth(cellWidth);
-		userNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("userName"));
+		userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
 		counterCol.setMinWidth(cellWidth);
-		counterCol.setCellValueFactory(
-            new PropertyValueFactory<>("counter"));
+		counterCol.setCellValueFactory(new PropertyValueFactory<>("counter"));
 		durationCol.setMinWidth(cellWidth);
-		durationCol.setCellValueFactory(
-            new PropertyValueFactory<>("duration"));
+		durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
 		dateCol.setMinWidth(cellWidth);
-		dateCol.setCellValueFactory(
-            new PropertyValueFactory<>("highScoreTime"));
-	
+		dateCol.setCellValueFactory(new PropertyValueFactory<>("highScoreTime"));
+
 		table.setItems(hs);
 
 		GridPane.setConstraints(table, 0,25);
