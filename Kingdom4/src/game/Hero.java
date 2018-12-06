@@ -9,9 +9,7 @@ import javafx.scene.shape.Rectangle;
 public class Hero {
 
     private GameEngine gameEngine;
-    private Rectangle player;
     private Rectangle actionSquare;
-    private Rectangle clip;
     private ImageView[] hero;
     private int tileSize;
 

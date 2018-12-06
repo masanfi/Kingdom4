@@ -6,7 +6,8 @@ import java.util.List;
 public class Observable implements IObservable {
     List<IObserver> observers;
 
-    public Observable() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public Observable() {
         observers = new LinkedList();
     }
 

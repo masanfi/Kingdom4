@@ -122,7 +122,8 @@ public class World {
         pane.getChildren().add(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
     }
 
-    private Pane createBackground() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private Pane createBackground() {
         Pane pane = new Pane();
 
         pane.setMinSize(amountHorizontalTiles * tileSize, amountVerticalTiles * tileSize);

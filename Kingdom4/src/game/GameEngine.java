@@ -1,31 +1,22 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class GameEngine extends Observable {
 
@@ -55,7 +46,6 @@ public class GameEngine extends Observable {
     private Rectangle actionSquare;
     private Pane entities;
     private Pane textOver;
-    private double noCollisionX, noCollisionY;
     private int trophyTreeCounter;
     private Text text;
     private double viewFactorX, viewFactorY;
@@ -71,7 +61,6 @@ public class GameEngine extends Observable {
     private long endTime=0;
     private Boolean triggerStop = false;
     private Scenery scenery;
-    private GridPane outro;
     private static final char[][] world = Level.getLevel();
         
     ArrayList<Integer> trophyCollisionWithTrees;
@@ -341,22 +330,6 @@ public class GameEngine extends Observable {
         }
 
         this.setLastUpdate(this.getTimestamp());
-    }
-
-    private void setNoCollisionX(double x) {
-        this.noCollisionX = x;
-    }
-
-    private void setNoCollisionY(double y) {
-        this.noCollisionY = y;
-    }
-
-    private double getNoCollisionX() {
-        return noCollisionX;
-    }
-
-    private double getNoCollisionY() {
-        return noCollisionY;
     }
 
     public void showSpeechBubble(Trigger trigger, Color backgroundColor, Color textColor) {
