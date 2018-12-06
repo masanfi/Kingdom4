@@ -19,8 +19,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class GameEngine extends Observable {
-
 /**
  *
  * This is the core class and the heart of the game. It is the toolkit for all the mechanics and both the object and the value store.

@@ -55,8 +55,6 @@ public class Scenery {
     private GridPane outro;
     private ScrollPane background;
     private BorderPane playground;
-    private MediaPlayer player;
-    private Boolean gameReady = false;
     
     
     public Scenery(GameEngine gameEngine) {
@@ -115,10 +113,6 @@ public class Scenery {
             gameEngine.getPlayer()[i].setTranslateY(64);
             gameEngine.getBackground().getChildren().add(gameEngine.getPlayer()[i]);
         }
-    }
-    
-    public void setGameReady(Boolean x) {
-    	this.gameReady=x;
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
