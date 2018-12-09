@@ -23,6 +23,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -187,6 +189,40 @@ public class Scenery {
     	return scene;
     }
     
+    private void introAction(TextField playerNameField,VBox vbox,Stage primaryStage) {
+        int paneWidth = gameEngine.getPaneWidth();
+       	int paneHeight = gameEngine.getPaneHeight();
+    	gameEngine.setUserName(playerNameField.getText());
+    	
+    	WritableImage wi = new WritableImage(paneWidth, paneHeight);
+    	
+        Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
+        ImageView firstImageView= new ImageView(firstImage);
+        
+        wi = new WritableImage(paneWidth, paneHeight);
+        Image secondImage = gameEngine.getScene().snapshot(wi);
+        ImageView secondImageView= new ImageView(secondImage);
+        
+        firstImageView.setTranslateX(0);
+        secondImageView.setTranslateX(paneWidth);
+        
+        StackPane pane= new StackPane(firstImageView,secondImageView);
+        pane.setPrefSize(paneWidth,paneHeight);
+        pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
+        intro.getChildren().setAll(pane);
+        
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(secondImageView.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(t->{
+        	intro.getChildren().setAll(vbox);
+            primaryStage.setScene(gameEngine.getScene());
+        });
+        timeline.play();
+    	
+    }
+    
     /**
      * This renders the intro of Kingdom 4.
      */
@@ -205,37 +241,18 @@ public class Scenery {
         Button startGameButton = new Button("Start Game");
         VBox vbox = new VBox(20,playerNameField,startGameButton);
         
+        
+        intro.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER) {
+            	introAction(playerNameField,vbox,primaryStage);
+               ev.consume(); 
+            }
+        });
+        
         //this action fade the game with the intro, we try to change it as blend effect
         startGameButton.setOnAction(e -> 
         {
-        	gameEngine.setUserName(playerNameField.getText());
-        	
-        	WritableImage wi = new WritableImage(paneWidth, paneHeight);
-        	
-            Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
-            ImageView firstImageView= new ImageView(firstImage);
-            
-            wi = new WritableImage(paneWidth, paneHeight);
-            Image secondImage = gameEngine.getScene().snapshot(wi);
-            ImageView secondImageView= new ImageView(secondImage);
-            
-            firstImageView.setTranslateX(0);
-            secondImageView.setTranslateX(paneWidth);
-            
-            StackPane pane= new StackPane(firstImageView,secondImageView);
-            pane.setPrefSize(paneWidth,paneHeight);
-            pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
-            intro.getChildren().setAll(pane);
-            
-            Timeline timeline = new Timeline();
-            KeyValue kv = new KeyValue(secondImageView.translateXProperty(), 0, Interpolator.EASE_BOTH);
-            KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
-            timeline.getKeyFrames().add(kf);
-            timeline.setOnFinished(t->{
-            	intro.getChildren().setAll(vbox);
-                primaryStage.setScene(gameEngine.getScene());
-            });
-            timeline.play();
+        	introAction(playerNameField,vbox,primaryStage);
         });
         
         vbox.setAlignment(Pos.CENTER);

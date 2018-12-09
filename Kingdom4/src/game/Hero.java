@@ -58,6 +58,7 @@ public class Hero {
      * @param scene
      */
     public void getControls(Scene scene) {
+    	
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case UP:    gameEngine.setNorth(true); break;
@@ -88,6 +89,7 @@ public class Hero {
      * @param now
      */
     public void move(long now) {
+    	    	
         gameEngine.setTimestamp(now);
         gameEngine.movePlayer();
     }

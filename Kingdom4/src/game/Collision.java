@@ -23,7 +23,11 @@ public class Collision implements IEvent {
         this.coordinates = coordinates;
     }
 
-    public String getName() {
+    public Collision() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getName() {
         return name;
     }
 

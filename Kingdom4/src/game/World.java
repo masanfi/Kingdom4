@@ -98,12 +98,14 @@ public class World {
      * @param pane
      */
     private void addToPane(int x, int y, Item item, Pane pane) {
-        ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    	Collision collision = new Collision();
+    	Trigger trigger = new Trigger();
+    	ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         this.backgroundCollection.add(image);
 
         //Provisorisches Finale
-        Trigger finale = new Trigger("Finale", new Point2D(1700,1600), item.isWalkable(), item.isPortable(), item.isNpc());
-        Rectangle finaleObstacle = new Rectangle(1700,1600, gameEngine.getTileSize(), gameEngine.getTileSize());
+        Trigger finale = new Trigger("Finale", new Point2D(1972,1600), item.isWalkable(), item.isPortable(), item.isNpc());
+        Rectangle finaleObstacle = new Rectangle(1972,1600, gameEngine.getTileSize(), gameEngine.getTileSize());
         finaleObstacle.setFill(Color.PURPLE);
         this.obstacles.add(finaleObstacle);
         this.triggers.add(finale);
@@ -111,10 +113,20 @@ public class World {
         gameEngine.setTriggerObject(this.triggers);
         //Provisorisches Finale
         
+        //Provisorisches Trigger Feld um den Knight zu verschieben
+        Trigger test = new Trigger("Test", new Point2D(300,300), item.isWalkable(), item.isPortable(), item.isNpc());
+        Rectangle testObstacle = new Rectangle(300,300, gameEngine.getTileSize(), gameEngine.getTileSize());
+        testObstacle.setFill(Color.PURPLE);
+        this.obstacles.add(testObstacle);
+        this.triggers.add(test);
+        gameEngine.setObstacle(this.obstacles);
+        gameEngine.setTriggerObject(this.triggers);
+      //Provisorisches Trigger Feld um den Knight zu verschieben
+        
         
         if (item.isNpc()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
+            trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.PURPLE);
             this.collisions.add(trigger);
             this.obstacles.add(obstacle);
@@ -125,7 +137,7 @@ public class World {
         }
         else if (item.isPortable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            Trigger trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
+            trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.CYAN);
             this.obstacles.add(obstacle);
             this.triggers.add(trigger);
@@ -134,7 +146,7 @@ public class World {
         }
         else if (!item.isWalkable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            Collision collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
             obstacle.setFill(Color.RED);
             this.obstacles.add(obstacle);
             this.collisions.add(collision);
@@ -143,7 +155,33 @@ public class World {
         }
 
         this.backgroundCollection.get(this.backgroundCollection.size() - 1).relocate(y * tileSize, x * tileSize);
+
+        //Prepare the change of the knight, create Knight2
+        if(item.getName().equals("knight2")) {
+        	gameEngine.setKnight2(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
+        	this.backgroundCollection.remove(image);
+        	ImageView green = new ImageView(new Image(items.get(0).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+      	  	this.backgroundCollection.add(green);
+      	  	this.backgroundCollection.get(this.backgroundCollection.size() - 1).relocate(y * tileSize, x * tileSize);
+        	System.out.println("Knight2 gespeichert");
+        }
+        
         pane.getChildren().add(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
+
+      //Prepare the change of the knight, create Knight and Footpath
+        if(item.getName().equals("knight")) {
+        	gameEngine.setKnightCollision(trigger);
+        	gameEngine.setKnight(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
+        	
+        	ImageView fph = new ImageView(new Image(items.get(15).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        	this.backgroundCollection.add(fph);
+        	this.backgroundCollection.get(this.backgroundCollection.size() - 1).relocate(y * tileSize, x * tileSize);
+        	
+        	gameEngine.setFpH(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
+        	System.out.println("Knight gespeichert");
+        	System.out.println("FpH gespeichert");
+        }
+        
     }
 
 
@@ -353,6 +391,9 @@ public class World {
                 }
                 else if (world[x][y] == 'w') {
                     addToPane(x, y, items.get(63), pane);
+                }
+                else if (world[x][y] == '6') {
+                    addToPane(x, y, items.get(64), pane);
                 }
                 else {
                     addToPane(x, y, items.get(0), pane);
