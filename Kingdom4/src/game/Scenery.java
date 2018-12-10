@@ -38,6 +38,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 /**
  *
  * Creates different scenes that are switched during the game-play.
@@ -131,7 +132,7 @@ public class Scenery {
 
 		outro = new GridPane();
 		outro.setStyle(
-				" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+				" -fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
 		Text t = new Text();
 		if (connectError) {
 			// Texthinweis
@@ -183,7 +184,7 @@ public class Scenery {
 		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(table,t);
 
-        outro.setStyle("-fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+        outro.setStyle("-fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
@@ -228,8 +229,13 @@ public class Scenery {
      */
     public void renderIntro() {
     	intro = new StackPane();
-        intro.setStyle(" -fx-background-image: url(\"introScreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
-        Stage primaryStage = gameEngine.getPrimaryStage();
+    	intro.getStylesheets().add(
+                getClass().getResource("style.css").toExternalForm()
+        );
+    	
+    	intro.setId("introscreen");
+    	Stage primaryStage = gameEngine.getPrimaryStage();
+
         
         int paneWidth = gameEngine.getPaneWidth();
     	int paneHeight = gameEngine.getPaneHeight();
@@ -237,8 +243,10 @@ public class Scenery {
     	TextField playerNameField = new TextField();
     	playerNameField.setMaxWidth(200);
     	playerNameField.setText("Enter Playername ...");
+    	playerNameField.setId("namefield");
     	
         Button startGameButton = new Button("Start Game");
+        startGameButton.setId("startbutton");
         VBox vbox = new VBox(20,playerNameField,startGameButton);
         
         
