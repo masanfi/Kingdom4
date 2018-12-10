@@ -184,7 +184,7 @@ public class Scenery {
 		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(table,t);
 
-        outro.setStyle("-fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+        //outro.setStyle("-fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
