@@ -70,7 +70,11 @@ public class GameEngine extends Observable {
     private Boolean triggerStop = false;
     private Scenery scenery;
     private static final char[][] world = Level.getLevel();
-        
+    private ImageView knight;
+    private ImageView knight2;
+    private Boolean knightChanged= false;
+    private ImageView fph;
+    private IEvent knightCollision;
     ArrayList<Integer> trophyCollisionWithTrees;
 
     public GameEngine() {
@@ -287,6 +291,18 @@ public class GameEngine extends Observable {
         return primaryDirection;
     }
 
+    public void setKnight(ImageView knight) {
+    	this.knight = knight;
+    }
+    public void setKnightCollision(IEvent collision) {
+    	this.knightCollision = collision;
+    }
+    public void setKnight2(ImageView knight) {
+    	this.knight2 = knight;
+    }
+    public void setFpH(ImageView fph) {
+    	this.fph = fph;
+    }
     /**
      * Generates a action square that implements the movement the player has made to check if there were any collisions on our hero's way.
      * @return the future action square
@@ -300,6 +316,9 @@ public class GameEngine extends Observable {
      * Moves what we love most: Our hero.
      */
     public void movePlayer() {
+    	
+    	
+    	
         this.animatePlayer();
         this.setLastDirection(this.getPrimaryDirection());
 
@@ -315,16 +334,24 @@ public class GameEngine extends Observable {
         double deltaY = 0;
 
         if (this.getEast()) {
-            deltaX += this.getSpeed();
+        	if(!this.getWest() && !this.getSouth() && !this.getNorth()) {
+        		deltaX += this.getSpeed();
+        	}
         }
         if (this.getWest()) {
-            deltaX -= this.getSpeed();
+        	if(!this.getEast() && !this.getSouth() && !this.getNorth()) {
+        		deltaX -= this.getSpeed();
+        	}
         }
         if (this.getSouth()) {
-            deltaY += this.getSpeed();
+        	if(!this.getWest() && !this.getEast() && !this.getNorth()) {
+        		deltaY += this.getSpeed();
+        	}
         }
         if (this.getNorth()) {
-            deltaY -= this.getSpeed();
+        	if(!this.getWest() && !this.getSouth() && !this.getEast()) {
+        		deltaY -= this.getSpeed();
+        	}
         }
 
         // This sets the movement the user has made
@@ -339,10 +366,11 @@ public class GameEngine extends Observable {
         if (!isCollision) {
             this.getActionSquare().setX(viewFactorX);
             this.getActionSquare().setY(viewFactorY);
-
+           
             for (int i = 0; i < this.getPlayer().length; i++) {
                 this.getPlayer()[i].setX(viewFactorX);
                 this.getPlayer()[i].setY(viewFactorY);
+                this.getPlayer()[i].toFront();
             }
         }
 
@@ -356,6 +384,16 @@ public class GameEngine extends Observable {
      * @param textColor
      */
     public void showSpeechBubble(Trigger trigger, Color backgroundColor, Color textColor) {
+    	
+    	//Die Sprüche und Textblasen sollten wir noch auslagern in eine extra Klasse
+    	
+    	List<String> wisemanText = new ArrayList<String>();
+    	wisemanText.add("Aluminiumfolie reißt nicht\\nso leicht, wenn man sie\\nvor Gebrauch vollflächig auf\\nRigipsplatten klebt.");
+    	wisemanText.add("Mein Sohn!\\nDie Schule des Lebens\\nhat niemals Ferien.");
+    	wisemanText.add("Schmutziges Geschirr\\nschimmelt nicht, wenn\\nman es in der Gefriertruhe\\naufbewahrt.");
+    	wisemanText.add("Alte Matrosen-Weisheit:\\nLieber Rum trinken,\\nals rumsitzen!");
+    	wisemanText.add("Zwiebeln statt Kiwis\\nkaufen! Zwiebeln sind\\nbilliger und länger\\nhaltbar.");
+    	    	
         String textString = "";
         Polygon littlePointer = new Polygon();
         littlePointer.getPoints().addAll(new Double[]{trigger.getCoordinates().getX() + 55, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 36 });
@@ -366,6 +404,7 @@ public class GameEngine extends Observable {
             textString = "Willkommen im\nKönigreich Faboma,\n" + this.getUserName() + "!";
         }
         else if (trigger.getName().contentEquals("wiseman")) {
+        	//würde es gerne durch ein Zufalls string ersetzen geht aber nicht durch die Aktualisierung
             textString = "Mein Sohn!\nDie Schule des Lebens\nhat niemals Ferien.";
         }
         else if (trigger.getName().contentEquals("blacksmith")) {
@@ -429,6 +468,20 @@ public class GameEngine extends Observable {
     	primaryStage.setScene(scene);
     	
     }
+	
+	private void changeKnight() {
+		knightChanged = true;
+		background.getChildren().remove(knight);
+    	background.getChildren().add(knight2);
+    	background.getChildren().add(fph);
+
+    	//System.out.println(collision.toString());
+    	//System.out.println(knightCollision.toString());
+    	collision.remove(knightCollision);
+    	//System.out.println(collision.toString());
+    	
+    	System.out.println("Knight verschoben");
+	}
 
     /**
      * This method checks for any triggers that are being passed.
@@ -454,6 +507,10 @@ public class GameEngine extends Observable {
                 	setEndTime(System.currentTimeMillis());
                 	System.out.println("Finale oh oh");
                 	beginFinale();
+                } else if(trigger.getName().equalsIgnoreCase("test")){
+                	if(!knightChanged) {
+                		changeKnight();
+                	}          	
                 }
                 else {
                     System.out.println("Something's happening!");
@@ -512,7 +569,7 @@ public class GameEngine extends Observable {
      * Animates our hero.
      */
     public void animatePlayer() {
-        if (north) {
+        if (north && !east && !south && !west) {
             if (!getLastDirection().equals("north")) {
                 this.setGeneralVisibility(false);
                 this.getPlayer()[2].setVisible(true);
@@ -536,7 +593,7 @@ public class GameEngine extends Observable {
             this.setPrimaryDirection("north");
         }
 
-        if (east) {
+        if (east && !north && !south && !west) {
             if (!getLastDirection().equals("east")) {
                 this.setGeneralVisibility(false);
                 this.getPlayer()[6].setVisible(true);
@@ -560,7 +617,7 @@ public class GameEngine extends Observable {
             this.setPrimaryDirection("east");
         }
 
-        if (south) {
+        if (south && !east && !north && !west) {
             if (!getLastDirection().equals("south")) {
                 this.setGeneralVisibility(false);
                 this.getPlayer()[0].setVisible(true);
@@ -584,7 +641,7 @@ public class GameEngine extends Observable {
             this.setPrimaryDirection("south");
         }
 
-        if (west) {
+        if (west && !east && !south && !north) {
             if (!getLastDirection().equals("west")) {
                 this.setGeneralVisibility(false);
                 this.getPlayer()[4].setVisible(true);

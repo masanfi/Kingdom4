@@ -638,5 +638,14 @@
         <portable>false</portable>
         <npc>false</npc>
         <information>I'm a fishing rod, please don't step on me.</information>
-    </element>       
+    </element>
+    <element>
+    	<id>64</id>
+    	<name>knight2</name>
+    	<type>character</type>
+    	<image>knight2.png</image>
+    	<walkable>false</walkable>
+    	<portable>false</portable>
+    	<npc>true</npc>
+    	<information>I'm a knight, don't bother me.</information></element>
 </root>

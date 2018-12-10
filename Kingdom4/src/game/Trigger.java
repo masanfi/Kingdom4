@@ -29,7 +29,11 @@ public class Trigger implements IEvent {
         this.isNpc = isNpc;
     }
 
-    @Override
+    public Trigger() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
     public String getName() {
         return name;
     }
