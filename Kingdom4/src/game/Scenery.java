@@ -1,5 +1,6 @@
 package game;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -58,11 +59,12 @@ public class Scenery {
     private GridPane outro;
     private ScrollPane background;
     private BorderPane playground;
-    
+    private File cssFile = new File("css/style.css");
     
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-
+        
+        
         background = new ScrollPane();
 
         entities = new Pane();
@@ -131,8 +133,8 @@ public class Scenery {
 		int paneHeight = gameEngine.getPaneHeight();
 
 		outro = new GridPane();
-		outro.setStyle(
-				" -fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
+		outro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
+		outro.setId("introscreen");
 		Text t = new Text();
 		if (connectError) {
 			// Texthinweis
@@ -184,7 +186,6 @@ public class Scenery {
 		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(table,t);
 
-        //outro.setStyle("-fx-background-image: url(\"introscreen.png\"); -fx-background-repeat: stretch; -fx-background-position: center center; -fx-background-insets: 0; -fx-padding: 0;");
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
@@ -229,10 +230,11 @@ public class Scenery {
      */
     public void renderIntro() {
     	intro = new StackPane();
-    	intro.getStylesheets().add(
-                getClass().getResource("style.css").toExternalForm()
-        );
+    	//intro.getStylesheets().add(
+        //        getClass().getResource("../css_neu/style.css").toExternalForm()
+        //);
     	
+    	intro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
     	intro.setId("introscreen");
     	Stage primaryStage = gameEngine.getPrimaryStage();
 

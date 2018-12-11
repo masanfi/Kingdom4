@@ -22,6 +22,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
     -fx-font-family: "Helvetica";
+    -fx-cursor: hand;
 }
 #startbutton:hover {
     -fx-background-color: 
@@ -57,7 +58,14 @@
 }
 
 #introscreen { 
-	-fx-background-image: url("../introscreen.png"); 
+	-fx-background-image: url("../images/introscreen.png"); 
+	-fx-background-repeat: stretch; 
+	-fx-background-position: center center; 
+	-fx-background-insets: 0; -fx-padding: 0;
+}
+
+#outroscreen { 
+	-fx-background-image: url("../images/introscreen.png"); 
 	-fx-background-repeat: stretch; 
 	-fx-background-position: center center; 
 	-fx-background-insets: 0; -fx-padding: 0;
