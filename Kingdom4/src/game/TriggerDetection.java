@@ -40,7 +40,7 @@ public class TriggerDetection implements IObserver {
             double height = gameEngine.getTileSize();
 
             Rectangle actionSquareFuture = gameEngine.getActionSquareFuture();
-            Rectangle actionRadius = new Rectangle(minX+2, minY+2, width+4, height+4);
+            Rectangle actionRadius = new Rectangle(minX-2, minY+4, width+6, height+4);
 
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
                 

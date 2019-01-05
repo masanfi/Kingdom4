@@ -55,7 +55,7 @@ import javafx.util.Duration;
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, textOver,hud;
+    private Pane entities, textOver, hud;
     private StackPane intro;
     private GridPane outro;
     private ScrollPane background;
@@ -87,7 +87,7 @@ public class Scenery {
         hud.setId("pane");
 
         hud.setStyle("-fx-background-color: transparent;");
-        hud.setStyle("-fx-background-color: rgba(0,0,0,0);");
+        hud.setStyle("-fx-background-color: rgba(255,255,255,0.0);");
         Text text = new Text("0");
         gameEngine.setHudText(text);
         text.setX(10);

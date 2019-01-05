@@ -271,13 +271,13 @@
     </element>  
     <element>
         <id>27</id>
-        <name>fishman</name>
+        <name>fisherman</name>
         <type>character</type>
         <image>fisherman.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
         <npc>true</npc>
-        <information>I'm the fishmen, talk to me.</information>
+        <information>I'm the fisherman, talk to me.</information>
     </element> 
     <element>
         <id>28</id>
