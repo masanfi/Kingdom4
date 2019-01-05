@@ -647,5 +647,16 @@
     	<walkable>false</walkable>
     	<portable>false</portable>
     	<npc>true</npc>
-    	<information>I'm a knight, don't bother me.</information></element>
+    	<information>I'm a knight, don't bother me.</information>
+    </element>
+    <element>
+        <id>65</id>
+        <name>river_d</name>
+        <type>terrain</type>
+        <image>river_d.png</image>
+        <walkable>false</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a river, please don't step on me.</information>
+    </element>
 </root>

@@ -435,6 +435,9 @@ private Boolean provTrigger = false;
                 else if (world[x][y] == '6') {
                     addToPane(x, y, items.get(64), pane);
                 }
+                else if (world[x][y] == 'd') {
+                    addToPane(x, y, items.get(65), pane);
+                }
                 else {
                     addToPane(x, y, items.get(0), pane);
                 }
