@@ -132,7 +132,7 @@
     <element>
         <id>13</id>
         <name>river_bridge_l</name>
-        <type>background</type>
+        <type>terrain</type>
         <image>river_bridge_l.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -142,7 +142,7 @@
      <element>
         <id>14</id>
         <name>river_bridge_r</name>
-        <type>background</type>
+        <type>terrain</type>
         <image>river_bridge_r.png</image>
         <walkable>true</walkable>
         <portable>false</portable>

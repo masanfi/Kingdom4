@@ -108,7 +108,11 @@ private Boolean provTrigger = false;
     	if(!provTrigger) {
     	provTrigger = true;
 	        //Provisorisches Finale
-	        Trigger finale = new Trigger("Finale", new Point2D(1972,1600), item.isWalkable(), item.isPortable(), item.isNpc());
+	    	Item finalItem = new Item();
+	    	finalItem.setId(999);
+	    	finalItem.setName("Finale");
+	    	finalItem.setType("test");
+	        Trigger finale = new Trigger(finalItem, new Point2D(1972,1600), item.isWalkable(), item.isPortable(), item.isNpc());
 	        Rectangle finaleObstacle = new Rectangle(1972,1600, gameEngine.getTileSize(), gameEngine.getTileSize());
 	        finaleObstacle.setFill(Color.PURPLE);
 	        this.obstacles.add(finaleObstacle);
@@ -118,7 +122,11 @@ private Boolean provTrigger = false;
 	        //Provisorisches Finale
 	        
 	        //Provisorisches Trigger Feld um den Knight zu verschieben
-	        Trigger test = new Trigger("Test", new Point2D(300,300), item.isWalkable(), item.isPortable(), item.isNpc());
+	        Item testItem = new Item();
+	        testItem.setId(666);
+	        testItem.setName("Test");
+	        testItem.setType("test");
+	        Trigger test = new Trigger(testItem, new Point2D(300,300), item.isWalkable(), item.isPortable(), item.isNpc());
 	        Rectangle testObstacle = new Rectangle(200,300, gameEngine.getTileSize(), gameEngine.getTileSize());
 	        testObstacle.setFill(Color.PURPLE);
 	        this.obstacles.add(testObstacle);
@@ -130,7 +138,7 @@ private Boolean provTrigger = false;
         
         if (item.isNpc()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
+            trigger = new Trigger(item, new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.PURPLE);
             this.collisions.add(trigger);
             this.obstacles.add(obstacle);
@@ -141,7 +149,7 @@ private Boolean provTrigger = false;
         }
         else if (item.isPortable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
+            trigger = new Trigger(item, new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             obstacle.setFill(Color.CYAN);
             this.obstacles.add(obstacle);
             this.triggers.add(trigger);
@@ -150,7 +158,7 @@ private Boolean provTrigger = false;
         }
         else if (!item.isWalkable()) {
             Rectangle obstacle = new Rectangle(y * gameEngine.getTileSize(), x * gameEngine.getTileSize(), gameEngine.getTileSize(), gameEngine.getTileSize());
-            collision = new Collision(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
+            collision = new Collision(item, new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()));
             
             obstacle.setFill(Color.RED);
             this.obstacles.add(obstacle);
@@ -161,7 +169,7 @@ private Boolean provTrigger = false;
         	
         	//System.out.println(item.getName());
         	
-        	trigger = new Trigger(item.getName(), new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
+        	trigger = new Trigger(item, new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             this.triggers.add(trigger);
         }
 

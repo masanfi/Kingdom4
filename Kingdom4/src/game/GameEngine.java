@@ -87,9 +87,13 @@ public class GameEngine extends Observable {
     ArrayList<Integer> trophyCollisionWithTrees;
     ArrayList<Integer> trophyCollisionWithFlowers;
     ArrayList<Integer> trophyCollisionWithStones;
+    ArrayList<Integer> trophyCollisionWithNPCs;
+    ArrayList<Integer> trophyCollisionWithBridge;
+    private Boolean trophyBridge = false;
     private Boolean trophyStones = false;
     private Boolean trophyTrees = false;
     private Boolean trophyFlowers = false;
+    private Boolean trophyNPCs = false;
     private File attention = new File("music/attention.mp3");
     private Boolean openSpeechBubble = false;
     List<String> wisemanText = new ArrayList<String>();
@@ -98,6 +102,8 @@ public class GameEngine extends Observable {
         trophyCollisionWithTrees = new ArrayList<>();
         trophyCollisionWithFlowers = new ArrayList<>();
         trophyCollisionWithStones = new ArrayList<>();
+        trophyCollisionWithNPCs = new ArrayList<>();
+        trophyCollisionWithBridge = new ArrayList<>();
         
     	wisemanText.add("Aluminiumfolie reißt nicht\\nso leicht, wenn man sie\\nvor Gebrauch vollflächig auf\\nRigipsplatten klebt.");
     	wisemanText.add("Mein Sohn!\\nDie Schule des Lebens\\nhat niemals Ferien.");
@@ -507,6 +513,7 @@ public class GameEngine extends Observable {
     	background.getChildren().add(fph);
     	
     	collision.remove(knightCollision);
+    	trigger.remove(knightCollision);
     	
     	System.out.println("Knight verschoben");
 	}
@@ -743,7 +750,7 @@ public class GameEngine extends Observable {
      * @param object
      * @param name
      */
-    public void collisionCounter(int object, String name) {
+    public void collisionCounter(int object, Item item) {
     	
     	//
     	if(this.getTrophyCollisionsWithFlowers().size()==20) {
@@ -772,13 +779,31 @@ public class GameEngine extends Observable {
     		this.trophyStones = true;
     	}
     	
+    	if(this.getTrophyCollisionsWithNPCs().size()==15) {
+    		
+    		if(!trophyNPCs) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Influencer!!!!!");
+    		}
+    		this.trophyNPCs = true;
+    	}
+    	
+    	if(this.getTrophyCollisionsWithBridge().size()==3) {
+    		
+    		if(!trophyBridge) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Verwirrt!!!!!");
+    		}
+    		this.trophyBridge = true;
+    	}
+    	
     	
     	if((System.currentTimeMillis()-lastCollisionTime) > 1000) {
     		//System.out.println("Collision with: " + name);
         	//System.out.println(System.currentTimeMillis() + " " + lastCollisionTime);
     	
     		//Collision with Trees
-    		if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
+    		if (item.getName().contentEquals("tree") || item.getName().contentEquals("tree2") || item.getName().contentEquals("tree3")) {
     			this.getTrophyCollisionsWithTrees().add(object);
     			//Platform.runLater(() -> {
 	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
@@ -787,7 +812,7 @@ public class GameEngine extends Observable {
     		}
     		
     		//Collision with Flowers
-    		if (name.contentEquals("flowers") || name.contentEquals("flower2")) {
+    		if (item.getName().contentEquals("flowers") || item.getName().contentEquals("flower2")) {
     			this.getTrophyCollisionsWithFlowers().add(object);
     			//Platform.runLater(() -> {
 	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
@@ -796,7 +821,7 @@ public class GameEngine extends Observable {
     		}
     		
     		//Collision with Stones
-    		if (name.contentEquals("stone")) {
+    		if (item.getName().contentEquals("stone")) {
     			this.getTrophyCollisionsWithStones().add(object);
     			//Platform.runLater(() -> {
 	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
@@ -804,18 +829,35 @@ public class GameEngine extends Observable {
     			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
     		}
     		
-    		if (name.contentEquals("stone")) {
+    		if (item.getName().contentEquals("stone")) {
     			this.getTrophyCollisionsWithStones().add(object);
     			//Platform.runLater(() -> {
 	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
 	           // });
     			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
     		}
+    		
+    		if(item.isNpc()) {
+    			this.getTrophyCollisionsWithNPCs().add(object);
+    			System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
+    		}
+    		
+    		if(item.getName().equals("river_bridge_l")) {
+    			this.getTrophyCollisionsWithBridge().add(object);
+    			System.out.println("Bridge:" +this.getTrophyCollisionsWithBridge().size());
+    		}
 
     		lastCollisionTime = System.currentTimeMillis();
     	}
     }
 
+    private ArrayList<Integer> getTrophyCollisionsWithBridge() {
+        return trophyCollisionWithBridge;
+    }
+    
+    private ArrayList<Integer> getTrophyCollisionsWithNPCs() {
+        return trophyCollisionWithNPCs;
+    }
     private ArrayList<Integer> getTrophyCollisionsWithTrees() {
         return trophyCollisionWithTrees;
     }

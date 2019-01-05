@@ -44,7 +44,7 @@ public class TriggerDetection implements IObserver {
 
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
                 
-            	gameEngine.collisionCounter(object, trigger.getName());
+            	gameEngine.collisionCounter(object, trigger.getItem());
             	
             	this.trigger = trigger;
                 triggers++;

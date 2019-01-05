@@ -15,11 +15,11 @@ import javafx.geometry.Point2D;
 
 public class Collision implements IEvent {
 
-    private String name;
+    private Item item;
     private Point2D coordinates;
 
-    public Collision(String name, Point2D coordinates) {
-        this.name = name;
+    public Collision(Item item, Point2D coordinates) {
+        this.item = item;
         this.coordinates = coordinates;
     }
 
@@ -27,8 +27,12 @@ public class Collision implements IEvent {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Item getItem() {
+        return item;
+    }
+	
 	public String getName() {
-        return name;
+        return item.getName();
     }
 
     public Point2D getCoordinates() {
