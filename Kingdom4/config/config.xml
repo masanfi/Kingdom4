@@ -152,7 +152,7 @@
     <element>
         <id>15</id>
         <name>footpath_horizontal</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_h.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -162,7 +162,7 @@
     <element>
         <id>16</id>
         <name>footpath_vertical</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_v.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -172,7 +172,7 @@
     <element>
         <id>17</id>
         <name>footpath_corner1</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_c1.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -182,7 +182,7 @@
     <element>
         <id>18</id>
         <name>footpath_corner2</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_c2.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -192,7 +192,7 @@
         <element>
         <id>19</id>
         <name>footpath_corner3</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_c3.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -202,7 +202,7 @@
     <element>
         <id>20</id>
         <name>footpath_corner4</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_c4.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -212,7 +212,7 @@
     <element>
         <id>21</id>
         <name>footpath_crossing1</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_x1.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -222,7 +222,7 @@
     <element>
         <id>22</id>
         <name>footpath_crossing2</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_x2.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -232,7 +232,7 @@
         <element>
         <id>23</id>
         <name>footpath_crossing3</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_x3.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -242,7 +242,7 @@
     <element>
         <id>24</id>
         <name>footpath_crossing4</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_x4.png</image>
         <walkable>true</walkable>
         <portable>false</portable>
@@ -252,7 +252,7 @@
     <element>
         <id>25</id>
         <name>footpath_center4</name>
-        <type>terrain</type>
+        <type>background</type>
         <image>footpath_center.png</image>
         <walkable>false</walkable>
         <portable>false</portable>
@@ -505,7 +505,7 @@
         <type>object</type>
         <image>key.png</image>
         <walkable>true</walkable>
-        <portable>false</portable>
+        <portable>true</portable>
         <npc>false</npc>
         <information>I'm a key, please step on me.</information>
     </element>

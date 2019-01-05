@@ -1,7 +1,9 @@
 package game;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -9,8 +11,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -56,6 +61,7 @@ public class GameEngine extends Observable {
     private Pane textOver;
     private int trophyTreeCounter;
     private Text text;
+    private ImageView hudKeyImageView;
     private double viewFactorX, viewFactorY;
     private double actionSquareOffsetX = 16;
     private double actionSquareOffsetY = 16;
@@ -63,7 +69,6 @@ public class GameEngine extends Observable {
     private String lastDirection;
     private String userName;
     private Stage primaryStage;
-    private int lastCollisionObject=0;
     private long lastCollisionTime=0;
     private long startTime=0;
     private long endTime=0;
@@ -73,12 +78,38 @@ public class GameEngine extends Observable {
     private ImageView knight;
     private ImageView knight2;
     private Boolean knightChanged= false;
+    private Boolean keyPickedUP= false;
     private ImageView fph;
+    private ImageView key;
+    private ImageView keyGreen;
+    private Image keyImage;
     private IEvent knightCollision;
     ArrayList<Integer> trophyCollisionWithTrees;
-
+    ArrayList<Integer> trophyCollisionWithFlowers;
+    ArrayList<Integer> trophyCollisionWithStones;
+    ArrayList<Integer> trophyCollisionWithNPCs;
+    ArrayList<Integer> trophyCollisionWithBridge;
+    private Boolean trophyBridge = false;
+    private Boolean trophyStones = false;
+    private Boolean trophyTrees = false;
+    private Boolean trophyFlowers = false;
+    private Boolean trophyNPCs = false;
+    private File attention = new File("music/attention.mp3");
+    private Boolean openSpeechBubble = false;
+    List<String> wisemanText = new ArrayList<String>();
+    
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
+        trophyCollisionWithFlowers = new ArrayList<>();
+        trophyCollisionWithStones = new ArrayList<>();
+        trophyCollisionWithNPCs = new ArrayList<>();
+        trophyCollisionWithBridge = new ArrayList<>();
+        
+    	wisemanText.add("Aluminiumfolie reißt nicht\\nso leicht, wenn man sie\\nvor Gebrauch vollflächig auf\\nRigipsplatten klebt.");
+    	wisemanText.add("Mein Sohn!\\nDie Schule des Lebens\\nhat niemals Ferien.");
+    	wisemanText.add("Schmutziges Geschirr\\nschimmelt nicht, wenn\\nman es in der Gefriertruhe\\naufbewahrt.");
+    	wisemanText.add("Alte Matrosen-Weisheit:\\nLieber Rum trinken,\\nals rumsitzen!");
+    	wisemanText.add("Zwiebeln statt Kiwis\\nkaufen! Zwiebeln sind\\nbilliger und länger\\nhaltbar.");
     }
 
     public void setScenery(Scenery scenery) {
@@ -303,6 +334,15 @@ public class GameEngine extends Observable {
     public void setFpH(ImageView fph) {
     	this.fph = fph;
     }
+    public void setKey(ImageView key) {
+    	this.key = key;
+    }
+    public void setKeyGreen(ImageView keyGreen) {
+    	this.keyGreen = keyGreen;
+    }
+    
+    
+    
     /**
      * Generates a action square that implements the movement the player has made to check if there were any collisions on our hero's way.
      * @return the future action square
@@ -387,12 +427,7 @@ public class GameEngine extends Observable {
     	
     	//Die Sprüche und Textblasen sollten wir noch auslagern in eine extra Klasse
     	
-    	List<String> wisemanText = new ArrayList<String>();
-    	wisemanText.add("Aluminiumfolie reißt nicht\\nso leicht, wenn man sie\\nvor Gebrauch vollflächig auf\\nRigipsplatten klebt.");
-    	wisemanText.add("Mein Sohn!\\nDie Schule des Lebens\\nhat niemals Ferien.");
-    	wisemanText.add("Schmutziges Geschirr\\nschimmelt nicht, wenn\\nman es in der Gefriertruhe\\naufbewahrt.");
-    	wisemanText.add("Alte Matrosen-Weisheit:\\nLieber Rum trinken,\\nals rumsitzen!");
-    	wisemanText.add("Zwiebeln statt Kiwis\\nkaufen! Zwiebeln sind\\nbilliger und länger\\nhaltbar.");
+    	
     	    	
         String textString = "";
         Polygon littlePointer = new Polygon();
@@ -404,8 +439,8 @@ public class GameEngine extends Observable {
             textString = "Willkommen im\nKönigreich Faboma,\n" + this.getUserName() + "!";
         }
         else if (trigger.getName().contentEquals("wiseman")) {
-        	//würde es gerne durch ein Zufalls string ersetzen geht aber nicht durch die Aktualisierung
-            textString = "Mein Sohn!\nDie Schule des Lebens\nhat niemals Ferien.";
+            int randomNum = ThreadLocalRandom.current().nextInt(1, wisemanText.size());
+            textString = wisemanText.get(randomNum);
         }
         else if (trigger.getName().contentEquals("blacksmith")) {
             textString = "Harrr! Hast du\nheute schon dein\nKinderbier getrunken?";
@@ -416,6 +451,7 @@ public class GameEngine extends Observable {
         Text text = new Text(trigger.getCoordinates().getX() + 74, trigger.getCoordinates().getY() + 46, textString);
         text.setFont(Font.font ("Verdana", 16));
         text.setFill(textColor);
+        
         this.getTextOver().getChildren().addAll(littlePointer, bubble, text);
         this.getTextOver().setVisible(true);
     }
@@ -471,16 +507,24 @@ public class GameEngine extends Observable {
 	
 	private void changeKnight() {
 		knightChanged = true;
+
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
-
-    	//System.out.println(collision.toString());
-    	//System.out.println(knightCollision.toString());
+    	
     	collision.remove(knightCollision);
-    	//System.out.println(collision.toString());
+    	trigger.remove(knightCollision);
     	
     	System.out.println("Knight verschoben");
+	}
+	
+	private void pickUpKey() {
+		keyPickedUP = true;
+		background.getChildren().remove(key);
+		background.getChildren().add(keyGreen);
+		Platform.runLater(() -> {
+			hudKeyImageView.setImage(keyImage);
+		});
 	}
 
     /**
@@ -488,6 +532,7 @@ public class GameEngine extends Observable {
      * @param trigger
      */
     public void checkForTriggers(Trigger trigger) {
+    	//System.out.println(images);
         if (trigger != null) {
             if (this.isTrigger() && !triggerStop) {
                 if (trigger.isNpc()) {
@@ -495,7 +540,10 @@ public class GameEngine extends Observable {
                         showSpeechBubble(trigger, Color.RED, Color.WHITE);
                     }
                     else if (trigger.getName().contentEquals("wiseman")) {
-                        showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
+                    	if(!openSpeechBubble) {
+                    		showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
+                    		openSpeechBubble = true;
+                    	}
                     }
                     else if (trigger.getName().contentEquals("blacksmith")) {
                         showSpeechBubble(trigger, Color.BROWN, Color.WHITE);
@@ -511,14 +559,21 @@ public class GameEngine extends Observable {
                 	if(!knightChanged) {
                 		changeKnight();
                 	}          	
+                }else if(trigger.getName().equalsIgnoreCase("key")){
+                	if(!keyPickedUP) {
+                		System.out.println("Schlüsssel gefunden");
+                		pickUpKey();
+                	}
                 }
                 else {
-                    System.out.println("Something's happening!");
+                    //System.out.println("Something's happening!");
                 }
             }
         }
         else {
+        	openSpeechBubble = false;
             this.getTextOver().setVisible(false);
+            this.getTextOver().getChildren().clear();
         }
     }
 
@@ -695,29 +750,124 @@ public class GameEngine extends Observable {
      * @param object
      * @param name
      */
-    public void collisionCounter(int object, String name) {
-        if (name.contentEquals("tree") || name.contentEquals("tree2") || name.contentEquals("tree3")) {
+    public void collisionCounter(int object, Item item) {
+    	
+    	//
+    	if(this.getTrophyCollisionsWithFlowers().size()==20) {
+    		
+    		if(!this.trophyFlowers) {
+    			System.out.println("Trophy gewonnen: Trampel!!!!!");
+    		}   
+    		this.trophyFlowers = true;
+    	}
+    	
+    	if(this.getTrophyCollisionsWithTrees().size()==20) {
+    		
+    		if(!trophyTrees) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Treehugger!!!!!");
+    		}
+    		this.trophyTrees = true;
+    	}
+    	
+    	if(this.getTrophyCollisionsWithStones().size()==10) {
+    		
+    		if(!trophyStones) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Steinbeisser!!!!!");
+    		}
+    		this.trophyStones = true;
+    	}
+    	
+    	if(this.getTrophyCollisionsWithNPCs().size()==15) {
+    		
+    		if(!trophyNPCs) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Influencer!!!!!");
+    		}
+    		this.trophyNPCs = true;
+    	}
+    	
+    	if(this.getTrophyCollisionsWithBridge().size()==3) {
+    		
+    		if(!trophyBridge) {
+    			//trophyPlayer.play();
+    			System.out.println("Trophy gewonnen: Verwirrt!!!!!");
+    		}
+    		this.trophyBridge = true;
+    	}
+    	
+    	
+    	if((System.currentTimeMillis()-lastCollisionTime) > 1000) {
+    		//System.out.println("Collision with: " + name);
+        	//System.out.println(System.currentTimeMillis() + " " + lastCollisionTime);
+    	
+    		//Collision with Trees
+    		if (item.getName().contentEquals("tree") || item.getName().contentEquals("tree2") || item.getName().contentEquals("tree3")) {
+    			this.getTrophyCollisionsWithTrees().add(object);
+    			//Platform.runLater(() -> {
+	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
+	            //});
+    			System.out.println("Trees:" +this.getTrophyCollisionsWithTrees().size());
+    		}
+    		
+    		//Collision with Flowers
+    		if (item.getName().contentEquals("flowers") || item.getName().contentEquals("flower2")) {
+    			this.getTrophyCollisionsWithFlowers().add(object);
+    			//Platform.runLater(() -> {
+	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
+	           // });
+    			System.out.println("Flowers:" +this.getTrophyCollisionsWithFlowers().size());
+    		}
+    		
+    		//Collision with Stones
+    		if (item.getName().contentEquals("stone")) {
+    			this.getTrophyCollisionsWithStones().add(object);
+    			//Platform.runLater(() -> {
+	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
+	           // });
+    			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
+    		}
+    		
+    		if (item.getName().contentEquals("stone")) {
+    			this.getTrophyCollisionsWithStones().add(object);
+    			//Platform.runLater(() -> {
+	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
+	           // });
+    			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
+    		}
+    		
+    		if(item.isNpc()) {
+    			this.getTrophyCollisionsWithNPCs().add(object);
+    			System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
+    		}
+    		
+    		if(item.getName().equals("river_bridge_l")) {
+    			this.getTrophyCollisionsWithBridge().add(object);
+    			System.out.println("Bridge:" +this.getTrophyCollisionsWithBridge().size());
+    		}
 
-        	if((System.currentTimeMillis()-lastCollisionTime) > 1000) {
-        		if(object != lastCollisionObject) {
-        			// if (!this.getTrophyCollisionsWithTrees().contains(object)) {
-        			this.getTrophyCollisionsWithTrees().add(object);
-        		}
-        	//}else {
-            //		this.getTrophyCollisionsWithTrees().add(object);
-            }
-            
-            Platform.runLater(() -> {
-                text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
-            });
-
-            lastCollisionObject = object;
-            lastCollisionTime = System.currentTimeMillis();
-        }
+    		lastCollisionTime = System.currentTimeMillis();
+    	}
     }
 
+    private ArrayList<Integer> getTrophyCollisionsWithBridge() {
+        return trophyCollisionWithBridge;
+    }
+    
+    private ArrayList<Integer> getTrophyCollisionsWithNPCs() {
+        return trophyCollisionWithNPCs;
+    }
     private ArrayList<Integer> getTrophyCollisionsWithTrees() {
         return trophyCollisionWithTrees;
+    }
+    
+    private ArrayList<Integer> getTrophyCollisionsWithStones() {
+        return trophyCollisionWithStones;
+    }
+    
+    private ArrayList<Integer> getTrophyCollisionsWithFlowers() {
+        return trophyCollisionWithFlowers;
     }
 
     public int getTrophyTreeCounter() {
@@ -728,6 +878,14 @@ public class GameEngine extends Observable {
         this.text = text;
     }
 
+    public void setHudKeyImageView(ImageView keyImageView) {
+        this.hudKeyImageView = keyImageView;
+    }
+    
+    public void setKeyImage(Image key) {
+    	this.keyImage = key;
+    }
+    
     public double getActionSquareOffsetX() {
         return actionSquareOffsetX;
     }
@@ -763,4 +921,5 @@ public class GameEngine extends Observable {
     public ArrayList<Trigger> getTriggerObject() {
         return trigger;
     }
+
 }

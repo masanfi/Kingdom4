@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Date;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,12 +40,26 @@ public class Highscore {
 		return counter.get();
 	}
 
-	public long getDuration() {
-		return duration.get();
+	public String getDuration() {
+	    
+	    long millis= duration.get();
+	    long secs = millis / 1000;
+	    long mins = secs / 60;
+	    long restsecs = secs % 60;
+	    return mins + ":" + restsecs;
+	    	
+	    
+		//return duration.get();
 	}
 
-	public long getHighScoreTime() {
-		return highScoreTime.get();
+	public String getHighScoreTime() {
+		
+		
+		String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(highScoreTime.get()));
+		
+		
+		return date;
+		//return highScoreTime.get();
 	}
 
 }

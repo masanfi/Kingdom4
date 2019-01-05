@@ -15,14 +15,14 @@ import javafx.geometry.Point2D;
 
 public class Trigger implements IEvent {
 
-    private String name;
+    private Item item;
     private Point2D coordinates;
     private boolean isWalkable;
     private boolean isPortable;
     private boolean isNpc;
 
-    public Trigger(String name, Point2D coordinates, boolean isWalkable, boolean isPortable, boolean isNpc) {
-        this.name = name;
+    public Trigger(Item item, Point2D coordinates, boolean isWalkable, boolean isPortable, boolean isNpc) {
+        this.item = item;
         this.coordinates = coordinates;
         this.isWalkable = isWalkable;
         this.isPortable = isPortable;
@@ -35,7 +35,11 @@ public class Trigger implements IEvent {
 
 	@Override
     public String getName() {
-        return name;
+        return item.getName();
+    }
+	
+	public Item getItem() {
+        return item;
     }
 
     @Override

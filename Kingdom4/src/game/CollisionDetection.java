@@ -45,7 +45,7 @@ public class CollisionDetection implements IObserver {
 
             // check if action square collides with collision object
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
-            	gameEngine.collisionCounter(object, collision.getName());
+            	gameEngine.collisionCounter(object, collision.getItem());
         		collisions++;
         	}     
         });

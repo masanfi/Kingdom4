@@ -15,5 +15,6 @@ import javafx.geometry.Point2D;
 
 public interface IEvent {
     public String getName();
+    public Item getItem();
     public Point2D getCoordinates();
 }

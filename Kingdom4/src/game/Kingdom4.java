@@ -64,7 +64,6 @@ public class Kingdom4 extends Application {
 
 		hero.getControls(gameEngine.getScene());
 		primaryStage.setTitle("Kingdom 4");
-
 		scenery.renderIntro();
 		primaryStage.setScene(gameEngine.getIntro());
 
