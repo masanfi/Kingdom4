@@ -20,6 +20,7 @@ public class TriggerDetection implements IObserver {
     Trigger trigger;
 
     int triggers;
+    int object;
 
     public TriggerDetection(GameEngine subject) {
         this.gameEngine = subject;
@@ -29,8 +30,10 @@ public class TriggerDetection implements IObserver {
     @Override
     public void update() {
         triggers = 0;
+        object = 0;
 
         gameEngine.getTriggerObject().forEach(trigger->{
+        	object++;
             double minX = trigger.getCoordinates().getX();
             double minY = trigger.getCoordinates().getY();
             double width = gameEngine.getTileSize();
@@ -40,7 +43,10 @@ public class TriggerDetection implements IObserver {
             Rectangle actionRadius = new Rectangle(minX+2, minY+2, width+4, height+4);
 
             if (actionRadius.getBoundsInParent().intersects(actionSquareFuture.boundsInParentProperty().getValue())) {
-                this.trigger = trigger;
+                
+            	gameEngine.collisionCounter(object, trigger.getName());
+            	
+            	this.trigger = trigger;
                 triggers++;
             }
         });

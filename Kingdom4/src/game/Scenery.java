@@ -31,8 +31,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -54,12 +55,15 @@ import javafx.util.Duration;
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, hud ,textOver;
+    private Pane entities, textOver,hud;
     private StackPane intro;
     private GridPane outro;
     private ScrollPane background;
     private BorderPane playground;
     private File cssFile = new File("css/style.css");
+    
+    //Music from: http://freemusicarchive.org 
+    private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
     
     public Scenery(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -79,8 +83,11 @@ public class Scenery {
         gameEngine.getEntities().setVisible(false);
 
         hud = new Pane();
-        Rectangle rect = new Rectangle(0, -64, 200, 80);
-        rect.setFill(Color.DARKGRAY);
+        hud.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
+        hud.setId("pane");
+
+        hud.setStyle("-fx-background-color: transparent;");
+        hud.setStyle("-fx-background-color: rgba(0,0,0,0);");
         Text text = new Text("0");
         gameEngine.setHudText(text);
         text.setX(10);
@@ -88,14 +95,19 @@ public class Scenery {
         text.setFill(Color.WHITE);
         text.setFont(Font.font ("Verdana", 20));
 
-        hud.setMinHeight(0);
-        hud.setPrefHeight(0);
-        hud.getChildren().addAll(rect, text);
+        ImageView keyImageView = new ImageView();
+        //keyImageView.setImage(new Image("grass.png", gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        keyImageView.relocate(712, 14);
+        gameEngine.setHudKeyImageView(keyImageView);
+        hud.setMinHeight(96);
+        hud.setPrefHeight(96);
+        hud.getChildren().addAll(keyImageView);
 
         background.setContent(gameEngine.getBackground());
         background.addEventFilter(InputEvent.ANY, (event)-> {
                 event.consume();
         });
+        
         background.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
@@ -190,6 +202,7 @@ public class Scenery {
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
     }
+
     
     private void introAction(TextField playerNameField,VBox vbox,Stage primaryStage) {
         int paneWidth = gameEngine.getPaneWidth();
@@ -205,24 +218,23 @@ public class Scenery {
         Image secondImage = gameEngine.getScene().snapshot(wi);
         ImageView secondImageView= new ImageView(secondImage);
         
-        firstImageView.setTranslateX(0);
-        secondImageView.setTranslateX(paneWidth);
+        //firstImageView.setTranslateX(0);
+        //secondImageView.setTranslateX(paneWidth);
+        secondImageView.setOpacity(0);
         
         StackPane pane= new StackPane(firstImageView,secondImageView);
         pane.setPrefSize(paneWidth,paneHeight);
         pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
         intro.getChildren().setAll(pane);
         
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(secondImageView.translateXProperty(), 0, Interpolator.EASE_BOTH);
-        KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t->{
-        	intro.getChildren().setAll(vbox);
-            primaryStage.setScene(gameEngine.getScene());
+        Timeline fadeInTimeline = new Timeline();
+        KeyFrame fadeInKey = new KeyFrame(Duration.millis(3000), new KeyValue(secondImageView.opacityProperty(), 1));
+        fadeInTimeline.getKeyFrames().add(fadeInKey);
+        fadeInTimeline.setOnFinished(t->{
+        intro.getChildren().setAll(vbox);
+        primaryStage.setScene(gameEngine.getScene());
         });
-        timeline.play();
-    	
+        fadeInTimeline.play();
     }
     
     /**
@@ -238,6 +250,10 @@ public class Scenery {
     	intro.setId("introscreen");
     	Stage primaryStage = gameEngine.getPrimaryStage();
 
+    	
+    	Media media = new Media("file:///" + backgroundMusic.getAbsolutePath().replace("\\", "/"));
+        MediaPlayer player = new MediaPlayer(media); 
+        player.play();
         
         int paneWidth = gameEngine.getPaneWidth();
     	int paneHeight = gameEngine.getPaneHeight();
@@ -250,11 +266,12 @@ public class Scenery {
         Button startGameButton = new Button("Start Game");
         startGameButton.setId("startbutton");
         VBox vbox = new VBox(20,playerNameField,startGameButton);
-        
+        vbox.setId("playerName");
         
         intro.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {
             	introAction(playerNameField,vbox,primaryStage);
+            	player.stop();
                ev.consume(); 
             }
         });
@@ -263,9 +280,10 @@ public class Scenery {
         startGameButton.setOnAction(e -> 
         {
         	introAction(playerNameField,vbox,primaryStage);
+        	player.stop();
         });
         
-        vbox.setAlignment(Pos.CENTER);
+        vbox.setAlignment(Pos.CENTER);        
         intro.getChildren().addAll(vbox);
     	Scene scene = new Scene(intro, paneWidth, paneHeight);
         gameEngine.setIntro(scene);

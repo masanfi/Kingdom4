@@ -57,6 +57,11 @@
         radial-gradient(center 50% 50%, radius 100%, #a2c191, #c4dd8f);
 }
 
+#playerName {
+	-fx-padding: 350 0 0 0;
+}
+
+
 #introscreen { 
 	-fx-background-image: url("../images/introscreen.png"); 
 	-fx-background-repeat: stretch; 
@@ -70,4 +75,11 @@
 	-fx-background-position: center center; 
 	-fx-background-insets: 0; -fx-padding: 0;
 }
-        
+
+#pane{
+	-fx-background-image: url("../images/hud.png"); 
+	-fx-background-repeat: stretch; 
+	-fx-background-position: center center; 
+	-fx-background-insets: 0; -fx-padding: 0;
+    
+}

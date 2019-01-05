@@ -61,10 +61,10 @@ public class Hero {
     	
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case UP:    gameEngine.setNorth(true); break;
-                case DOWN:  gameEngine.setSouth(true); break;
-                case LEFT:  gameEngine.setWest(true); break;
-                case RIGHT: gameEngine.setEast(true); break;
+                case UP:    gameEngine.setNorth(true);gameEngine.setSouth(false);gameEngine.setWest(false);gameEngine.setEast(false); break;
+                case DOWN:  gameEngine.setSouth(true); gameEngine.setNorth(false);gameEngine.setWest(false);gameEngine.setEast(false);break;
+                case LEFT:  gameEngine.setWest(true); gameEngine.setSouth(false);gameEngine.setNorth(false);gameEngine.setEast(false);break;
+                case RIGHT: gameEngine.setEast(true); gameEngine.setSouth(false);gameEngine.setWest(false);gameEngine.setNorth(false);break;
                 case D: gameEngine.getEntities().setVisible(true); break;
                 default:
                     break;
