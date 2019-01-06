@@ -7,13 +7,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 /**
  *
@@ -31,9 +27,11 @@ public class Conversations {
     private GameEngine gameEngine;
     private List<String> wisemanText = new ArrayList<String>();
     private boolean statusSpeechBubble = false;
+    private Random random;
 
     public Conversations(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
+        this.random = new Random();
 
         gameEngine.getCharacter().put("lady", 0);
         gameEngine.getCharacter().put("fisherman", 0);
@@ -50,6 +48,10 @@ public class Conversations {
         wisemanText.add("Schmutziges Geschirr\nschimmelt nicht, wenn\nman es in der Gefrier-\ntruhe aufbewahrt.");
         wisemanText.add("Alte Matrosen-Weisheit:\nLieber Rum trinken,\nals rumsitzen!");
         wisemanText.add("Zwiebeln statt Kiwis\nkaufen! Zwiebeln sind\nbilliger und länger\nhaltbar.");
+        wisemanText.add("Mögen die Höhepunkte\nder Vergangenheit die\nTiefpunkte der Zukunft\nsein.");
+        wisemanText.add("Auch im Luftschlösserbau\ngibt es Konjunkturen und\nKrisen.");
+        wisemanText.add("Gestern standen wir\nnoch vor einem Abgrund,\nheute sind wir schon einen\ngroßen Schritt weiter.");
+        wisemanText.add("Das Schwierige am\nDiskutieren ist nicht, den\neigenen Standpunkt zu\nverteidigen, sondern ihn\nzu kennen.");
     }
 
     public void startConversation(Trigger trigger) {
@@ -97,22 +99,22 @@ public class Conversations {
         else if (trigger.getName().contentEquals("wiseman")) {
             if(!this.getStatusSpeechBubble()) {
                 if (gameEngine.getCharacter().get("wiseman") == 0) {
-                    int randomNum = ThreadLocalRandom.current().nextInt(0, wisemanText.size());
+                    int randomNum = random.nextInt(wisemanText.size());
                     if (gameEngine.getCharacter().get("lady") >= 1) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Man!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 2, Color.WHITE, Color.BLACK)));
                     }
                     else {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Man!\nWas gibt's Neues?", 2, Color.WHITE, Color.BLACK)));
                     }
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomNum), 3, Color.DARKGRAY, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomNum), 3, Color.web("#744D34"), Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(5200), ae -> this.showSpeechBubble(playerX, playerY, "Das schreibe ich mir\nsofort auf.", 2, Color.WHITE, Color.BLACK)));
                     timeline.play();
                     gameEngine.getCharacter().put("wiseman", 1);
                 }
                 else if (gameEngine.getCharacter().get("wiseman") == 1) {
-                    int randomNum = ThreadLocalRandom.current().nextInt(0, wisemanText.size());
+                	int randomNum = random.nextInt(wisemanText.size());
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Eine Frage...", 1, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomNum), 3, Color.DARKGRAY, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomNum), 3, Color.web("#744D34"), Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(playerX, playerY, "Interessant.", 2, Color.WHITE, Color.BLACK)));
                     timeline.play();
                 }
@@ -123,18 +125,18 @@ public class Conversations {
             if(!this.getStatusSpeechBubble()) {
                 if (gameEngine.getCharacter().get("blacksmith") == 0) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag!\nIch bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Jeder kennt dich, Oreh.\nHast du das Geld\ndabei, das du mir noch\nschuldest?", 3, Color.BLACK, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Jeder kennt dich, Oreh.\nHast du das Geld\ndabei, das du mir noch\nschuldest?", 3, Color.DARKRED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(5200), ae -> this.showSpeechBubble(playerX, playerY, "Ja, sicher. Ich hab\ndas, äh, hier.\nGeb ich dir gleich.", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7300), ae -> this.showSpeechBubble(playerX, playerY, "Wie heißt du denn,\nedler Mann?\nIch war so lange weg.", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9400), ae -> this.showSpeechBubble(triggerX, triggerY, "Du warst zwei Tage weg.\nAuf \"Geschäftsreise\".\nIch bin Fabian Schmied!", 3, Color.BLACK, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9400), ae -> this.showSpeechBubble(triggerX, triggerY, "Du warst zwei Tage weg.\nAuf \"Geschäftsreise\".\nIch bin Fabian Schmied!", 3, Color.DARKRED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12500), ae -> this.showSpeechBubble(playerX, playerY, "Stimmt!\nLeider habe ich immer\nso derbe viel zu tun!", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ja, ja.\nBring mir einen Hasen,\nwenn du schon kein\nGeld hast.", 3, Color.BLACK, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ja, ja.\nBring mir einen Hasen,\nwenn du schon kein\nGeld hast.", 3, Color.DARKRED, Color.WHITE)));
                     timeline.play();
                     gameEngine.getCharacter().put("blacksmith", 1);
                 }
                 else if (gameEngine.getCharacter().get("blacksmith") == 1){
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Hallo!\nIch bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Hat der mächtige Held\neinen Hasen gefunden?", 2, Color.BLACK, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Hat der mächtige Held\neinen Hasen gefunden?", 2, Color.DARKRED, Color.WHITE)));
                     timeline.play();
                 }
                 this.setStatusSpeechBubble(true);
@@ -206,10 +208,10 @@ public class Conversations {
         Polygon littlePointer = new Polygon();
         littlePointer.getPoints().addAll(new Double[]{ x + 20, y - 20, x + 40, y, x + 64, y - 20 });
         littlePointer.setFill(backgroundColor);
-        Rectangle bubble = new Rectangle(x, y - 2 * gameEngine.getTileSize() + 20, 200, 100);
+        Rectangle bubble = new Rectangle(x - 10, y - 2 * gameEngine.getTileSize() + 10, 210, 110);
         bubble.setFill(backgroundColor);
 
-        Text text = new Text(x + 10, y - 80, textString);
+        Text text = new Text(x, y - 90, textString);
         text.setFont(Font.font ("Verdana", 14));
         text.setFill(textColor);
 
