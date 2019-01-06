@@ -41,13 +41,14 @@ public class GameEngine extends Observable {
     private final int paneWidth = 960;
     private final int paneHeight = 640;
 
-    private final int speed = 200 ; // pixels / second
+    private int speed = 200 ; // pixels / second
     private final double animationSpeed = 0.15;
     private double animationTimer = 0;
     private int currentHero = 0;
     private ImageView[] player;
     private Scene scene;
     private Scene intro;
+    private Conversations conversations;
     private Pane background;
     private Rectangle camera;
     private long lastUpdate;
@@ -95,8 +96,6 @@ public class GameEngine extends Observable {
     private Boolean trophyFlowers = false;
     private Boolean trophyNPCs = false;
     private File attention = new File("music/attention.mp3");
-    private Boolean openSpeechBubble = false;
-    List<String> wisemanText = new ArrayList<String>();
     
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
@@ -104,12 +103,8 @@ public class GameEngine extends Observable {
         trophyCollisionWithStones = new ArrayList<>();
         trophyCollisionWithNPCs = new ArrayList<>();
         trophyCollisionWithBridge = new ArrayList<>();
-        
-    	wisemanText.add("Aluminiumfolie reißt nicht\\nso leicht, wenn man sie\\nvor Gebrauch vollflächig auf\\nRigipsplatten klebt.");
-    	wisemanText.add("Mein Sohn!\\nDie Schule des Lebens\\nhat niemals Ferien.");
-    	wisemanText.add("Schmutziges Geschirr\\nschimmelt nicht, wenn\\nman es in der Gefriertruhe\\naufbewahrt.");
-    	wisemanText.add("Alte Matrosen-Weisheit:\\nLieber Rum trinken,\\nals rumsitzen!");
-    	wisemanText.add("Zwiebeln statt Kiwis\\nkaufen! Zwiebeln sind\\nbilliger und länger\\nhaltbar.");
+
+        this.conversations = new Conversations(this);
     }
 
     public void setScenery(Scenery scenery) {
@@ -160,6 +155,10 @@ public class GameEngine extends Observable {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public void setPlayer(ImageView[] player) {
@@ -417,45 +416,6 @@ public class GameEngine extends Observable {
         this.setLastUpdate(this.getTimestamp());
     }
 
-    /**
-     * Shows a speech bubble of a conversation.
-     * @param trigger
-     * @param backgroundColor
-     * @param textColor
-     */
-    public void showSpeechBubble(Trigger trigger, Color backgroundColor, Color textColor) {
-    	
-    	//Die Sprüche und Textblasen sollten wir noch auslagern in eine extra Klasse
-    	
-    	
-    	    	
-        String textString = "";
-        Polygon littlePointer = new Polygon();
-        littlePointer.getPoints().addAll(new Double[]{trigger.getCoordinates().getX() + 55, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 20, trigger.getCoordinates().getX() + 64, trigger.getCoordinates().getY() + 36 });
-        littlePointer.setFill(backgroundColor);
-        Rectangle bubble = new Rectangle(trigger.getCoordinates().getX() + this.getTileSize(), trigger.getCoordinates().getY() + 20, 200, 100);
-        bubble.setFill(backgroundColor);
-        if (trigger.getName().contentEquals("lady")) {
-            textString = "Willkommen im\nKönigreich Faboma,\n" + this.getUserName() + "!";
-        }
-        else if (trigger.getName().contentEquals("wiseman")) {
-            int randomNum = ThreadLocalRandom.current().nextInt(1, wisemanText.size());
-            textString = wisemanText.get(randomNum);
-        }
-        else if (trigger.getName().contentEquals("blacksmith")) {
-            textString = "Harrr! Hast du\nheute schon dein\nKinderbier getrunken?";
-        }
-        else if (trigger.getName().contentEquals("fishman")) {
-            textString = "Wenn du so\nprogrammierst, wie\ndu aussiehst, ist die\nWelt verloren!";
-        }
-        Text text = new Text(trigger.getCoordinates().getX() + 74, trigger.getCoordinates().getY() + 46, textString);
-        text.setFont(Font.font ("Verdana", 16));
-        text.setFill(textColor);
-        
-        this.getTextOver().getChildren().addAll(littlePointer, bubble, text);
-        this.getTextOver().setVisible(true);
-    }
-
     private void setTriggerStop() {
     	triggerStop=true;
     }
@@ -536,21 +496,7 @@ public class GameEngine extends Observable {
         if (trigger != null) {
             if (this.isTrigger() && !triggerStop) {
                 if (trigger.isNpc()) {
-                    if (trigger.getName().contentEquals("lady")) {
-                        showSpeechBubble(trigger, Color.RED, Color.WHITE);
-                    }
-                    else if (trigger.getName().contentEquals("wiseman")) {
-                    	if(!openSpeechBubble) {
-                    		showSpeechBubble(trigger, Color.DARKGRAY, Color.BLACK);
-                    		openSpeechBubble = true;
-                    	}
-                    }
-                    else if (trigger.getName().contentEquals("blacksmith")) {
-                        showSpeechBubble(trigger, Color.BROWN, Color.WHITE);
-                    }
-                    else if (trigger.getName().contentEquals("fishman")) {
-                        showSpeechBubble(trigger, Color.DARKBLUE, Color.WHITE);
-                    }
+                    conversations.startConversation(trigger);
                 }else if(trigger.getName().equalsIgnoreCase("finale")){
                 	setEndTime(System.currentTimeMillis());
                 	System.out.println("Finale oh oh");
@@ -571,7 +517,7 @@ public class GameEngine extends Observable {
             }
         }
         else {
-        	openSpeechBubble = false;
+        	conversations.setStatusSpeechBubble(false);
             this.getTextOver().setVisible(false);
             this.getTextOver().getChildren().clear();
         }
@@ -748,7 +694,7 @@ public class GameEngine extends Observable {
     /**
      * This counts the collisions for the fun of counting.
      * @param object
-     * @param name
+     * @param item
      */
     public void collisionCounter(int object, Item item) {
     	
