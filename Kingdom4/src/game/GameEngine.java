@@ -2,24 +2,19 @@ package game;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Map;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -96,8 +91,9 @@ public class GameEngine extends Observable {
     private Boolean trophyFlowers = false;
     private Boolean trophyNPCs = false;
     private File attention = new File("music/attention.mp3");
-    private String lastCollitionName;
+    private String lastCollisionName;
     private Boolean movement = true;
+    private Map<String, Integer> character = new HashMap<>();
     
     
     public GameEngine() {
@@ -783,10 +779,10 @@ public class GameEngine extends Observable {
     		}
     		
     		if(item.isNpc()) {
-    			if(!item.getName().equals(lastCollitionName) ) {
+    			if(!item.getName().equals(lastCollisionName) ) {
     				this.getTrophyCollisionsWithNPCs().add(object);
     				System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
-    				lastCollitionName = item.getName();
+    				lastCollisionName = item.getName();
     			}
     		}
     		
@@ -870,4 +866,11 @@ public class GameEngine extends Observable {
         return trigger;
     }
 
+    public Map<String, Integer> getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Map<String, Integer> character) {
+        this.character = character;
+    }
 }

@@ -245,14 +245,14 @@ public class Scenery {
     	//intro.getStylesheets().add(
         //        getClass().getResource("../css_neu/style.css").toExternalForm()
         //);
-    	
+
     	intro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
     	intro.setId("introscreen");
     	Stage primaryStage = gameEngine.getPrimaryStage();
 
-    	
+
     	Media media = new Media("file:///" + backgroundMusic.getAbsolutePath().replace("\\", "/"));
-        MediaPlayer player = new MediaPlayer(media); 
+        MediaPlayer player = new MediaPlayer(media);
         player.play();
         
         int paneWidth = gameEngine.getPaneWidth();
