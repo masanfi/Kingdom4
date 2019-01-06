@@ -57,10 +57,14 @@ public class Conversations {
         double triggerY = trigger.getCoordinates().getY();
         double playerX = gameEngine.getPlayer()[0].getX() + gameEngine.getTileSize();
         double playerY = gameEngine.getPlayer()[0].getY() + gameEngine.getTileSize();
-
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> gameEngine.setMovement(false)));
+        timeline.setOnFinished(t->{
+    		gameEngine.setMovement(true);
+    	});
         if (trigger.getName().contentEquals("lady")) {
             if(!this.getStatusSpeechBubble()) {
                 if (character.get("lady") == 0) {
+                	
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag!\nIch bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Willkommen zurück im\nKönigreich Faboma,\nOreh!", 2, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich weiß, wer du\nbist, du mächtiger Held.\nWo warst du?", 2, Color.RED, Color.WHITE)));
@@ -69,6 +73,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(11900), ae -> this.showSpeechBubble(playerX, playerY, "Schreck lass nach!\nWo könnte sie denn sein?", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14000), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nauf der anderen Seite\nder Brücke finden kannst.", 2, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16100), ae -> this.showSpeechBubble(playerX, playerY, "Das sehe ich mir sofort\nan!", 2, Color.WHITE, Color.BLACK)));
+              	
                     timeline.play();
                     character.put("lady", 1);
                 }

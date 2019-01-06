@@ -231,8 +231,8 @@ public class Scenery {
         KeyFrame fadeInKey = new KeyFrame(Duration.millis(3000), new KeyValue(secondImageView.opacityProperty(), 1));
         fadeInTimeline.getKeyFrames().add(fadeInKey);
         fadeInTimeline.setOnFinished(t->{
-        intro.getChildren().setAll(vbox);
-        primaryStage.setScene(gameEngine.getScene());
+        	intro.getChildren().setAll(vbox);
+        	primaryStage.setScene(gameEngine.getScene());
         });
         fadeInTimeline.play();
     }

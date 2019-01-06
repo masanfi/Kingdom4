@@ -96,6 +96,9 @@ public class GameEngine extends Observable {
     private Boolean trophyFlowers = false;
     private Boolean trophyNPCs = false;
     private File attention = new File("music/attention.mp3");
+    private String lastCollitionName;
+    private Boolean movement = true;
+    
     
     public GameEngine() {
         trophyCollisionWithTrees = new ArrayList<>();
@@ -340,7 +343,10 @@ public class GameEngine extends Observable {
     	this.keyGreen = keyGreen;
     }
     
-    
+    public void setMovement(Boolean state) {
+    	//System.out.println("setzestate :" +state);
+    	this.movement=state;
+    }
     
     /**
      * Generates a action square that implements the movement the player has made to check if there were any collisions on our hero's way.
@@ -356,7 +362,7 @@ public class GameEngine extends Observable {
      */
     public void movePlayer() {
     	
-    	
+    	if(this.movement) {
     	
         this.animatePlayer();
         this.setLastDirection(this.getPrimaryDirection());
@@ -371,7 +377,7 @@ public class GameEngine extends Observable {
         double elapsedTimeInSeconds = elapsedTimeInNanoseconds / 1_000_000_000.0;
         double deltaX = 0;
         double deltaY = 0;
-
+        
         if (this.getEast()) {
         	if(!this.getWest() && !this.getSouth() && !this.getNorth()) {
         		deltaX += this.getSpeed();
@@ -412,8 +418,8 @@ public class GameEngine extends Observable {
                 this.getPlayer()[i].toFront();
             }
         }
-
         this.setLastUpdate(this.getTimestamp());
+    	}
     }
 
     private void setTriggerStop() {
@@ -497,6 +503,7 @@ public class GameEngine extends Observable {
             if (this.isTrigger() && !triggerStop) {
                 if (trigger.isNpc()) {
                     conversations.startConversation(trigger);
+                    //this.movementStop = true;
                 }else if(trigger.getName().equalsIgnoreCase("finale")){
                 	setEndTime(System.currentTimeMillis());
                 	System.out.println("Finale oh oh");
@@ -570,6 +577,7 @@ public class GameEngine extends Observable {
      * Animates our hero.
      */
     public void animatePlayer() {
+    	
         if (north && !east && !south && !west) {
             if (!getLastDirection().equals("north")) {
                 this.setGeneralVisibility(false);
@@ -766,15 +774,6 @@ public class GameEngine extends Observable {
     			System.out.println("Flowers:" +this.getTrophyCollisionsWithFlowers().size());
     		}
     		
-    		//Collision with Stones
-    		if (item.getName().contentEquals("stone")) {
-    			this.getTrophyCollisionsWithStones().add(object);
-    			//Platform.runLater(() -> {
-	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
-	           // });
-    			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
-    		}
-    		
     		if (item.getName().contentEquals("stone")) {
     			this.getTrophyCollisionsWithStones().add(object);
     			//Platform.runLater(() -> {
@@ -784,8 +783,11 @@ public class GameEngine extends Observable {
     		}
     		
     		if(item.isNpc()) {
-    			this.getTrophyCollisionsWithNPCs().add(object);
-    			System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
+    			if(!item.getName().equals(lastCollitionName) ) {
+    				this.getTrophyCollisionsWithNPCs().add(object);
+    				System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
+    				lastCollitionName = item.getName();
+    			}
     		}
     		
     		if(item.getName().equals("river_bridge_l")) {
