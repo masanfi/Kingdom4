@@ -1,22 +1,19 @@
 package game;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 /**
@@ -55,9 +52,6 @@ public class GameEngine extends Observable {
     private Rectangle actionSquare;
     private Pane entities;
     private Pane textOver;
-    private int trophyTreeCounter;
-    private Text text;
-    private ImageView hudKeyImageView;
     private double viewFactorX, viewFactorY;
     private double actionSquareOffsetX = 16;
     private double actionSquareOffsetY = 16;
@@ -65,7 +59,7 @@ public class GameEngine extends Observable {
     private String lastDirection;
     private String userName;
     private Stage primaryStage;
-    private long lastCollisionTime=0;
+    
     private long startTime=0;
     private long endTime=0;
     private Boolean triggerStop = false;
@@ -75,37 +69,47 @@ public class GameEngine extends Observable {
     private ImageView knight2;
     private Boolean knightChanged= false;
     private Boolean keyPickedUP= false;
+    private Boolean rabbitPickedUP= false;
     private ImageView fph;
     private ImageView key;
     private ImageView keyGreen;
-    private Image keyImage;
+
+    private ImageView clumsy;
+    private ImageView confused;
+    private ImageView influencer;
+    private ImageView stoney;
+    private ImageView treehugger;
+    private ImageView rabbit;
+    private ImageView sword;
+    private ImageView fish;
+    private ImageView rabbitGreen;
+    private MediaPlayer fanfare;
+    
+    
     private IEvent knightCollision;
-    ArrayList<Integer> trophyCollisionWithTrees;
-    ArrayList<Integer> trophyCollisionWithFlowers;
-    ArrayList<Integer> trophyCollisionWithStones;
-    ArrayList<Integer> trophyCollisionWithNPCs;
-    ArrayList<Integer> trophyCollisionWithBridge;
-    private Boolean trophyBridge = false;
-    private Boolean trophyStones = false;
-    private Boolean trophyTrees = false;
-    private Boolean trophyFlowers = false;
-    private Boolean trophyNPCs = false;
-    private File attention = new File("music/attention.mp3");
-    private String lastCollisionName;
+    private IEvent knight2Collision;
+
     private Boolean movement = true;
     private Map<String, Integer> character = new HashMap<>();
-    
+    private Trophy trophy;
+    private Hud hud;
     
     public GameEngine() {
-        trophyCollisionWithTrees = new ArrayList<>();
-        trophyCollisionWithFlowers = new ArrayList<>();
-        trophyCollisionWithStones = new ArrayList<>();
-        trophyCollisionWithNPCs = new ArrayList<>();
-        trophyCollisionWithBridge = new ArrayList<>();
+
 
         this.conversations = new Conversations(this);
     }
+    
+    public void setFanfare(MediaPlayer fanfare) {
+    	this.fanfare = fanfare;
+    }
 
+    public void setTrophy(Trophy trophy) {
+    	this.trophy = trophy;
+    }
+    public void setHud(Hud hud) {
+    	this.hud = hud;
+    }
     public void setScenery(Scenery scenery) {
     	this.scenery = scenery;
     }
@@ -329,6 +333,11 @@ public class GameEngine extends Observable {
     public void setKnight2(ImageView knight) {
     	this.knight2 = knight;
     }
+    
+    public void setKnight2Collision(IEvent collision) {
+    	this.knight2Collision = collision;
+    }
+    
     public void setFpH(ImageView fph) {
     	this.fph = fph;
     }
@@ -337,6 +346,37 @@ public class GameEngine extends Observable {
     }
     public void setKeyGreen(ImageView keyGreen) {
     	this.keyGreen = keyGreen;
+    }
+    
+    public void setRabbit(ImageView rabbit) {
+    	this.rabbit = rabbit;
+    }
+    
+    public void setSword(ImageView sword) {
+    	this.sword = sword;
+    }
+    
+    public void setFish(ImageView fish) {
+    	this.fish = fish;
+    }
+    public void setClumsy(ImageView clumsy) {
+    	this.clumsy = clumsy;
+    }
+    public void setInfluencer(ImageView influencer) {
+    	this.influencer = influencer;
+    }
+    public void setTreehugger(ImageView treehugger) {
+    	this.treehugger = treehugger;
+    }
+    public void setStoney(ImageView stoney) {
+    	this.stoney = stoney;
+    }
+    public void setConfused(ImageView confused) {
+    	this.confused = confused;
+    }
+    
+    public void setRabbitGreen(ImageView rabbitGreen) {
+    	this.rabbitGreen = rabbitGreen;
     }
     
     public void setMovement(Boolean state) {
@@ -360,61 +400,61 @@ public class GameEngine extends Observable {
     	
     	if(this.movement) {
     	
-        this.animatePlayer();
-        this.setLastDirection(this.getPrimaryDirection());
-
-        this.setTimestamp(this.getTimestamp());
-        long elapsedTimeInNanoseconds = this.getTimestamp() - this.getLastUpdate();
-        if (this.getLastUpdate() < 0) {
-            this.setLastUpdate(this.getTimestamp());
-            return;
-        }
-
-        double elapsedTimeInSeconds = elapsedTimeInNanoseconds / 1_000_000_000.0;
-        double deltaX = 0;
-        double deltaY = 0;
-        
-        if (this.getEast()) {
-        	if(!this.getWest() && !this.getSouth() && !this.getNorth()) {
-        		deltaX += this.getSpeed();
-        	}
-        }
-        if (this.getWest()) {
-        	if(!this.getEast() && !this.getSouth() && !this.getNorth()) {
-        		deltaX -= this.getSpeed();
-        	}
-        }
-        if (this.getSouth()) {
-        	if(!this.getWest() && !this.getEast() && !this.getNorth()) {
-        		deltaY += this.getSpeed();
-        	}
-        }
-        if (this.getNorth()) {
-        	if(!this.getWest() && !this.getSouth() && !this.getEast()) {
-        		deltaY -= this.getSpeed();
-        	}
-        }
-
-        // This sets the movement the user has made
-        setViewFactorX(viewFactor(this.getActionSquare().getX() + deltaX * elapsedTimeInSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
-        setViewFactorY(viewFactor(this.getActionSquare().getY() + deltaY * elapsedTimeInSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
-        
-        this.notifyObservers();
-
-        //this.checkForTriggers();
-
-        // Processes the isCollision flag set by the collision detection.
-        if (!isCollision) {
-            this.getActionSquare().setX(viewFactorX);
-            this.getActionSquare().setY(viewFactorY);
-           
-            for (int i = 0; i < this.getPlayer().length; i++) {
-                this.getPlayer()[i].setX(viewFactorX);
-                this.getPlayer()[i].setY(viewFactorY);
-                this.getPlayer()[i].toFront();
-            }
-        }
-        this.setLastUpdate(this.getTimestamp());
+	        this.animatePlayer();
+	        this.setLastDirection(this.getPrimaryDirection());
+	
+	        this.setTimestamp(this.getTimestamp());
+	        long elapsedTimeInNanoseconds = this.getTimestamp() - this.getLastUpdate();
+	        if (this.getLastUpdate() < 0) {
+	            this.setLastUpdate(this.getTimestamp());
+	            return;
+	        }
+	
+	        double elapsedTimeInSeconds = elapsedTimeInNanoseconds / 1_000_000_000.0;
+	        double deltaX = 0;
+	        double deltaY = 0;
+	        
+	        if (this.getEast()) {
+	        	if(!this.getWest() && !this.getSouth() && !this.getNorth()) {
+	        		deltaX += this.getSpeed();
+	        	}
+	        }
+	        if (this.getWest()) {
+	        	if(!this.getEast() && !this.getSouth() && !this.getNorth()) {
+	        		deltaX -= this.getSpeed();
+	        	}
+	        }
+	        if (this.getSouth()) {
+	        	if(!this.getWest() && !this.getEast() && !this.getNorth()) {
+	        		deltaY += this.getSpeed();
+	        	}
+	        }
+	        if (this.getNorth()) {
+	        	if(!this.getWest() && !this.getSouth() && !this.getEast()) {
+	        		deltaY -= this.getSpeed();
+	        	}
+	        }
+	
+	        // This sets the movement the user has made
+	        setViewFactorX(viewFactor(this.getActionSquare().getX() + deltaX * elapsedTimeInSeconds, 0, this.getBackground().getWidth() - this.getActionSquare().getWidth()));
+	        setViewFactorY(viewFactor(this.getActionSquare().getY() + deltaY * elapsedTimeInSeconds, 0, this.getBackground().getHeight() - this.getActionSquare().getHeight()));
+	        
+	        this.notifyObservers();
+	
+	        //this.checkForTriggers();
+	
+	        // Processes the isCollision flag set by the collision detection.
+	        if (!isCollision) {
+	            this.getActionSquare().setX(viewFactorX);
+	            this.getActionSquare().setY(viewFactorY);
+	           
+	            for (int i = 0; i < this.getPlayer().length; i++) {
+	                this.getPlayer()[i].setX(viewFactorX);
+	                this.getPlayer()[i].setY(viewFactorY);
+	                this.getPlayer()[i].toFront();
+	            }
+	        }
+	        this.setLastUpdate(this.getTimestamp());
     	}
     }
 
@@ -437,7 +477,7 @@ public class GameEngine extends Observable {
     	final ObservableList<Highscore> hs = FXCollections.observableArrayList();
     	
     	try {
-        	JavaClient.sendMessage(getUserName() + "|" + getTrophyCollisionsWithTrees().size() +"|"+ (endTime-startTime) + "|" +  timestamp);
+        	JavaClient.sendMessage(getUserName() + "|" + trophy.getTrophysForHighScore() +"|"+ (endTime-startTime) + "|" +  timestamp);
         }catch(Exception e) {
         	System.out.println(e.getMessage());
         	connectError = true;
@@ -449,7 +489,7 @@ public class GameEngine extends Observable {
     		highscore.forEach(item ->{
     			//System.out.println(item + "\n\n");
     			String[] hsLine = item.split("\\|", -1);
-    			hs.add(new Highscore(hsLine[0],Integer.parseInt(hsLine[1]), Integer.parseInt(hsLine[2]), Long.parseLong(hsLine[3])));
+    			hs.add(new Highscore(hsLine[0],hsLine[1], Integer.parseInt(hsLine[2]), Long.parseLong(hsLine[3])));
     		});
     	}catch(Exception e) {
     		System.out.println(e.getMessage());
@@ -458,7 +498,7 @@ public class GameEngine extends Observable {
     	
     	//Wenn keine Highscore abgerufen werde kann wird das aktuelle Ergebnis ausgegeben
     	if(connectError) {
-    		hs.add(new Highscore(getUserName(),getTrophyCollisionsWithTrees().size(), (endTime-startTime), timestamp));
+    		hs.add(new Highscore(getUserName(),trophy.getTrophysForHighScore(), (endTime-startTime), timestamp));
 
     	}
     	//Endscene wird in der Scenery erstellt und hier ausgegeben
@@ -473,20 +513,63 @@ public class GameEngine extends Observable {
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
-    	
+    	collision.add(knight2Collision);
     	collision.remove(knightCollision);
     	trigger.remove(knightCollision);
     	
     	System.out.println("Knight verschoben");
 	}
 	
+	public void collectTrophyClumsy() {
+		hud.setCollectedTrophy(clumsy.getImage(), "C");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.play();
+	}
+	public void collectTrophyConfused() {
+		hud.setCollectedTrophy(confused.getImage(), "O");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.play();
+	}
+	public void collectTrophyInfluencer() {
+		hud.setCollectedTrophy(influencer.getImage(), "I");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.play();
+	}
+	public void collectTrophyStoney() {
+		hud.setCollectedTrophy(stoney.getImage(), "S");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.play();
+	}
+	public void collectTrophyTreehugger() {
+		hud.setCollectedTrophy(treehugger.getImage(), "T");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.play();
+	}
+	
+	public void pickUpFish() {
+		hud.setPickedUpItem(fish.getImage(),"F");
+	}
+	
+	public void pickUpSword() {
+		hud.setPickedUpItem(sword.getImage(),"S");
+	}
+	
 	private void pickUpKey() {
 		keyPickedUP = true;
 		background.getChildren().remove(key);
 		background.getChildren().add(keyGreen);
-		Platform.runLater(() -> {
-			hudKeyImageView.setImage(keyImage);
-		});
+		hud.setPickedUpItem(key.getImage(),"K");
+	}
+	
+	private void pickUpRabbit() {
+		rabbitPickedUP = true;
+		background.getChildren().remove(rabbit);
+		background.getChildren().add(rabbitGreen);
+		hud.setPickedUpItem(rabbit.getImage(),"R");	
+	}
+	
+	public String[] getPickedUpItems() {
+		return hud.getPickedUpItems();
 	}
 
     /**
@@ -513,6 +596,11 @@ public class GameEngine extends Observable {
                 		System.out.println("Schlüsssel gefunden");
                 		pickUpKey();
                 	}
+                }else if(trigger.getName().equalsIgnoreCase("rabbit")){
+                	if(!rabbitPickedUP) {
+                		System.out.println("Hase gefunden");
+                		pickUpRabbit();
+                	}
                 }
                 else {
                     //System.out.println("Something's happening!");
@@ -521,6 +609,7 @@ public class GameEngine extends Observable {
         }
         else {
         	conversations.setStatusSpeechBubble(false);
+        	trophy.setlastCollisionName("");
             this.getTextOver().setVisible(false);
             this.getTextOver().getChildren().clear();
         }
@@ -701,133 +790,7 @@ public class GameEngine extends Observable {
      * @param item
      */
     public void collisionCounter(int object, Item item) {
-    	
-    	//
-    	if(this.getTrophyCollisionsWithFlowers().size()==20) {
-    		
-    		if(!this.trophyFlowers) {
-    			System.out.println("Trophy gewonnen: Trampel!!!!!");
-    		}   
-    		this.trophyFlowers = true;
-    	}
-    	
-    	if(this.getTrophyCollisionsWithTrees().size()==20) {
-    		
-    		if(!trophyTrees) {
-    			//trophyPlayer.play();
-    			System.out.println("Trophy gewonnen: Treehugger!!!!!");
-    		}
-    		this.trophyTrees = true;
-    	}
-    	
-    	if(this.getTrophyCollisionsWithStones().size()==10) {
-    		
-    		if(!trophyStones) {
-    			//trophyPlayer.play();
-    			System.out.println("Trophy gewonnen: Steinbeisser!!!!!");
-    		}
-    		this.trophyStones = true;
-    	}
-    	
-    	if(this.getTrophyCollisionsWithNPCs().size()==15) {
-    		
-    		if(!trophyNPCs) {
-    			//trophyPlayer.play();
-    			System.out.println("Trophy gewonnen: Influencer!!!!!");
-    		}
-    		this.trophyNPCs = true;
-    	}
-    	
-    	if(this.getTrophyCollisionsWithBridge().size()==3) {
-    		
-    		if(!trophyBridge) {
-    			//trophyPlayer.play();
-    			System.out.println("Trophy gewonnen: Verwirrt!!!!!");
-    		}
-    		this.trophyBridge = true;
-    	}
-    	
-    	
-    	if((System.currentTimeMillis()-lastCollisionTime) > 1000) {
-    		//System.out.println("Collision with: " + name);
-        	//System.out.println(System.currentTimeMillis() + " " + lastCollisionTime);
-    	
-    		//Collision with Trees
-    		if (item.getName().contentEquals("tree") || item.getName().contentEquals("tree2") || item.getName().contentEquals("tree3")) {
-    			this.getTrophyCollisionsWithTrees().add(object);
-    			//Platform.runLater(() -> {
-	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
-	            //});
-    			System.out.println("Trees:" +this.getTrophyCollisionsWithTrees().size());
-    		}
-    		
-    		//Collision with Flowers
-    		if (item.getName().contentEquals("flowers") || item.getName().contentEquals("flower2")) {
-    			this.getTrophyCollisionsWithFlowers().add(object);
-    			//Platform.runLater(() -> {
-	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
-	           // });
-    			System.out.println("Flowers:" +this.getTrophyCollisionsWithFlowers().size());
-    		}
-    		
-    		if (item.getName().contentEquals("stone")) {
-    			this.getTrophyCollisionsWithStones().add(object);
-    			//Platform.runLater(() -> {
-	            //    text.textProperty().bind(new SimpleIntegerProperty(this.getTrophyCollisionsWithTrees().size()).asString());
-	           // });
-    			System.out.println("Stones:" +this.getTrophyCollisionsWithStones().size());
-    		}
-    		
-    		if(item.isNpc()) {
-    			if(!item.getName().equals(lastCollisionName) ) {
-    				this.getTrophyCollisionsWithNPCs().add(object);
-    				System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
-    				lastCollisionName = item.getName();
-    			}
-    		}
-    		
-    		if(item.getName().equals("river_bridge_l")) {
-    			this.getTrophyCollisionsWithBridge().add(object);
-    			System.out.println("Bridge:" +this.getTrophyCollisionsWithBridge().size());
-    		}
-
-    		lastCollisionTime = System.currentTimeMillis();
-    	}
-    }
-
-    private ArrayList<Integer> getTrophyCollisionsWithBridge() {
-        return trophyCollisionWithBridge;
-    }
-    
-    private ArrayList<Integer> getTrophyCollisionsWithNPCs() {
-        return trophyCollisionWithNPCs;
-    }
-    private ArrayList<Integer> getTrophyCollisionsWithTrees() {
-        return trophyCollisionWithTrees;
-    }
-    
-    private ArrayList<Integer> getTrophyCollisionsWithStones() {
-        return trophyCollisionWithStones;
-    }
-    
-    private ArrayList<Integer> getTrophyCollisionsWithFlowers() {
-        return trophyCollisionWithFlowers;
-    }
-
-    public int getTrophyTreeCounter() {
-        return trophyTreeCounter;
-    }
-
-    public void setHudText(Text text) {
-        this.text = text;
-    }
-
-    public void setHudKeyImageView(ImageView keyImageView) {
-        this.hudKeyImageView = keyImageView;
-    }
-    
-    public void setKeyImage(Image key) {
-    	this.keyImage = key;
+    	trophy.trophyManager(object, item);
     }
     
     public double getActionSquareOffsetX() {
