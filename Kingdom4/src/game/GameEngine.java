@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 /**
@@ -521,22 +522,32 @@ public class GameEngine extends Observable {
 	
 	public void collectTrophyClumsy() {
 		hud.setCollectedTrophy(clumsy.getImage(), "C");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.setCycleCount(MediaPlayer.INDEFINITE);
 		fanfare.play();
 	}
 	public void collectTrophyConfused() {
 		hud.setCollectedTrophy(confused.getImage(), "O");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.setCycleCount(MediaPlayer.INDEFINITE);
 		fanfare.play();
 	}
 	public void collectTrophyInfluencer() {
 		hud.setCollectedTrophy(influencer.getImage(), "I");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.setCycleCount(MediaPlayer.INDEFINITE);
 		fanfare.play();
 	}
 	public void collectTrophyStoney() {
 		hud.setCollectedTrophy(stoney.getImage(), "S");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.setCycleCount(MediaPlayer.INDEFINITE);
 		fanfare.play();
 	}
 	public void collectTrophyTreehugger() {
 		hud.setCollectedTrophy(treehugger.getImage(), "T");
+		fanfare.setStartTime(new Duration(0));
+		fanfare.setCycleCount(MediaPlayer.INDEFINITE);
 		fanfare.play();
 	}
 	
