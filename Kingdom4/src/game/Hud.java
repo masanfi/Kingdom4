@@ -145,7 +145,6 @@ public class Hud {
 		case 0:
 			Platform.runLater(() -> {
 				hudItemOneImageView.setImage(null);
-				;
 			});
 			break;
 		case 1:

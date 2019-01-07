@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -572,14 +573,6 @@ public class GameEngine extends Observable {
 		background.getChildren().remove(rabbit);
 		background.getChildren().add(rabbitGreen);
 		hud.setPickedUpItem(rabbit.getImage(),"R");	
-	}
-	
-	public String[] getPickedUpItems() {
-		return hud.getPickedUpItems();
-	}
-	
-	public void setPickedUpItem(Image image, String name) {
-		hud.setPickedUpItem(image,name);
 	}
 	
 	public void findRemovePickedUpItem(String name) {
