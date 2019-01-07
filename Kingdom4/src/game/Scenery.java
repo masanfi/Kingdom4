@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -62,9 +63,6 @@ public class Scenery {
     private BorderPane playground;
     private File cssFile = new File("css/style.css");
     
-
-    //Music from: http://freemusicarchive.org 
-    //private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
     private File fanfareFile = new File("music/attention.mp3");
     private File startscreenMusic = new File("music/DizzySpells.mp3");
     private File backgroundMusic = new File("music/Underclocked.mp3");
@@ -73,7 +71,6 @@ public class Scenery {
   
     public Scenery(GameEngine gameEngine,Hud hud) {
         this.gameEngine = gameEngine;
-
 
         Media fanfareMedia = new Media("file:///" + fanfareFile.getAbsolutePath().replace("\\", "/"));
         MediaPlayer fanfarePlayer = new MediaPlayer(fanfareMedia);
@@ -103,13 +100,33 @@ public class Scenery {
         ImageView itemTwoImageView = new ImageView();
         ImageView itemThreeImageView = new ImageView();
         
-        itemOneImageView.relocate(712, 5);
-        itemTwoImageView.relocate(788, 5);
-        itemThreeImageView.relocate(864, 5);
+        HBox hBoxItemOneImageView = new HBox();
+        hBoxItemOneImageView.getChildren().add(itemOneImageView);
+        hBoxItemOneImageView.relocate(712, 5);
+        hBoxItemOneImageView.setMaxHeight(64);
+        hBoxItemOneImageView.setPrefHeight(64);
+        hBoxItemOneImageView.setPrefWidth(64);
+        hBoxItemOneImageView.setMaxWidth(64);
         
-        hud.setHuditemOneImageView(itemOneImageView);
-        hud.setHuditemTwoImageView(itemTwoImageView);
-        hud.setHuditemThreeImageView(itemThreeImageView);
+        HBox hBoxItemTwoImageView = new HBox();
+        hBoxItemTwoImageView.getChildren().add(itemTwoImageView);
+        hBoxItemTwoImageView.relocate(788, 5);
+        hBoxItemTwoImageView.setMaxHeight(64);
+        hBoxItemTwoImageView.setPrefHeight(64);
+        hBoxItemTwoImageView.setPrefWidth(64);
+        hBoxItemTwoImageView.setMaxWidth(64);
+        
+        HBox hBoxItemThreeImageView = new HBox();
+        hBoxItemThreeImageView.getChildren().add(itemThreeImageView);
+        hBoxItemThreeImageView.relocate(864, 5);
+        hBoxItemThreeImageView.setMaxHeight(64);
+        hBoxItemThreeImageView.setPrefHeight(64);
+        hBoxItemThreeImageView.setPrefWidth(64);
+        hBoxItemThreeImageView.setMaxWidth(64);
+        
+        hud.setHuditemOneImageView(itemOneImageView,hBoxItemOneImageView);
+        hud.setHuditemTwoImageView(itemTwoImageView,hBoxItemTwoImageView);
+        hud.setHuditemThreeImageView(itemThreeImageView,hBoxItemThreeImageView);
 
         ImageView trophyOneImageView = new ImageView();
         ImageView trophyTwoImageView = new ImageView();
@@ -117,11 +134,11 @@ public class Scenery {
         ImageView trophyFourImageView = new ImageView();
         ImageView trophyFiveImageView = new ImageView();
         
-        trophyOneImageView.relocate(250, 5);
-        trophyTwoImageView.relocate(326, 5);
-        trophyThreeImageView.relocate(402, 5);
-        trophyFourImageView.relocate(478, 5);
-        trophyFiveImageView.relocate(554, 5);
+        trophyOneImageView.relocate(291, 15);
+        trophyTwoImageView.relocate(367, 15);
+        trophyThreeImageView.relocate(443, 15);
+        trophyFourImageView.relocate(519, 15);
+        trophyFiveImageView.relocate(595, 15);
         
         hud.setHudTrophyOneImageView(trophyOneImageView);
         hud.setHudTrophyTwoImageView(trophyTwoImageView);
@@ -131,7 +148,7 @@ public class Scenery {
         
         hudPane.setMinHeight(77);
         hudPane.setPrefHeight(77);
-        hudPane.getChildren().addAll(itemOneImageView,itemTwoImageView,itemThreeImageView,trophyOneImageView,trophyTwoImageView,trophyThreeImageView,trophyFourImageView,trophyFiveImageView);
+        hudPane.getChildren().addAll(hBoxItemOneImageView,hBoxItemTwoImageView,hBoxItemThreeImageView,trophyOneImageView,trophyTwoImageView,trophyThreeImageView,trophyFourImageView,trophyFiveImageView);
         
         background.setContent(gameEngine.getBackground());
         background.addEventFilter(InputEvent.ANY, (event)-> {

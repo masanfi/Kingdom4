@@ -3,6 +3,8 @@ package game;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
 
 public class Hud {
 
@@ -18,17 +20,23 @@ public class Hud {
 	private ImageView hudTrophyThreeImageView;
 	private ImageView hudTrophyFourImageView;
 	private ImageView hudTrophyFiveImageView;
+	private HBox hboxItemOneImageView;
+	private HBox hboxItemTwoImageView;
+	private HBox hboxItemThreeImageView;
 	
-	public void setHuditemOneImageView(ImageView ImageView) {
+	public void setHuditemOneImageView(ImageView ImageView,HBox box) {
 		this.hudItemOneImageView = ImageView;
+		this.hboxItemOneImageView = box;
 	}
 
-	public void setHuditemTwoImageView(ImageView ImageView) {
+	public void setHuditemTwoImageView(ImageView ImageView,HBox box) {
 		this.hudItemTwoImageView = ImageView;
+		this.hboxItemTwoImageView = box;
 	}
 
-	public void setHuditemThreeImageView(ImageView ImageView) {
+	public void setHuditemThreeImageView(ImageView ImageView,HBox box) {
 		this.hudItemThreeImageView = ImageView;
+		this.hboxItemThreeImageView = box;
 	}
 	
 	public void setHudTrophyOneImageView(ImageView ImageView) {
@@ -66,6 +74,7 @@ public class Hud {
 		case 0:
 			Platform.runLater(() -> {
 				hudTrophyOneImageView.setImage(image);
+				
 			});
 			break;
 		case 1:
@@ -107,20 +116,25 @@ public class Hud {
 	
 
 	private void positionPickedUpItem(Image image, int pos) {
+		String border ="-fx-border-color: black;"
+                + "-fx-border-width: 1;";
 		switch (pos) {
 		case 0:
 			Platform.runLater(() -> {
 				hudItemOneImageView.setImage(image);
+				hboxItemOneImageView.setStyle(border);
 			});
 			break;
 		case 1:
 			Platform.runLater(() -> {
 				hudItemTwoImageView.setImage(image);
+				hboxItemTwoImageView.setStyle(border);
 			});
 			break;
 		case 2:
 			Platform.runLater(() -> {
 				hudItemThreeImageView.setImage(image);
+				hboxItemThreeImageView.setStyle(border);
 			});
 			break;
 		}

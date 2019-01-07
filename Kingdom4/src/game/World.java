@@ -188,23 +188,23 @@ private Boolean provTrigger = false;
     	
     		if(item.getType().equals("trophy")) {
     			if(item.getName().equals("clumsy")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setClumsy(image);
     				
     			}else if(item.getName().equals("confused")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setConfused(image);
     				
     			}else if(item.getName().equals("influencer")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setInfluencer(image);
     				
     			}else if(item.getName().equals("stoney")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setStoney(image);
     				
     			}else if(item.getName().equals("treehugger")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setTreehugger(image);
     			}
     			
@@ -255,13 +255,11 @@ private Boolean provTrigger = false;
         	gameEngine.setFpH(fph);
     	}else if (itemName.equals("key")) {
     		gameEngine.setKey(image);
-    		System.out.println(image);
     		ImageView green = new ImageView(new Image(items.get(0).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         	green.relocate(y * tileSize, x * tileSize);
         	gameEngine.setKeyGreen(green);
     	}else if(itemName.equals("rabbit")) {
     		gameEngine.setRabbit(image);
-    		System.out.println(image);
     		ImageView green = new ImageView(new Image(items.get(0).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         	green.relocate(y * tileSize, x * tileSize);
         	gameEngine.setRabbitGreen(green);
