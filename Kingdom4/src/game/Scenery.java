@@ -64,7 +64,7 @@ public class Scenery {
     
 
     //Music from: http://freemusicarchive.org 
-    private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
+    //private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
     private File fanfareFile = new File("music/attention.mp3");
     private File startscreenMusic = new File("music/DizzySpells.mp3");
     private File backgroundMusic = new File("music/Underclocked.mp3");
