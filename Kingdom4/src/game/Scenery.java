@@ -48,6 +48,8 @@ import javafx.util.Duration;
  * @author Boris Bischoff
  * @version 1.0
  *
+ * StartScreen Music: Eric Skiff - A Night Of Dizzy Spells - Resistor Anthems - Available at http://EricSkiff.com/music
+ * Gameplay Music: Eric Skiff - Underclocked - Resistor Anthems - Available at http://EricSkiff.com/music
  */
 
 public class Scenery {
@@ -60,14 +62,18 @@ public class Scenery {
     private BorderPane playground;
     private File cssFile = new File("css/style.css");
     
+
     //Music from: http://freemusicarchive.org 
     private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
     private File fanfareFile = new File("music/attention.mp3");
-    
-
-    
+    private File startscreenMusic = new File("music/DizzySpells.mp3");
+    private File backgroundMusic = new File("music/Underclocked.mp3");
+    Media mediaMain = new Media("file:///" + backgroundMusic.getAbsolutePath().replace("\\", "/"));
+    MediaPlayer playerMain = new MediaPlayer(mediaMain);
+  
     public Scenery(GameEngine gameEngine,Hud hud) {
         this.gameEngine = gameEngine;
+
 
         Media fanfareMedia = new Media("file:///" + fanfareFile.getAbsolutePath().replace("\\", "/"));
         MediaPlayer fanfarePlayer = new MediaPlayer(fanfareMedia);
@@ -131,6 +137,7 @@ public class Scenery {
         background.addEventFilter(InputEvent.ANY, (event)-> {
                 event.consume();
         });
+        
         
         background.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -222,10 +229,12 @@ public class Scenery {
 
 		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(table,t);
-
+		
+		
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
+    	
     }
 
     
@@ -275,10 +284,11 @@ public class Scenery {
     	intro.setId("introscreen");
     	Stage primaryStage = gameEngine.getPrimaryStage();
 
-
-    	Media media = new Media("file:///" + backgroundMusic.getAbsolutePath().replace("\\", "/"));
-        MediaPlayer player = new MediaPlayer(media);
-        player.play();
+    	Media media = new Media("file:///" + startscreenMusic.getAbsolutePath().replace("\\", "/"));
+        MediaPlayer playerStart = new MediaPlayer(media);
+        playerStart.setStartTime(new Duration(0));
+        playerStart.setCycleCount(MediaPlayer.INDEFINITE);
+        playerStart.play();
         
         int paneWidth = gameEngine.getPaneWidth();
     	int paneHeight = gameEngine.getPaneHeight();
@@ -296,7 +306,10 @@ public class Scenery {
         intro.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {
             	introAction(playerNameField,vbox,primaryStage);
-            	player.stop();
+            	playerStart.stop();
+                playerMain.setStartTime(new Duration(0));
+                playerMain.setCycleCount(MediaPlayer.INDEFINITE);
+                playerMain.play();
                ev.consume(); 
             }
         });
@@ -305,7 +318,10 @@ public class Scenery {
         startGameButton.setOnAction(e -> 
         {
         	introAction(playerNameField,vbox,primaryStage);
-        	player.stop();
+        	playerStart.stop();
+            playerMain.setStartTime(new Duration(0));
+            playerMain.setCycleCount(MediaPlayer.INDEFINITE);
+            playerMain.play();
         });
         
         vbox.setAlignment(Pos.CENTER);        
