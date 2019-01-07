@@ -2,7 +2,6 @@ package game;
 
 import java.util.Date;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -19,15 +18,14 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Highscore {
 
-
 	private final SimpleStringProperty userName;
-    private final SimpleIntegerProperty counter;
+    private final SimpleStringProperty trophy;
     private final SimpleLongProperty duration;
     private final SimpleLongProperty highScoreTime;
 	
-	public Highscore(String userName, int counter, long duration, long highScoreTime){
+	public Highscore(String userName, String trophy, long duration, long highScoreTime){
         this.userName = new SimpleStringProperty(userName);
-        this.counter = new SimpleIntegerProperty(counter);
+        this.trophy = new SimpleStringProperty(trophy);
         this.duration = new SimpleLongProperty(duration);
         this.highScoreTime = new SimpleLongProperty(highScoreTime);
     }
@@ -36,8 +34,8 @@ public class Highscore {
 		return userName.get();
 	}
 
-	public int getCounter() {
-		return counter.get();
+	public String getTrophy() {
+		return trophy.get();
 	}
 
 	public String getDuration() {

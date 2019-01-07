@@ -525,7 +525,7 @@
         <type>object</type>
         <image>rabbit.png</image>
         <walkable>true</walkable>
-        <portable>false</portable>
+        <portable>true</portable>
         <npc>false</npc>
         <information>I'm a rabbit, please step on me.</information>
     </element> 
@@ -659,4 +659,74 @@
         <npc>false</npc>
         <information>I'm a river, please don't step on me.</information>
     </element>
+    <element>
+        <id>66</id>
+        <name>sword</name>
+        <type>object</type>
+        <image>sword.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a sword, please use me.</information>
+    </element>
+    <element>
+        <id>67</id>
+        <name>fish</name>
+        <type>object</type>
+        <image>fish.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a fish, please eat me.</information>
+    </element>  
+    <element>
+        <id>68</id>
+        <name>clumsy</name>
+        <type>trophy</type>
+        <image>trophy_clumsy.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a clumsy, sorry.</information>
+    </element>  
+    <element>
+        <id>69</id>
+        <name>confused</name>
+        <type>trophy</type>
+        <image>trophy_confused.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm confused, please let me alone.</information>
+    </element>  
+    <element>
+        <id>70</id>
+        <name>influencer</name>
+        <type>trophy</type>
+        <image>trophy_influencer.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a an influencer, please talk with me.</information>
+    </element>  
+    <element>
+        <id>71</id>
+        <name>stoney</name>
+        <type>trophy</type>
+        <image>trophy_stoney.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a stoney, I love stones.</information>
+    </element>  
+    <element>
+        <id>72</id>
+        <name>treehugger</name>
+        <type>trophy</type>
+        <image>trophy_treehugger.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a treehugger, please give me trees.</information>
+    </element>  
 </root>
