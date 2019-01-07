@@ -8,6 +8,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
@@ -522,26 +523,31 @@ public class GameEngine extends Observable {
 	
 	public void collectTrophyClumsy() {
 		hud.setCollectedTrophy(clumsy.getImage(), "C");
+		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyConfused() {
 		hud.setCollectedTrophy(confused.getImage(), "O");
+		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyInfluencer() {
 		hud.setCollectedTrophy(influencer.getImage(), "I");
+		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyStoney() {
 		hud.setCollectedTrophy(stoney.getImage(), "S");
+		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyTreehugger() {
 		hud.setCollectedTrophy(treehugger.getImage(), "T");
+		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
@@ -571,6 +577,15 @@ public class GameEngine extends Observable {
 	public String[] getPickedUpItems() {
 		return hud.getPickedUpItems();
 	}
+	
+	public void setPickedUpItem(Image image, String name) {
+		hud.setPickedUpItem(image,name);
+	}
+	
+	public void findRemovePickedUpItem(String name) {
+		hud.findRemovePickedUpItem(name);
+	}
+	
 
     /**
      * This method checks for any triggers that are being passed.
