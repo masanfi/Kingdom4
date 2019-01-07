@@ -62,7 +62,7 @@ public class Conversations {
     }
     private void fillHeroWithNonsense() {
     	heroText.add("Das schreibe ich mir\nsofort auf.");
-    	heroText.add("Interessant.\nDarüber möchte ich später\nmehr wissen.");
+    	heroText.add("Interessant.\nDarüber möchte ich\nspäter mehr wissen.");
     	heroText.add("Wahnsinn, hätte ich\nnicht gedacht.");
     	heroText.add("Wenn ich alt bin,\nwill ich auch mal\nso klug werden.");
     	heroText.add("So kluge Sachen höre\nich nie vom Schmied.");
@@ -85,29 +85,29 @@ public class Conversations {
             if(!this.getStatusSpeechBubble()) {
                 if (gameEngine.getCharacter().get("lady") == 0) {
                 	
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag!\nIch bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag! Ich bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Willkommen zurück im\nKönigreich Faboma,\nOreh!", 2, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich weiß, wer du\nbist, du mächtiger Held.\nWo warst du?", 2, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6600), ae -> this.showSpeechBubble(playerX, playerY, "Ich war auf\nGeschäftsreise!\nWas ist denn passiert?", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(8800), ae -> this.showSpeechBubble(triggerX, triggerY, "Unsere Prinzessin Adlez\nwurde aus der Burg\nentführt!\nDu musst sie finden!", 3, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(11900), ae -> this.showSpeechBubble(playerX, playerY, "Schreck lass nach!\nWo könnte sie denn sein?", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14000), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nauf der anderen Seite\nder Brücke finden kannst.", 2, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16100), ae -> this.showSpeechBubble(playerX, playerY, "Das sehe ich mir sofort\nan!", 2, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich weiß, wer du\nbist, du mächtiger Held.\nWo warst du?", 3, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7300), ae -> this.showSpeechBubble(playerX, playerY, "Ich war auf\nGeschäftsreise!\nWas ist denn passiert?", 2.5, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9900), ae -> this.showSpeechBubble(triggerX, triggerY, "Unsere Prinzessin Adlez\nwurde aus der Burg\nentführt!\nDu musst sie finden!", 3.5, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(13500), ae -> this.showSpeechBubble(playerX, playerY, "Schreck lass nach!\nWo könnte sie denn sein?", 2, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(15600), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nauf der anderen Seite\nder Brücke finden kannst.", 3, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(18700), ae -> this.showSpeechBubble(playerX, playerY, "Das sehe ich mir sofort\nan!", 2, Color.WHITE, Color.BLACK)));
               	
                     timeline.play();
                     gameEngine.getCharacter().put("lady", 1);
                 }
                 else if (gameEngine.getCharacter().get("lady") == 1) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Wie heißt du eigentlich?", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Oreh, wir haben im\nNachbarkönigreich\nzusammen Informatik\nstudiert.", 2, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich bin Ydal!\nHast du die Prinzessin\nschon finden können?", 2, Color.RED, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6300), ae -> this.showSpeechBubble(playerX, playerY, "Ich bin kurz vor dem\ngroßen Durchbruch!\nMuss los, bye!", 2, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Oreh, wir haben im\nNachbarkönigreich\nzusammen Informatik\nstudiert.", 4, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich bin Derni Ydal!\nHast du die Prinzessin\nschon finden können?", 3.5, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9800), ae -> this.showSpeechBubble(playerX, playerY, "Ich bin kurz vor dem\ngroßen Durchbruch!\nMuss los, see ya!", 3, Color.WHITE, Color.BLACK)));
                     timeline.play();
                     gameEngine.getCharacter().put("lady", 2);
                 }
                 else {
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Hallo Ydal!\nIch bin Oreh,\nein mächtiger Held!", 2, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Du bist\nvielleicht eine große\nNervensäge!\nSuch die Prinzessin!", 2, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Hallo Derni Ydal!\nIch bin Oreh,\nein mächtiger Held!", 3, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3100), ae -> this.showSpeechBubble(triggerX, triggerY, "Du bist\nvielleicht eine Nervensäge!\nSuch die Prinzessin!", 3.5, Color.RED, Color.WHITE)));
                     timeline.play();
                 }
                 this.setStatusSpeechBubble(true);
@@ -232,7 +232,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), ae -> this.showSpeechBubble(playerX, playerY, "Kann ich ganz bitte,\nbitte nur mal kurz über\ndie Brücke?", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(playerX, playerY, "Ich will nach ganz oben\nin den Highscore!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(triggerX, triggerY, "Klar!", 2, Color.NAVY, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6300), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich reiß die Brücke gleich\nein, dann ist vorbei mit\nHighscore. Hast du ein\nGlück das ich Hunger\nhabe.", 3.5, Color.NAVY, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6300), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich reiß die Brücke gleich\nein, dann ist vorbei mit\nHighscore. Hast du ein\nGlück, dass ich Hunger\nhabe.", 3.5, Color.NAVY, Color.WHITE)));
                     timeline.play();
                     gameEngine.getCharacter().put("knight", 2);
                 }
