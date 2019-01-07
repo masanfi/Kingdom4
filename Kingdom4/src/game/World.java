@@ -120,19 +120,7 @@ private Boolean provTrigger = false;
 	        gameEngine.setObstacle(this.obstacles);
 	        gameEngine.setTriggerObject(this.triggers);
 	        //Provisorisches Finale
-	        
-	        //Provisorisches Trigger Feld um den Knight zu verschieben
-	        Item testItem = new Item();
-	        testItem.setName("Test");
-	        testItem.setType("test");
-	        Trigger test = new Trigger(testItem, new Point2D(300,300), item.isWalkable(), item.isPortable(), item.isNpc());
-	        Rectangle testObstacle = new Rectangle(200,300, gameEngine.getTileSize(), gameEngine.getTileSize());
-	        testObstacle.setFill(Color.PURPLE);
-	        this.obstacles.add(testObstacle);
-	        this.triggers.add(test);
-	        gameEngine.setObstacle(this.obstacles);
-	        gameEngine.setTriggerObject(this.triggers);
-	        //Provisorisches Trigger Feld um den Knight zu verschieben
+
     	}
         
         if (item.isNpc()) {

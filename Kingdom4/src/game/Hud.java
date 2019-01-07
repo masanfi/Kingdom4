@@ -5,6 +5,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ *
+ * This makes the HUD work
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
+ * @author Fabian Schmidt
+ * @author Martin Sanfilippo
+ * @author Boris Bischoff
+ * @version 1.0
+ *
+ */
 
 public class Hud {
 
@@ -23,6 +33,12 @@ public class Hud {
 	private HBox hboxItemOneImageView;
 	private HBox hboxItemTwoImageView;
 	private HBox hboxItemThreeImageView;
+
+	public Hud() {
+		for (int i = 0; i < 3; i++) {
+			this.pickedUpItems[i] = "";
+		}
+	}
 	
 	public void setHuditemOneImageView(ImageView ImageView,HBox box) {
 		this.hudItemOneImageView = ImageView;
@@ -102,7 +118,7 @@ public class Hud {
 		
 	public void setPickedUpItem(Image image,String item) {
 		for (int i = 0; i < 3; i++) {
-			if (pickedUpItems[i] == null) {
+			if (pickedUpItems[i] == "") {
 				positionPickedUpItem(image, i);
 				pickedUpItems[i] = item;
 				break;
@@ -113,7 +129,6 @@ public class Hud {
 	public String[] getPickedUpItems() {
 		return pickedUpItems;
 	}
-	
 
 	private void positionPickedUpItem(Image image, int pos) {
 		String border ="-fx-border-color: black;"
@@ -145,16 +160,19 @@ public class Hud {
 		case 0:
 			Platform.runLater(() -> {
 				hudItemOneImageView.setImage(null);
+				hboxItemOneImageView.setStyle(null);
 			});
 			break;
 		case 1:
 			Platform.runLater(() -> {
 				hudItemTwoImageView.setImage(null);
+				hboxItemTwoImageView.setStyle(null);
 			});
 			break;
 		case 2:
 			Platform.runLater(() -> {
 				hudItemThreeImageView.setImage(null);
+				hboxItemThreeImageView.setStyle(null);
 			});
 			break;
 		}
@@ -164,7 +182,7 @@ public class Hud {
 		for (int i = 0; i < 3; i++) {
 			if (pickedUpItems[i] == name) {
 				removePickedUpItem(i);
-				pickedUpItems[i] = null;
+				pickedUpItems[i] = "";
 			}
 		}
 	}

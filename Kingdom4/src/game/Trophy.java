@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
 *
-* To manage the Trophys in Kingdom of Faboma
+* This manages the trophies in Kingdom of Faboma
 * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
 * @author Fabian Schmidt
 * @author Martin Sanfilippo
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 * @version 1.0
 *
 */
+
 public class Trophy {
 	
 	GameEngine gameEngine;
@@ -140,8 +141,11 @@ public class Trophy {
     		
     		//Collision with Flowers
     		if (item.getName().contentEquals("flowers") || item.getName().contentEquals("flower2")) {
-    			this.getTrophyCollisionsWithFlowers().add(object);
-    			System.out.println("Flowers:" +this.getTrophyCollisionsWithFlowers().size());
+				if(!item.getName().equals(lastCollisionName)) {
+					this.getTrophyCollisionsWithFlowers().add(object);
+					System.out.println("Flowers:" +this.getTrophyCollisionsWithFlowers().size());
+					setlastCollisionName(item.getName());
+				}
     		}
     		
     		if (item.getName().contentEquals("stone")) {
@@ -150,7 +154,7 @@ public class Trophy {
     		}
     		
     		if(item.isNpc()) {
-    			if(!item.getName().equals(lastCollisionName) ) {
+    			if(!item.getName().equals(lastCollisionName)) {
     				this.getTrophyCollisionsWithNPCs().add(object);
     				System.out.println("NPC:" +this.getTrophyCollisionsWithNPCs().size());
     				setlastCollisionName(item.getName());
@@ -158,8 +162,11 @@ public class Trophy {
     		}
     		
     		if(item.getName().equals("river_bridge_l")) {
-    			this.getTrophyCollisionsWithBridge().add(object);
-    			System.out.println("Bridge:" +this.getTrophyCollisionsWithBridge().size());
+				if(!item.getName().equals(lastCollisionName)) {
+					this.getTrophyCollisionsWithBridge().add(object);
+					System.out.println("Bridge:" +this.getTrophyCollisionsWithBridge().size());
+					setlastCollisionName(item.getName());
+				}
     		}
 
     		lastCollisionTime = System.currentTimeMillis();
