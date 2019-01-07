@@ -1,6 +1,7 @@
 <root>
     <element>
         <id>0</id>
+        <symbol>32</symbol>
         <name>grass</name>
         <type>background</type>
         <image>grass.png</image>
@@ -11,6 +12,7 @@
     </element>
     <element>
         <id>1</id>
+        <symbol>88</symbol>
         <name>tree</name>
         <type>terrain</type>
         <image>tree.png</image>
@@ -21,6 +23,7 @@
     </element>
     <element>
         <id>2</id>
+        <symbol>89</symbol>
         <name>stone</name>
         <type>terrain</type>
         <image>stone.png</image>
@@ -31,6 +34,7 @@
     </element>
         <element>
         <id>3</id>
+        <symbol>90</symbol>
         <name>flowers</name>
         <type>terrain</type>
         <image>flower1.png</image>
@@ -41,6 +45,7 @@
     </element>
     <element>
         <id>4</id>
+        <symbol>45</symbol>
         <name>wall up</name>
         <type>terrain</type>
         <image>wall_up.png</image>
@@ -51,6 +56,7 @@
     </element>
     <element>
         <id>5</id>
+        <symbol>61</symbol>
         <name>wall down</name>
         <type>terrain</type>
         <image>wall_down.png</image>
@@ -61,6 +67,7 @@
     </element>
     <element>
         <id>6</id>
+        <symbol>64</symbol>
         <name>wall left</name>
         <type>terrain</type>
         <image>wall_left.png</image>
@@ -71,6 +78,7 @@
     </element>
     <element>
         <id>7</id>
+        <symbol>40</symbol>
         <name>wall corner up left</name>
         <type>terrain</type>
         <image>wall_corner_up_left.png</image>
@@ -81,6 +89,7 @@
     </element>
     <element>
         <id>8</id>
+        <symbol>41</symbol>
         <name>wall corner down left</name>
         <type>terrain</type>
         <image>wall_corner_down_left.png</image>
@@ -91,6 +100,7 @@
     </element>
     <element>
         <id>9</id>
+        <symbol>43</symbol>
         <name>Wall end low</name>
         <type>terrain</type>
         <image>wall_low.png</image>
@@ -101,6 +111,7 @@
     </element>
     <element>
         <id>10</id>
+        <symbol>38</symbol>
         <name>Wall end high</name>
         <type>terrain</type>
         <image>wall_high.png</image>
@@ -111,6 +122,7 @@
     </element>
      <element>
         <id>11</id>
+        <symbol>82</symbol>
         <name>river_l</name>
         <type>terrain</type>
         <image>river_l.png</image>
@@ -121,6 +133,7 @@
     </element>
      <element>
         <id>12</id>
+        <symbol>114</symbol>
         <name>river_r</name>
         <type>terrain</type>
         <image>river_r.png</image>
@@ -131,6 +144,7 @@
     </element>
     <element>
         <id>13</id>
+        <symbol>66</symbol>
         <name>river_bridge_l</name>
         <type>terrain</type>
         <image>river_bridge_l.png</image>
@@ -141,6 +155,7 @@
     </element>
      <element>
         <id>14</id>
+        <symbol>98</symbol>
         <name>river_bridge_r</name>
         <type>terrain</type>
         <image>river_bridge_r.png</image>
@@ -151,6 +166,7 @@
     </element>
     <element>
         <id>15</id>
+        <symbol>102</symbol>
         <name>footpath_horizontal</name>
         <type>background</type>
         <image>footpath_h.png</image>
@@ -161,6 +177,7 @@
     </element>
     <element>
         <id>16</id>
+        <symbol>103</symbol>
         <name>footpath_vertical</name>
         <type>background</type>
         <image>footpath_v.png</image>
@@ -171,6 +188,7 @@
     </element>
     <element>
         <id>17</id>
+        <symbol>104</symbol>
         <name>footpath_corner1</name>
         <type>background</type>
         <image>footpath_c1.png</image>
@@ -181,6 +199,7 @@
     </element>
     <element>
         <id>18</id>
+        <symbol>105</symbol>
         <name>footpath_corner2</name>
         <type>background</type>
         <image>footpath_c2.png</image>
@@ -191,6 +210,7 @@
     </element>
         <element>
         <id>19</id>
+        <symbol>106</symbol>
         <name>footpath_corner3</name>
         <type>background</type>
         <image>footpath_c3.png</image>
@@ -201,6 +221,7 @@
     </element>
     <element>
         <id>20</id>
+        <symbol>107</symbol>
         <name>footpath_corner4</name>
         <type>background</type>
         <image>footpath_c4.png</image>
@@ -211,6 +232,7 @@
     </element>  
     <element>
         <id>21</id>
+        <symbol>108</symbol>
         <name>footpath_crossing1</name>
         <type>background</type>
         <image>footpath_x1.png</image>
@@ -221,6 +243,7 @@
     </element>
     <element>
         <id>22</id>
+        <symbol>109</symbol>
         <name>footpath_crossing2</name>
         <type>background</type>
         <image>footpath_x2.png</image>
@@ -231,6 +254,7 @@
     </element>
         <element>
         <id>23</id>
+        <symbol>110</symbol>
         <name>footpath_crossing3</name>
         <type>background</type>
         <image>footpath_x3.png</image>
@@ -241,6 +265,7 @@
     </element>
     <element>
         <id>24</id>
+        <symbol>111</symbol>
         <name>footpath_crossing4</name>
         <type>background</type>
         <image>footpath_x4.png</image>
@@ -251,6 +276,7 @@
     </element>
     <element>
         <id>25</id>
+        <symbol>112</symbol>
         <name>footpath_center4</name>
         <type>background</type>
         <image>footpath_center.png</image>
@@ -261,6 +287,7 @@
     </element>   
     <element>
         <id>26</id>
+        <symbol>50</symbol>
         <name>blacksmith</name>
         <type>character</type>
         <image>blacksmith.png</image>
@@ -271,6 +298,7 @@
     </element>  
     <element>
         <id>27</id>
+        <symbol>51</symbol>
         <name>fisherman</name>
         <type>character</type>
         <image>fisherman.png</image>
@@ -281,6 +309,7 @@
     </element> 
     <element>
         <id>28</id>
+        <symbol>52</symbol>
         <name>wiseman</name>
         <type>character</type>
         <image>wiseman.png</image>
@@ -291,6 +320,7 @@
     </element> 
     <element>
         <id>29</id>
+        <symbol>53</symbol>
         <name>lady</name>
         <type>character</type>
         <image>lady_red.png</image>
@@ -301,6 +331,7 @@
     </element>  
     <element>
         <id>30</id>
+        <symbol>81</symbol>
         <name>smith1</name>
         <type>building</type>
         <image>smith_lo.png</image>
@@ -311,6 +342,7 @@
     </element>  
     <element>
         <id>31</id>
+        <symbol>83</symbol>
         <name>smith2</name>
         <type>building</type>
         <image>smith_ro.png</image>
@@ -321,6 +353,7 @@
     </element> 
     <element>
         <id>32</id>
+        <symbol>84</symbol>
         <name>smith3</name>
         <type>building</type>
         <image>smith_lu.png</image>
@@ -331,6 +364,7 @@
     </element> 
     <element>
         <id>33</id>
+        <symbol>85</symbol>
         <name>smith4</name>
         <type>building</type>
         <image>smith_ru.png</image>
@@ -341,6 +375,7 @@
     </element>
     <element>
         <id>34</id>
+        <symbol>65</symbol>
         <name>fisher1</name>
         <type>building</type>
         <image>fish_lo.png</image>
@@ -351,6 +386,7 @@
     </element>  
     <element>
         <id>35</id>
+        <symbol>47</symbol>
         <name>fisher2</name>
         <type>building</type>
         <image>fish_ro.png</image>
@@ -361,6 +397,7 @@
     </element> 
     <element>
         <id>36</id>
+        <symbol>67</symbol>
         <name>fisher3</name>
         <type>building</type>
         <image>fish_lu.png</image>
@@ -371,6 +408,7 @@
     </element> 
     <element>
         <id>37</id>
+        <symbol>68</symbol>
         <name>fisher4</name>
         <type>building</type>
         <image>fish_ru.png</image>
@@ -381,6 +419,7 @@
     </element>   
     <element>
         <id>38</id>
+        <symbol>69</symbol>
         <name>stone_house1</name>
         <type>building</type>
         <image>stone_house_lo.png</image>
@@ -391,6 +430,7 @@
     </element>  
     <element>
         <id>39</id>
+        <symbol>70</symbol>
         <name>stone_house2</name>
         <type>building</type>
         <image>stone_house_ro.png</image>
@@ -401,6 +441,7 @@
     </element> 
     <element>
         <id>40</id>
+        <symbol>71</symbol>
         <name>stone_house3</name>
         <type>building</type>
         <image>stone_house_lu.png</image>
@@ -411,6 +452,7 @@
     </element> 
     <element>
         <id>41</id>
+        <symbol>72</symbol>
         <name>stone_house4</name>
         <type>building</type>
         <image>stone_house_ru.png</image>
@@ -421,6 +463,7 @@
     </element> 
     <element>
         <id>42</id>
+        <symbol>73</symbol>
         <name>wood_house1</name>
         <type>building</type>
         <image>wood_house_lo.png</image>
@@ -431,6 +474,7 @@
     </element>  
     <element>
         <id>43</id>
+        <symbol>74</symbol>
         <name>wood_house2</name>
         <type>building</type>
         <image>wood_house_ro.png</image>
@@ -441,6 +485,7 @@
     </element> 
     <element>
         <id>44</id>
+        <symbol>75</symbol>
         <name>wood_house3</name>
         <type>building</type>
         <image>wood_house_lu.png</image>
@@ -451,6 +496,7 @@
     </element> 
     <element>
         <id>45</id>
+        <symbol>76</symbol>
         <name>wood_house4</name>
         <type>building</type>
         <image>wood_house_ru.png</image>
@@ -461,6 +507,7 @@
     </element>
     <element>
         <id>46</id>
+        <symbol>86</symbol>
         <name>church1</name>
         <type>building</type>
         <image>church_lo.png</image>
@@ -471,6 +518,7 @@
     </element>  
     <element>
         <id>47</id>
+        <symbol>87</symbol>
         <name>church2</name>
         <type>building</type>
         <image>church_ro.png</image>
@@ -481,6 +529,7 @@
     </element> 
     <element>
         <id>48</id>
+        <symbol>37</symbol>
         <name>church3</name>
         <type>building</type>
         <image>church_lu.png</image>
@@ -491,6 +540,7 @@
     </element> 
     <element>
         <id>49</id>
+        <symbol>35</symbol>
         <name>church4</name>
         <type>building</type>
         <image>church_ru.png</image>
@@ -501,6 +551,7 @@
     </element> 
     <element>
         <id>50</id>
+        <symbol>33</symbol>
         <name>key</name>
         <type>object</type>
         <image>key.png</image>
@@ -511,6 +562,7 @@
     </element>
     <element>
         <id>51</id>
+        <symbol>36</symbol>
         <name>chest</name>
         <type>object</type>
         <image>chest.png</image>
@@ -521,6 +573,7 @@
     </element>  
     <element>
         <id>52</id>
+        <symbol>44</symbol>
         <name>rabbit</name>
         <type>object</type>
         <image>rabbit.png</image>
@@ -531,6 +584,7 @@
     </element> 
     <element>
         <id>53</id>
+        <symbol>49</symbol>
         <name>knight</name>
         <type>character</type>
         <image>knight.png</image>
@@ -541,6 +595,7 @@
     </element>
     <element>
         <id>54</id>
+        <symbol>77</symbol>
         <name>castle1</name>
         <type>building</type>
         <image>castle_1.png</image>
@@ -551,6 +606,7 @@
     </element> 
     <element>
         <id>55</id>
+        <symbol>78</symbol>
         <name>castle2</name>
         <type>building</type>
         <image>castle_2.png</image>
@@ -561,6 +617,7 @@
     </element> 
     <element>
         <id>56</id>
+        <symbol>79</symbol>
         <name>castle3</name>
         <type>building</type>
         <image>castle_3.png</image>
@@ -571,6 +628,7 @@
     </element>
     <element>
         <id>57</id>
+        <symbol>80</symbol>
         <name>castle4</name>
         <type>building</type>
         <image>castle_4.png</image>
@@ -581,6 +639,7 @@
     </element>  
     <element>
         <id>58</id>
+        <symbol>97</symbol>
         <name>castle5</name>
         <type>building</type>
         <image>castle_5.png</image>
@@ -591,6 +650,7 @@
     </element> 
     <element>
         <id>59</id>
+        <symbol>99</symbol>
         <name>castle6</name>
         <type>building</type>
         <image>castle_6.png</image>
@@ -601,6 +661,7 @@
     </element>
     <element>
         <id>60</id>
+        <symbol>120</symbol>
         <name>tree2</name>
         <type>terrain</type>
         <image>tree2.png</image>
@@ -611,6 +672,7 @@
     </element> 
     <element>
         <id>61</id>
+        <symbol>121</symbol>
         <name>tree3</name>
         <type>terrain</type>
         <image>tree3.png</image>
@@ -621,6 +683,7 @@
     </element>
     <element>
         <id>62</id>
+        <symbol>122</symbol>
         <name>flower2</name>
         <type>terrain</type>
         <image>flower2.png</image>
@@ -631,6 +694,7 @@
     </element>   
     <element>
         <id>63</id>
+        <symbol>119</symbol>
         <name>angel</name>
         <type>terrain</type>
         <image>angel.png</image>
@@ -641,6 +705,7 @@
     </element>
     <element>
     	<id>64</id>
+    	<symbol>54</symbol>
     	<name>knight2</name>
     	<type>character</type>
     	<image>knight2.png</image>
@@ -651,6 +716,7 @@
     </element>
     <element>
         <id>65</id>
+        <symbol>100</symbol>
         <name>river_d</name>
         <type>terrain</type>
         <image>river_d.png</image>
@@ -661,6 +727,7 @@
     </element>
     <element>
         <id>66</id>
+        <symbol>42</symbol>
         <name>sword</name>
         <type>object</type>
         <image>sword.png</image>
@@ -671,6 +738,7 @@
     </element>
     <element>
         <id>67</id>
+        <symbol>42</symbol>
         <name>fish</name>
         <type>object</type>
         <image>fish.png</image>
@@ -681,6 +749,7 @@
     </element>  
     <element>
         <id>68</id>
+        <symbol>42</symbol>
         <name>clumsy</name>
         <type>trophy</type>
         <image>trophy_clumsy.png</image>
@@ -691,6 +760,7 @@
     </element>  
     <element>
         <id>69</id>
+        <symbol>42</symbol>
         <name>confused</name>
         <type>trophy</type>
         <image>trophy_confused.png</image>
@@ -701,6 +771,7 @@
     </element>  
     <element>
         <id>70</id>
+        <symbol>42</symbol>
         <name>influencer</name>
         <type>trophy</type>
         <image>trophy_influencer.png</image>
@@ -711,6 +782,7 @@
     </element>  
     <element>
         <id>71</id>
+        <symbol>42</symbol>
         <name>stoney</name>
         <type>trophy</type>
         <image>trophy_stoney.png</image>
@@ -721,6 +793,7 @@
     </element>  
     <element>
         <id>72</id>
+        <symbol>42</symbol>
         <name>treehugger</name>
         <type>trophy</type>
         <image>trophy_treehugger.png</image>

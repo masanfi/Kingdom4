@@ -13,8 +13,8 @@ package game;
 
 public class Item {
 
-    private int id;
-    private String name;
+    private char symbol;
+	private String name;
     private String type;
     private String image;
     private boolean walkable;
@@ -22,14 +22,14 @@ public class Item {
     private boolean npc;
     private String information;
 
-    public int getId() {
-        return id;
-    }
+    public char getSymbol() {
+		return symbol;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+	public void setSymbol(char symbol) {
+		this.symbol = symbol;
+	}
+	
     public String getName() {
         return name;
     }
@@ -88,7 +88,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item [id=" + id + ", name=" + name + ", image=" + image + ", type=" + type + ", walkable=" + walkable + ", portable="
+        return "Item [name=" + name + ", image=" + image + ", type=" + type + ", walkable=" + walkable + ", portable="
                 + portable + " npc=" + npc + ", information=" + information + "]";
     }
 
