@@ -508,7 +508,7 @@ public class GameEngine extends Observable {
     	
     }
 	
-	private void changeKnight() {
+	public void changeKnight() {
 		knightChanged = true;
 
 		background.getChildren().remove(knight);
@@ -585,6 +585,15 @@ public class GameEngine extends Observable {
 	public void findRemovePickedUpItem(String name) {
 		hud.findRemovePickedUpItem(name);
 	}
+
+	public boolean findItemInInventory(String item) {
+	    for(int i = 0; i < hud.getPickedUpItems().length; i++) {
+	        if(hud.getPickedUpItems()[i].contentEquals(item)) {
+	            return true;
+            }
+        }
+	    return false;
+    }
 	
 
     /**
@@ -608,7 +617,7 @@ public class GameEngine extends Observable {
                 	}          	
                 }else if(trigger.getName().equalsIgnoreCase("key")){
                 	if(!keyPickedUP) {
-                		System.out.println("Schlüsssel gefunden");
+                		System.out.println("Schlüssel gefunden");
                 		pickUpKey();
                 	}
                 }else if(trigger.getName().equalsIgnoreCase("rabbit")){
