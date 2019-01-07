@@ -182,6 +182,46 @@ private Boolean provTrigger = false;
         
     }
     
+    private void handleNotShownItems() {
+    	
+    	items.forEach(item->{
+    	
+    		if(item.getType().equals("trophy")) {
+    			if(item.getName().equals("clumsy")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        			gameEngine.setClumsy(image);
+    				
+    			}else if(item.getName().equals("confused")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        			gameEngine.setConfused(image);
+    				
+    			}else if(item.getName().equals("influencer")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        			gameEngine.setInfluencer(image);
+    				
+    			}else if(item.getName().equals("stoney")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        			gameEngine.setStoney(image);
+    				
+    			}else if(item.getName().equals("treehugger")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        			gameEngine.setTreehugger(image);
+    			}
+    			
+    		}else if (item.getName().equals("sword")) {
+    			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    			gameEngine.setSword(image);
+    			
+    		}else if (item.getName().equals("fish")) {
+    			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+    			gameEngine.setFish(image);
+    		}
+    		
+    	});
+    	
+    }
+    
+    
     /**
      * This mehode handels Special items
      * @param x
@@ -195,6 +235,7 @@ private Boolean provTrigger = false;
     	//Prepare the change of the knight, create Knight2
     	if(itemName.equals("knight2")) {
     		gameEngine.setKnight2(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
+    		gameEngine.setKnight2Collision(trigger);
     		this.collisions.remove(trigger);
         	this.backgroundCollection.remove(image);
         	this.triggers.remove(trigger);
@@ -212,13 +253,19 @@ private Boolean provTrigger = false;
         	fph.relocate(y * tileSize, x * tileSize);
         	
         	gameEngine.setFpH(fph);
-    	}
-    	else if (itemName.equals("key")) {
-    		gameEngine.setKey(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
-    		gameEngine.setKeyImage(image.getImage());
+    	}else if (itemName.equals("key")) {
+    		gameEngine.setKey(image);
+    		System.out.println(image);
     		ImageView green = new ImageView(new Image(items.get(0).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
         	green.relocate(y * tileSize, x * tileSize);
         	gameEngine.setKeyGreen(green);
+    	}else if(itemName.equals("rabbit")) {
+    		gameEngine.setRabbit(image);
+    		System.out.println(image);
+    		ImageView green = new ImageView(new Image(items.get(0).getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
+        	green.relocate(y * tileSize, x * tileSize);
+        	gameEngine.setRabbitGreen(green);
+    		
     	}
     	
     	return true;
@@ -443,7 +490,7 @@ private Boolean provTrigger = false;
                 }
             }
         }
-
+        this.handleNotShownItems();
         return pane ;
     }
 

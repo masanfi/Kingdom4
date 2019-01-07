@@ -3,8 +3,6 @@ package game;
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
-
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -55,7 +53,7 @@ import javafx.util.Duration;
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, textOver, hud;
+    private Pane entities, textOver, hudPane;
     private StackPane intro;
     private GridPane outro;
     private ScrollPane background;
@@ -64,10 +62,16 @@ public class Scenery {
     
     //Music from: http://freemusicarchive.org 
     private File backgroundMusic = new File("music/Livio_Amato_-_14_-_Sugar_doesnt_replace_you_at_all.mp3");
+    private File fanfareFile = new File("music/attention.mp3");
     
-    public Scenery(GameEngine gameEngine) {
+
+    
+    public Scenery(GameEngine gameEngine,Hud hud) {
         this.gameEngine = gameEngine;
-        
+
+        Media fanfareMedia = new Media("file:///" + fanfareFile.getAbsolutePath().replace("\\", "/"));
+        MediaPlayer fanfarePlayer = new MediaPlayer(fanfareMedia);
+        gameEngine.setFanfare(fanfarePlayer);
         
         background = new ScrollPane();
 
@@ -82,27 +86,47 @@ public class Scenery {
         playground = new BorderPane();
         gameEngine.getEntities().setVisible(false);
 
-        hud = new Pane();
-        hud.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
-        hud.setId("pane");
+        hudPane = new Pane();
+        hudPane.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
+        hudPane.setId("pane");
 
-        hud.setStyle("-fx-background-color: transparent;");
-        hud.setStyle("-fx-background-color: rgba(255,255,255,0.0);");
-        Text text = new Text("0");
-        gameEngine.setHudText(text);
-        text.setX(10);
-        text.setY(-40);
-        text.setFill(Color.WHITE);
-        text.setFont(Font.font ("Verdana", 20));
+        hudPane.setStyle("-fx-background-color: transparent;");
+        hudPane.setStyle("-fx-background-color: rgba(255,255,255,0.0);");
 
-        ImageView keyImageView = new ImageView();
-        //keyImageView.setImage(new Image("grass.png", gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
-        keyImageView.relocate(712, 14);
-        gameEngine.setHudKeyImageView(keyImageView);
-        hud.setMinHeight(96);
-        hud.setPrefHeight(96);
-        hud.getChildren().addAll(keyImageView);
+        ImageView itemOneImageView = new ImageView();
+        ImageView itemTwoImageView = new ImageView();
+        ImageView itemThreeImageView = new ImageView();
+        
+        itemOneImageView.relocate(712, 5);
+        itemTwoImageView.relocate(788, 5);
+        itemThreeImageView.relocate(864, 5);
+        
+        hud.setHuditemOneImageView(itemOneImageView);
+        hud.setHuditemTwoImageView(itemTwoImageView);
+        hud.setHuditemThreeImageView(itemThreeImageView);
 
+        ImageView trophyOneImageView = new ImageView();
+        ImageView trophyTwoImageView = new ImageView();
+        ImageView trophyThreeImageView = new ImageView();
+        ImageView trophyFourImageView = new ImageView();
+        ImageView trophyFiveImageView = new ImageView();
+        
+        trophyOneImageView.relocate(250, 5);
+        trophyTwoImageView.relocate(326, 5);
+        trophyThreeImageView.relocate(402, 5);
+        trophyFourImageView.relocate(478, 5);
+        trophyFiveImageView.relocate(554, 5);
+        
+        hud.setHudTrophyOneImageView(trophyOneImageView);
+        hud.setHudTrophyTwoImageView(trophyTwoImageView);
+        hud.setHudTrophyThreeImageView(trophyThreeImageView);
+        hud.setHudTrophyFourImageView(trophyFourImageView);
+        hud.setHudTrophyFiveImageView(trophyFiveImageView);
+        
+        hudPane.setMinHeight(77);
+        hudPane.setPrefHeight(77);
+        hudPane.getChildren().addAll(itemOneImageView,itemTwoImageView,itemThreeImageView,trophyOneImageView,trophyTwoImageView,trophyThreeImageView,trophyFourImageView,trophyFiveImageView);
+        
         background.setContent(gameEngine.getBackground());
         background.addEventFilter(InputEvent.ANY, (event)-> {
                 event.consume();
@@ -112,11 +136,12 @@ public class Scenery {
         background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
         playground.setCenter(background);
-        playground.setBottom(hud);
+        playground.setBottom(hudPane);
 
         Scene scene = new Scene(playground, gameEngine.getPaneWidth(), gameEngine.getPaneHeight());
         gameEngine.setScene(scene);
     }
+ 
 
     /**
      * This sets the action square and our hero on the field.
@@ -165,7 +190,7 @@ public class Scenery {
 		}
 
 		// Sort the highscore
-		Collections.sort(hs, Comparator.comparing(Highscore::getCounter).thenComparing(Highscore::getDuration)
+		Collections.sort(hs, Comparator.comparing(Highscore::getTrophy).thenComparing(Highscore::getDuration)
 				.thenComparing(Highscore::getUserName).thenComparing(Highscore::getHighScoreTime));
 
 		outro.setPadding(new Insets(10, 10, 10, 10));

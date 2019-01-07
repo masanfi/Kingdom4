@@ -23,6 +23,8 @@ public class Kingdom4 extends Application {
 	private Hero hero;
 	private GameEngine gameEngine;
 	private Scenery scenery;
+	private Trophy trophy;
+	private Hud hud;
 
     /**
      * method start
@@ -43,14 +45,22 @@ public class Kingdom4 extends Application {
 		new CollisionDetection(gameEngine);
 		// Initialize Trigger Detection
 		new TriggerDetection(gameEngine);
-
-		world = new World(gameEngine);
-		scenery = new Scenery(gameEngine);
 		
+		
+		// Initialize Trophy Manager und Hud Manager
+		hud = new Hud();
+		trophy = new Trophy(gameEngine,hud);
+		
+		gameEngine.setHud(hud);
+		gameEngine.setTrophy(trophy);
+		
+		world = new World(gameEngine);
+		scenery = new Scenery(gameEngine,hud);
 		gameEngine.setScenery(scenery);
 		hero = new Hero(gameEngine);
 		world.buildWorld();
 		scenery.setPlayerOnField();
+		
 		world.setCamera();
 		gameEngine.setLastUpdate(-1);
 
