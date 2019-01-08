@@ -891,4 +891,15 @@ public class GameEngine extends Observable {
     public void setCharacter(Map<String, Integer> character) {
         this.character = character;
     }
+
+    public void showCharacterStates() {
+        System.out.println(" ");
+        System.out.println("Character states:");
+        System.out.println("-----------------");
+        System.out.println("Lady: " + this.getCharacter().get("lady"));
+        System.out.println("Knight: " + this.getCharacter().get("knight"));
+        System.out.println("Blacksmith: " + this.getCharacter().get("blacksmith"));
+        System.out.println("Fisherman: " + this.getCharacter().get("fisherman"));
+        System.out.println("Wise man: " + this.getCharacter().get("wiseman"));
+    }
 }
