@@ -213,8 +213,7 @@ private Boolean provTrigger = false;
     			
     		}else if (item.getName().equals("sword")) {
     			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
-    			gameEngine.setSword(image);
-    			
+    			gameEngine.setSword(image);    			
     		}else if (item.getName().equals("fish")) {
     			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
     			gameEngine.setFish(image);

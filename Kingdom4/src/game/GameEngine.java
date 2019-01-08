@@ -655,6 +655,7 @@ public class GameEngine extends Observable {
                 	}
                 }
                 else {
+                	
                     //System.out.println("Something's happening!");
                 }
             }
