@@ -56,7 +56,7 @@ public class Kingdom4 extends Application {
 		
 		world = new World(gameEngine);
 		scenery = new Scenery(gameEngine,hud);
-		gameEngine.setScenery(scenery);
+		gameEngine.setScenery(scenery); 
 		hero = new Hero(gameEngine);
 		world.buildWorld();
 		scenery.setPlayerOnField();
