@@ -84,6 +84,7 @@ public class Conversations {
         double playerY = gameEngine.getPlayer()[0].getY() + gameEngine.getTileSize();
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> gameEngine.setMovement(false)));
         timeline.setOnFinished(t->{
+            gameEngine.setLastUpdate(gameEngine.getTimestamp());
     		gameEngine.setMovement(true);
     	});
         if (trigger.getName().contentEquals("lady")) {
