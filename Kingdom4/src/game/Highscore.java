@@ -39,12 +39,17 @@ public class Highscore {
 	}
 
 	public String getDuration() {
-	    
+	    String sek;
 	    long millis= duration.get();
 	    long secs = millis / 1000;
 	    long mins = secs / 60;
 	    long restsecs = secs % 60;
-	    return mins + ":" + restsecs;
+	    if(restsecs<10) {
+	    	sek = "0" + restsecs; 
+	    }else {
+	    	sek = ""+restsecs;
+	    }
+	    return mins + ":" + sek;
 	    	
 	    
 		//return duration.get();

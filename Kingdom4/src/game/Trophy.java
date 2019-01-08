@@ -72,8 +72,8 @@ public class Trophy {
     }
 
     public String getTrophysForHighScore() {
-    	    	
-    	return "B#"+trophyCollisionWithBridge + "§N#"+trophyCollisionWithNPCs + "§T#"+trophyCollisionWithTrees + "§S#"+trophyCollisionWithStones + "§F#" + trophyCollisionWithFlowers;
+    	    
+    	return "B"+ ((trophyBridge) ? "*" : "-") + "§N"+((trophyNPCs) ? "*" : "-") + "§T"+((trophyTrees) ? "*" : "-") + "§S"+((trophyStones) ? "*" : "-") + "§F" + ((trophyFlowers) ? "*" : "-");
     	
     }
 

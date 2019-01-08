@@ -67,6 +67,8 @@ public class Hero {
                 case LEFT:  gameEngine.setWest(true); gameEngine.setSouth(false);gameEngine.setNorth(false);gameEngine.setEast(false);break;
                 case RIGHT: gameEngine.setEast(true); gameEngine.setSouth(false);gameEngine.setWest(false);gameEngine.setNorth(false);break;
                 case D: gameEngine.getEntities().setVisible(true); break;
+                case M: gameEngine.toggleMusic(); break;
+                case K: gameEngine.changeKnight(); break;
                 case S: gameEngine.showCharacterStates(); break;
                 default:
                     break;
@@ -84,7 +86,6 @@ public class Hero {
                     break;
             }
         });
-    	
     }
 
     /**

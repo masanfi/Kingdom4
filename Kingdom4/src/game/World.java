@@ -206,6 +206,9 @@ private Boolean provTrigger = false;
     			}else if(item.getName().equals("treehugger")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setTreehugger(image);
+    			}else if(item.getName().equals("transparent")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
+        			gameEngine.setTransparent(image);
     			}
     			
     		}else if (item.getName().equals("sword")) {

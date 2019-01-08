@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -28,10 +29,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -56,13 +57,11 @@ import javafx.util.Duration;
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, textOver, hudPane;
-    private StackPane intro;
+    private Pane entities, textOver, hudPane, intro;
     private GridPane outro;
     private ScrollPane background;
     private BorderPane playground;
     private File cssFile = new File("css/style.css");
-    
     private File fanfareFile = new File("music/attention.mp3");
     private File startscreenMusic = new File("music/DizzySpells.mp3");
     private File backgroundMusic = new File("music/Underclocked.mp3");
@@ -214,45 +213,154 @@ public class Scenery {
 		}
 
 		// Sort the highscore
-		Collections.sort(hs, Comparator.comparing(Highscore::getTrophy).thenComparing(Highscore::getDuration)
+		Collections.sort(hs, Comparator.comparing(Highscore::getDuration)
 				.thenComparing(Highscore::getUserName).thenComparing(Highscore::getHighScoreTime));
 
 		outro.setPadding(new Insets(10, 10, 10, 10));
 		outro.setVgap(10);
 		outro.setHgap(10);
+		
+		//HBox hsTable = new HBox();
+		
+		//int[] offsetRows = new int[] {100
+		int c=0;
+		String newUserName="";
+		String newDuration="";
+		
+		for(Highscore h : hs)
+		{
+			Text user = new Text();
+			if(h.getUserName().length()<20) {
+				newUserName = padRight(h.getUserName(), 20) + " ";
+				
+			}else {
+				newUserName = h.getUserName();
+			}
+			user.setText(newUserName);
+			
+			newDuration = padRight(h.getDuration(), 20) + " ";
+			
+			Text duration = new Text();
+			duration.setText(newDuration);
+			
+			Text hsTime = new Text();
+			hsTime.setText(h.getHighScoreTime());
+			
+			HBox vboxTrophy = renderTrophys(h.getTrophy(),c);
+			HBox row = new HBox();
+			
+			
+			row.getChildren().addAll(user,vboxTrophy,duration,hsTime);
+			
+			//Text colum1 = new Text();
+			
+			//colum1.setText(newUserName + "\t" + h.getTrophy() + "\t" + h.getDuration() + "\t" + h.getHighScoreTime());
+
+			outro.addRow(c, row);
+
+			
+			if(c==9) {
+				break;
+			}
+				c++;
+		}
 
 		// table for Highscore
 		TableView table = new TableView();
-		table.setEditable(true);
+		//table.setEditable(true);
 
 		TableColumn userNameCol = new TableColumn("Username");
-		TableColumn counterCol = new TableColumn("Counter");
+		TableColumn trophyCol = new TableColumn("Trophys");
 		TableColumn durationCol = new TableColumn("Duration");
 		TableColumn dateCol = new TableColumn("Highscore Date");
 
-		table.getColumns().addAll(userNameCol, counterCol, durationCol, dateCol);
+		table.getColumns().addAll(userNameCol, trophyCol, durationCol, dateCol);
 		table.setMinWidth(paneWidth - 20);
 		double cellWidth = (paneWidth) / 4;
 		userNameCol.setMinWidth(cellWidth);
 		userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
-		counterCol.setMinWidth(cellWidth);
-		counterCol.setCellValueFactory(new PropertyValueFactory<>("counter"));
+		trophyCol.setMinWidth(cellWidth);
+		trophyCol.setCellValueFactory(new PropertyValueFactory<>("trophy"));
 		durationCol.setMinWidth(cellWidth);
 		durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
 		dateCol.setMinWidth(cellWidth);
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("highScoreTime"));
 
+		userNameCol.setSortable(false);
+		trophyCol.setSortable(false);
+		durationCol.setSortable(false);
+		dateCol.setSortable(false);
+		
+		durationCol.setStyle( "-fx-alignment: CENTER-RIGHT;");
+		dateCol.setStyle( "-fx-alignment: CENTER-RIGHT;");
+		
 		table.setItems(hs);
 
 		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(table,t);
-		
 		
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
     	return scene;
     	
     }
+    
+
+
+	private HBox renderTrophys(String trophy,int c) {
+    	ImageView influencer;
+    	ImageView confused;
+    	ImageView treehugger;
+    	ImageView stoney;
+    	ImageView clumsy;
+    	
+    	HBox vboxTrophys = new HBox();
+    	int tCounter = 0;
+    	String[] parts = trophy.split("§");
+		for (int i = 0; i<parts.length;i++) {
+			if(parts[i].startsWith("B*")) {
+				confused = gameEngine.getConfused();
+				confused.relocate(c*30, 0);
+				vboxTrophys.getChildren().add(confused);
+				tCounter++;
+			}else if(parts[i].startsWith("N*")) {
+				influencer = gameEngine.getInfluencer();
+				influencer.relocate(c*30, 0);
+				vboxTrophys.getChildren().add(influencer);
+				tCounter++;
+			}else if(parts[i].startsWith("T*")) {
+				treehugger = gameEngine.getTreehugger();
+				treehugger.relocate(c*30, 0);
+				vboxTrophys.getChildren().add(treehugger);
+				tCounter++;
+			}else if(parts[i].startsWith("S*")) {
+				stoney = new ImageView(gameEngine.getStoney().getImage());
+				stoney.relocate(c*30, 0);
+				vboxTrophys.getChildren().add(stoney);
+				tCounter++;
+			}else if(parts[i].startsWith("F*")) {
+				clumsy = gameEngine.getClumsy();
+				clumsy.relocate(c*30, 0);
+				vboxTrophys.getChildren().add(clumsy);
+				tCounter++;
+			}
+		}
+		//System.out.println("Found " + tCounter + " Trophys");
+		if(tCounter<5) {
+			for(int i = 0;i<(5-tCounter);i++) {
+				//System.out.println("Addiere");
+				ImageView placholder = new ImageView(gameEngine.getTransparent().getImage());
+				//ImageView placholder = gameEngine.getTransparent();
+				vboxTrophys.getChildren().add(placholder);
+			}
+		}
+		System.out.println(vboxTrophys.getWidth());
+    	return vboxTrophys;
+    }
+    
+    public static String padRight(String s, int n) {
+        return String.format("%1$-" + n + "s", s);  
+   }
 
     
     private void introAction(TextField playerNameField,VBox vbox,Stage primaryStage) {
@@ -268,16 +376,15 @@ public class Scenery {
         wi = new WritableImage(paneWidth, paneHeight);
         Image secondImage = gameEngine.getScene().snapshot(wi);
         ImageView secondImageView= new ImageView(secondImage);
-        
+        firstImageView.relocate(0, 0);
         //firstImageView.setTranslateX(0);
         //secondImageView.setTranslateX(paneWidth);
         secondImageView.setOpacity(0);
         
-        StackPane pane= new StackPane(firstImageView,secondImageView);
+        Pane pane= new Pane(firstImageView,secondImageView);
         pane.setPrefSize(paneWidth,paneHeight);
-        pane.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
+        pane.setStyle("-fx-background-insets: 0; -fx-padding: 0; -fx-border-insets:0;");
         intro.getChildren().setAll(pane);
-        
         Timeline fadeInTimeline = new Timeline();
         KeyFrame fadeInKey = new KeyFrame(Duration.millis(3000), new KeyValue(secondImageView.opacityProperty(), 1));
         fadeInTimeline.getKeyFrames().add(fadeInKey);
@@ -292,11 +399,9 @@ public class Scenery {
      * This renders the intro of Kingdom 4.
      */
     public void renderIntro() {
-    	intro = new StackPane();
-    	//intro.getStylesheets().add(
-        //        getClass().getResource("../css_neu/style.css").toExternalForm()
-        //);
-
+        //int paneWidth = gameEngine.getPaneWidth();
+       	//int paneHeight = gameEngine.getPaneHeight();
+    	intro = new Pane();
     	intro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
     	intro.setId("introscreen");
     	Stage primaryStage = gameEngine.getPrimaryStage();
@@ -307,9 +412,9 @@ public class Scenery {
         playerStart.setCycleCount(MediaPlayer.INDEFINITE);
         playerStart.play();
         
-        int paneWidth = gameEngine.getPaneWidth();
-    	int paneHeight = gameEngine.getPaneHeight();
-        
+        int paneWidth = gameEngine.getPaneWidth()-10;
+    	int paneHeight = gameEngine.getPaneHeight()-10;
+    	
     	TextField playerNameField = new TextField();
     	playerNameField.setMaxWidth(200);
     	playerNameField.setText("Enter Playername ...");
@@ -346,4 +451,14 @@ public class Scenery {
     	Scene scene = new Scene(intro, paneWidth, paneHeight);
         gameEngine.setIntro(scene);
     }
+    
+    public void toggleMusic() {
+    	if(playerMain.getStatus().equals(Status.STOPPED)) {
+    		playerMain.play();
+    	}
+    	else {
+    		playerMain.stop();
+    	}
+    }
+    
 }
