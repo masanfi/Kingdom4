@@ -63,7 +63,7 @@ public class Conversations {
         wisemanText.add("Hardware nennt man die\nTeile eines Computers, die\nman treten kann.");
         wisemanText.add("Die Gespräche mit mir\nsind wie eine Schachtel\nPralinen, man weiß nie,\nwas man bekommt.");
         wisemanText.add("In der Informatik geht\nes genau so wenig um\nComputer, wie in der\nAstronomie um Teleskope.");
-        wisemanText.add("Ich liebe Deadlines. Ich\nmag das zischende Geräusch,\ndas sie machen, wenn sie\nvorbeifliegen.");
+        wisemanText.add("Ich liebe Deadlines. Ich\nmag das zischende\nGeräusch, das sie machen,\nwenn sie vorbeifliegen.");
         wisemanText.add("Ein Computerprogramm tut,\nwas man ihm sagt, und nicht,\nwas er tun soll.");
     }
     private void fillHeroWithNonsense() {
@@ -342,7 +342,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14500), ae -> gameEngine.getCharacter().put("knight", 3)));
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("knight") == 3) {
+                else if (gameEngine.getCharacter().get("knight2") == 3) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Ähm...", 1.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich esse. Verschwinde!", 2, Color.NAVY, Color.WHITE)));
                     timeline.play();
