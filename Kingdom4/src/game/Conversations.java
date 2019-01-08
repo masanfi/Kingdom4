@@ -63,6 +63,8 @@ public class Conversations {
         wisemanText.add("Hardware nennt man die\nTeile eines Computers, die\nman treten kann.");
         wisemanText.add("Die Gespräche mit mir\nsind wie eine Schachtel\nPralinen, man weiß nie,\nwas man bekommt.");
         wisemanText.add("In der Informatik geht\nes genau so wenig um\nComputer, wie in der\nAstronomie um Teleskope.");
+        wisemanText.add("Ich liebe Deadlines. Ich\nmag das zischende Geräusch,\ndas sie machen, wenn sie\nvorbeifliegen.");
+        wisemanText.add("Ein Computerprogramm tut,\nwas man ihm sagt, und nicht,\nwas er tun soll.");
     }
     private void fillHeroWithNonsense() {
     	heroText.add("Das schreibe ich mir\nsofort auf.");
@@ -232,7 +234,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(13400), ae -> this.showSpeechBubble(playerX, playerY, "Wie es aussieht, störe\nich dich beim Packen.", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16000), ae -> this.showSpeechBubble(triggerX, triggerY, "Na, du scheinst ja\nwirklich ein Blitzmerker\nder Firma Spätzünder\nzu sein.", 3.5, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich bin dann mal beim\nFischen, hoffentlich nicht\nbis später.", 3, Color.YELLOW, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> gameEngine.getCharacter().put("fisherman", 1)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19600), ae -> gameEngine.getCharacter().put("fisherman", 1)));
                     timeline.play();
                 }
                 else if (gameEngine.getCharacter().get("fisherman") == 1 && gameEngine.getCharacter().get("blacksmith") < 2) {
