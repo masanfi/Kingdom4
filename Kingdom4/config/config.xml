@@ -802,4 +802,15 @@
         <npc>false</npc>
         <information>I'm a treehugger, please give me trees.</information>
     </element>  
+    <element>
+        <id>73</id>
+        <symbol>42</symbol>
+        <name>transparent</name>
+        <type>trophy</type>
+        <image>transparent.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a placeholder, please use me.</information>
+    </element> 
 </root>

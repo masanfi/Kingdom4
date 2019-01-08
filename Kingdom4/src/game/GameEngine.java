@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
@@ -76,6 +74,7 @@ public class GameEngine extends Observable {
     private ImageView key;
     private ImageView keyGreen;
 
+    private ImageView transparent;
     private ImageView clumsy;
     private ImageView confused;
     private ImageView influencer;
@@ -231,19 +230,19 @@ public class GameEngine extends Observable {
     }
 
     public void setNorth(boolean north) {
-        this.north = north;
+    		this.north = north;
     }
 
     public void setEast(boolean east) {
-        this.east = east;
+    		this.east = east;
     }
 
     public void setSouth(boolean south) {
-        this.south = south;
+    		this.south = south;
     }
 
     public void setWest(boolean west) {
-        this.west = west;
+    		this.west = west;
     }
 
     public boolean getNorth() {
@@ -364,17 +363,41 @@ public class GameEngine extends Observable {
     public void setClumsy(ImageView clumsy) {
     	this.clumsy = clumsy;
     }
+    public ImageView getClumsy() {
+    	return this.clumsy;
+    }
     public void setInfluencer(ImageView influencer) {
     	this.influencer = influencer;
+    }
+    
+    public ImageView getInfluencer() {
+    	return this.influencer;
     }
     public void setTreehugger(ImageView treehugger) {
     	this.treehugger = treehugger;
     }
+    public ImageView getTreehugger() {
+    	return this.treehugger;
+    }
     public void setStoney(ImageView stoney) {
     	this.stoney = stoney;
     }
+    public ImageView getStoney() {
+    	return this.stoney;
+    }
     public void setConfused(ImageView confused) {
     	this.confused = confused;
+    }
+    public ImageView getConfused() {
+    	return this.confused;
+    }
+    
+    public void setTransparent(ImageView transparent) {
+    	this.transparent = transparent;
+    }
+    
+    public ImageView getTransparent() {
+    	return this.transparent;
     }
     
     public void setRabbitGreen(ImageView rabbitGreen) {
@@ -384,6 +407,7 @@ public class GameEngine extends Observable {
     public void setMovement(Boolean state) {
     	//System.out.println("setzestate :" +state);
     	this.movement=state;
+    	
     }
     
     /**
@@ -523,6 +547,7 @@ public class GameEngine extends Observable {
 	}
 	
 	public void collectTrophyClumsy() {
+		
 		hud.setCollectedTrophy(clumsy.getImage(), "C");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
@@ -579,6 +604,10 @@ public class GameEngine extends Observable {
 		hud.findRemovePickedUpItem(name);
 	}
 
+	public void toggleMusic() {
+		scenery.toggleMusic();
+	}
+	
 	public boolean findItemInInventory(String item) {
 	    for(int i = 0; i < hud.getPickedUpItems().length; i++) {
 	        if(hud.getPickedUpItems()[i].contentEquals(item)) {
@@ -649,6 +678,7 @@ public class GameEngine extends Observable {
      * Moves and pans the camera over the playground.
      */
     public void moveCamera() {
+
         camera = new Rectangle();
         this.setCamera(camera);
 
@@ -661,6 +691,7 @@ public class GameEngine extends Observable {
         this.getCamera().yProperty().bind(Bindings.createDoubleBinding(
                 () -> viewFactor(this.getActionSquare().getY() - this.getScene().getHeight() / 2, 0, this.getBackground().getHeight() - this.getScene().getHeight()),
                 this.getActionSquare().yProperty(), this.getScene().heightProperty()));
+    	
     }
 
     public char[][] getWorld() {
@@ -775,6 +806,7 @@ public class GameEngine extends Observable {
             }
             this.setPrimaryDirection("west");
         }
+    	
     }
 
     public void setGeneralVisibility(boolean visibility) {
