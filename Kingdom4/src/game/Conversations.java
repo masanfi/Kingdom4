@@ -61,6 +61,8 @@ public class Conversations {
         wisemanText.add("Was sind die letzten\nWorte eines Informatikers?\n\"Ich bleibe hier bis\ndas Problem gelöst ist.\"");
         wisemanText.add("Irren ist menschlich.\nAber für das richtige\nChaos braucht man\neinen Computer.");
         wisemanText.add("Hardware nennt man die\nTeile eines Computers, die\nman treten kann.");
+        wisemanText.add("Die Gespräche mit mir\nsind wie eine Schachtel\nPralinen, man weiß nie,\nwas man bekommt.");
+        wisemanText.add("In der Informatik geht\nes genau so wenig um\nComputer, wie in der\nAstronomie um Teleskope.");
     }
     private void fillHeroWithNonsense() {
     	heroText.add("Das schreibe ich mir\nsofort auf.");
@@ -71,6 +73,7 @@ public class Conversations {
     	heroText.add("Je länger ich spiele,\ndesto mehr scheine ich\nzu lernen.");
     	heroText.add("Ich habe das Gefühl,\ndiese Sprüche erzählst du\nnach dem Zufallsprinzip.");
     	heroText.add("Hold on.\nIch komme gleich wieder!");
+    	heroText.add("Manchmal habe ich das\nGefühl, ich habe das\nschon einmal gehört.");
     }
 
     public void startConversation(Trigger trigger) {
@@ -92,18 +95,18 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9300), ae -> this.showSpeechBubble(playerX, playerY, "Ich war auf\nGeschäftsreise!\nHabe ich was verpasst?", 3, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12400), ae -> this.showSpeechBubble(triggerX, triggerY, "Unsere Prinzessin Adlez\nwurde aus der Burg\nentführt!\nDu musst sie finden!", 4, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16500), ae -> this.showSpeechBubble(playerX, playerY, "Schreck lass nach!\nWo könnte sie denn sein?", 2.5, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19100), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nauf der anderen Seite\nder Brücke finden kannst.", 4, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19100), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nweit Weg, weit hinter den\nFluss, gebracht wurde.", 4, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(23200), ae -> this.showSpeechBubble(playerX, playerY, "Das sehe ich mir sofort\nan!", 2, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(23200), ae -> gameEngine.getCharacter().put("lady", 1)));
                     timeline.play();
-                    gameEngine.getCharacter().put("lady", 1);
                 }
                 else if (gameEngine.getCharacter().get("lady") == 1) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Wie heißt du eigentlich?", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Oreh, wir haben im\nNachbarkönigreich\nzusammen Informatik\nstudiert.", 4, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich bin Derni Ydal!\nHast du die Prinzessin\nschon finden können?", 3.5, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9800), ae -> this.showSpeechBubble(playerX, playerY, "Ich bin kurz vor dem\ngroßen Durchbruch!\nMuss los, see ya!", 3, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9800), ae -> gameEngine.getCharacter().put("lady", 2)));
                     timeline.play();
-                    gameEngine.getCharacter().put("lady", 2);
                 } 
                 else if (gameEngine.getCharacter().get("lady") == 2 && !gameEngine.findItemInInventory("S")) {
                 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Hallo Derni Ydal!\nIch bin Oreh,\nein mächtiger Held!", 3, Color.WHITE, Color.BLACK)));
@@ -115,11 +118,11 @@ public class Conversations {
                 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Die Nummer mit dem Held\nist jetzt durch, oder?\nUnd mit dem Zahnstocher\nvon Schwert kommst du\nauch nicht weit!", 4.5, Color.RED, Color.WHITE)));
                 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7200), ae -> this.showSpeechBubble(playerX, playerY, "Ich möchte nicht lügen,\nalso... ähm, ciao.", 3, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10300), ae -> this.showSpeechBubble(triggerX, triggerY, "Hoffentlich kommt der\nBischof(f) bald wieder,\ndann bete ich für dich\nein Ave Maria!", 3.5, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10300), ae -> gameEngine.getCharacter().put("lady", 3)));
                     timeline.play();
-                    gameEngine.getCharacter().put("lady", 3);
                 }
                 else if (gameEngine.getCharacter().get("lady") == 3) {
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Ist dir das\nnicht peinlich?", 3, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Ist dir das nicht\n langsam peinlich?", 3, Color.RED, Color.WHITE)));
                     timeline.play();
                 }
                 this.setStatusSpeechBubble(true);
@@ -184,7 +187,7 @@ public class Conversations {
                     }
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("blacksmith") == 1 && !gameEngine.findItemInInventory("R") && !gameEngine.findItemInInventory("S")){
+                else if (gameEngine.getCharacter().get("blacksmith") == 1 && !gameEngine.findItemInInventory("R")){
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Hallo!\nIch bin Oreh,\nein mächtiger Held!", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Hat der \"mächtige Held\"\neinen Hasen gefunden?", 3, Color.DARKRED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(5700), ae -> this.showSpeechBubble(triggerX, triggerY, "Oder soll ich meine\nsizilianischen Freunde\nvon der Sanfilippo Nostro\num Hilfe bitten?", 3, Color.DARKRED, Color.WHITE)));
@@ -201,7 +204,7 @@ public class Conversations {
                     timeline.play();
                 }
                 else if (gameEngine.getCharacter().get("blacksmith") == 2 && gameEngine.getCharacter().get("knight") == 1) {
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich arbeite an einem\nanderen Kundenauftrag.", 3.5, Color.DARKRED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich produziere gerade\nfür einen anderen Kunden,\nich hab keine Zeit.", 3.5, Color.DARKRED, Color.WHITE)));
                     timeline.play();
                 }
                 else if (gameEngine.getCharacter().get("blacksmith") == 2 && gameEngine.getCharacter().get("knight") == 2){
@@ -229,9 +232,15 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(13400), ae -> this.showSpeechBubble(playerX, playerY, "Wie es aussieht, störe\nich dich beim Packen.", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16000), ae -> this.showSpeechBubble(triggerX, triggerY, "Na, du scheinst ja\nwirklich ein Blitzmerker\nder Firma Spätzünder\nzu sein.", 3.5, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich bin dann mal beim\nFischen, hoffentlich nicht\nbis später.", 3, Color.YELLOW, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> gameEngine.getCharacter().put("fisherman", 1)));
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("fisherman") == 0 && gameEngine.getCharacter().get("blacksmith") >= 2) {
+                else if (gameEngine.getCharacter().get("fisherman") == 1 && gameEngine.getCharacter().get("blacksmith") < 2) {
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Was ich noch mit dir besprechen wollte...", 2.5, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Hatte ich nicht gesagt, ich hab jetzt zu tun?", 2.5, Color.YELLOW, Color.BLACK)));
+                    timeline.play();
+                }
+                else if (gameEngine.getCharacter().get("fisherman") == 1 && gameEngine.getCharacter().get("blacksmith") >= 2) {
                 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "*hust* ... ähm... Hallo!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Na, genau auf dich habe\nich ja gewartet.", 2.5, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4700), ae -> this.showSpeechBubble(playerX, playerY, "Oh, ja, wirklich?\nDas ist ja großartig.", 2.5, Color.WHITE, Color.BLACK)));
@@ -246,29 +255,29 @@ public class Conversations {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(23900), ae -> gameEngine.findRemovePickedUpItem("K")));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich sag mal,\nTOP EBAYER, gerne wieder!\nNimm diesen Fisch\nals Dank.", 3.5, Color.YELLOW, Color.BLACK)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> gameEngine.pickUpFish()));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> gameEngine.getCharacter().put("fisherman", 2)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27500), ae -> gameEngine.getCharacter().put("fisherman", 3)));
                     } else {
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14600), ae -> gameEngine.getCharacter().put("fisherman", 1)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14600), ae -> gameEngine.getCharacter().put("fisherman", 2)));
                     }
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("fisherman") == 1 && !gameEngine.findItemInInventory("K")) {
+                else if (gameEngine.getCharacter().get("fisherman") == 2 && !gameEngine.findItemInInventory("K")) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Nochmal wegen...", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Hast du den Schlüssel?", 2, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4200), ae -> this.showSpeechBubble(playerX, playerY, "Ich war quasi gerade\nauf dem Weg... ähm...\nbis gleich.", 3, Color.WHITE, Color.BLACK)));
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("fisherman") == 1 && gameEngine.findItemInInventory("K")) {
+                else if (gameEngine.getCharacter().get("fisherman") == 2 && gameEngine.findItemInInventory("K")) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Weißt du, was ich\nzufällig gefunden habe?", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Die Bedeutung von 42?", 2, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4700), ae -> this.showSpeechBubble(playerX, playerY, "So ähnlich.\nEinen Schlüssel, der\nzu deiner Truhe\npassen könnte.", 3.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(4700), ae -> gameEngine.findRemovePickedUpItem("K")));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(8300), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich sag mal,\nTOP EBAYER, gerne wieder!\nNimm diesen Fisch\nals Dank.", 3.5, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(8300), ae -> gameEngine.pickUpFish()));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(8300), ae -> gameEngine.getCharacter().put("fisherman", 2)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(8300), ae -> gameEngine.getCharacter().put("fisherman", 3)));
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("fisherman") == 2) {
+                else if (gameEngine.getCharacter().get("fisherman") == 3) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Ich wollte nochmal...", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, "Solange du nicht weißt,\nwas die Bedeutung von\n42 ist, brauchst du\nnicht wiederkommen.", 4, Color.YELLOW, Color.BLACK)));
                     timeline.play();
