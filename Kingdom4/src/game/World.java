@@ -239,6 +239,7 @@ private Boolean provTrigger = false;
     	if(itemName.equals("knight2")) {
     		gameEngine.setKnight2(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
     		gameEngine.setKnight2Collision(trigger);
+    		gameEngine.setKnight2Trigger(trigger);
     		this.collisions.remove(trigger);
         	this.backgroundCollection.remove(image);
         	this.triggers.remove(trigger);

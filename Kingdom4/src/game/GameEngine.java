@@ -89,7 +89,8 @@ public class GameEngine extends Observable {
     
     private IEvent knightCollision;
     private IEvent knight2Collision;
-
+    private Trigger knight2Trigger;
+    
     private Boolean movement = true;
     private Map<String, Integer> character = new HashMap<>();
     private Trophy trophy;
@@ -339,6 +340,10 @@ public class GameEngine extends Observable {
     	this.knight2Collision = collision;
     }
     
+    public void setKnight2Trigger(Trigger trigger) {
+    	this.knight2Trigger = trigger;
+    }
+    
     public void setFpH(ImageView fph) {
     	this.fph = fph;
     }
@@ -535,11 +540,12 @@ public class GameEngine extends Observable {
 	
 	public void changeKnight() {
 		knightChanged = true;
-
+		getCharacter().put("knight", 3);
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
     	collision.add(knight2Collision);
+    	trigger.add(knight2Trigger);
     	collision.remove(knightCollision);
     	trigger.remove(knightCollision);
     	
