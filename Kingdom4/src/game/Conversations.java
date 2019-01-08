@@ -28,13 +28,11 @@ public class Conversations {
     private List<String> wisemanText = new ArrayList<String>();
     private List<String> heroText = new ArrayList<String>();
     private boolean statusSpeechBubble = false;
-    private Random randomWise;
-    private Random randomHero;
+    private Random random;
 
     public Conversations(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        this.randomWise = new Random(System.currentTimeMillis());
-        this.randomHero = new Random(System.currentTimeMillis());
+        this.random = new Random(System.currentTimeMillis());
 
         gameEngine.getCharacter().put("lady", 0);
         gameEngine.getCharacter().put("fisherman", 0);
@@ -63,8 +61,8 @@ public class Conversations {
         wisemanText.add("Hardware nennt man die\nTeile eines Computers, die\nman treten kann.");
         wisemanText.add("Die Gespräche mit mir\nsind wie eine Schachtel\nPralinen, man weiß nie,\nwas man bekommt.");
         wisemanText.add("In der Informatik geht\nes genau so wenig um\nComputer, wie in der\nAstronomie um Teleskope.");
-        wisemanText.add("Ich liebe Deadlines. Ich\nmag das zischende\nGeräusch, das sie machen,\nwenn sie vorbeifliegen.");
-        wisemanText.add("Ein Computerprogramm tut,\nwas man ihm sagt, und nicht,\nwas er tun soll.");
+        wisemanText.add("Ich liebe Deadlines.\nIch mag das zischende\nGeräusch, das sie machen,\nwenn sie vorbeifliegen.");
+        wisemanText.add("Ein Computerprogramm tut,\nwas man ihm sagt, und nicht,\nwas es tun soll.");
     }
     private void fillHeroWithNonsense() {
     	heroText.add("Das schreibe ich mir\nsofort auf.");
@@ -131,8 +129,8 @@ public class Conversations {
             }
         }
         else if (trigger.getName().contentEquals("wiseman")) {
-        	int randomNum = randomWise.nextInt(wisemanText.size());
-            int randomNumHero = randomHero.nextInt(heroText.size());
+        	int randomNum = random.nextInt(wisemanText.size());
+            int randomNumHero = random.nextInt(heroText.size());
             if(!this.getStatusSpeechBubble()) {
                 if (gameEngine.getCharacter().get("wiseman") == 0) {
                     if (gameEngine.getCharacter().get("lady") >= 1) {
@@ -167,7 +165,7 @@ public class Conversations {
                 }
                 else if (gameEngine.getCharacter().get("blacksmith") == 0 && gameEngine.getCharacter().get("knight") == 1){
                 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag!\nIch bin Oreh,\nein mächtiger Held!", 2.5, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Immer die gleiche Leier.\nHast du das Geld\nfür das Schwert\ndabei?", 3.5, Color.DARKRED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Immer die gleiche Leier.\nHast du das Geld für\ndas Schwert dabei?", 3.5, Color.DARKRED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(playerX, playerY, "Ja, sicher. Ich hab\ndas, äh, hier.\nGeb ich dir gleich.", 3, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9300), ae -> this.showSpeechBubble(playerX, playerY, "Wie war Ihr Name,\nedler Mann?\nIch war so lange weg.", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(11900), ae -> this.showSpeechBubble(triggerX, triggerY, "Du warst zwei Tage weg.\nAuf \"Geschäftsreise\".\nIch bin Fabian Schmied!", 3.5, Color.DARKRED, Color.WHITE)));
@@ -312,6 +310,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10300), ae -> this.showSpeechBubble(playerX, playerY, "Ähm... schau mal\nein Ufo!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12500), ae -> this.showSpeechBubble(triggerX, triggerY, "Bis ich nicht einen Fisch\ngefangen habe, schau ich\nnirgendwo hin.", 3.5, Color.NAVY, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12500), ae -> gameEngine.getCharacter().put("knight", 2)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12500), ae -> gameEngine.getCharacter().put("fisherman", 1)));
                     if (gameEngine.findItemInInventory("F")) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16000), ae -> this.showSpeechBubble(playerX, playerY, "Ich habe zufällig einen\nFisch bei mir.", 2.5, Color.WHITE, Color.BLACK)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(18600), ae -> this.showSpeechBubble(triggerX, triggerY, "Heute scheint dein\nGlückstag zu sein!", 2.5, Color.NAVY, Color.WHITE)));
