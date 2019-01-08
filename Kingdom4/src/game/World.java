@@ -213,8 +213,7 @@ private Boolean provTrigger = false;
     			
     		}else if (item.getName().equals("sword")) {
     			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
-    			gameEngine.setSword(image);
-    			
+    			gameEngine.setSword(image);    			
     		}else if (item.getName().equals("fish")) {
     			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
     			gameEngine.setFish(image);
@@ -239,6 +238,7 @@ private Boolean provTrigger = false;
     	if(itemName.equals("knight2")) {
     		gameEngine.setKnight2(this.backgroundCollection.get(this.backgroundCollection.size() - 1));
     		gameEngine.setKnight2Collision(trigger);
+    		gameEngine.setKnight2Trigger(trigger);
     		this.collisions.remove(trigger);
         	this.backgroundCollection.remove(image);
         	this.triggers.remove(trigger);
