@@ -855,7 +855,9 @@ public class GameEngine extends Observable {
     }
 
     public void showCharacterStates() {
-        System.out.println("Character states: ");
+        System.out.println(" ");
+        System.out.println("Character states:");
+        System.out.println("-----------------");
         System.out.println("Lady: " + this.getCharacter().get("lady"));
         System.out.println("Knight: " + this.getCharacter().get("knight"));
         System.out.println("Blacksmith: " + this.getCharacter().get("blacksmith"));
