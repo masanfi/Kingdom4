@@ -243,7 +243,7 @@ public class Scenery {
 		String newDuration="";
 		
 		Text head = new Text();
-		head.setText("Highcore");
+		head.setText("Highscore");
 		head.setFont(Font.font(null, FontWeight.BOLD, 24));
 		head.setTextAlignment(TextAlignment.CENTER);
 		hsTable.addRow(c, head);

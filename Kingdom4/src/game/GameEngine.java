@@ -574,7 +574,7 @@ public class GameEngine extends Observable {
 	
 	public void changeKnight() {
 		knightChanged = true;
-		//getCharacter().put("knight", 3);
+		this.getCharacter().put("knight2", 3);
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
@@ -936,5 +936,6 @@ public class GameEngine extends Observable {
         System.out.println("Blacksmith: " + this.getCharacter().get("blacksmith"));
         System.out.println("Fisherman: " + this.getCharacter().get("fisherman"));
         System.out.println("Wise man: " + this.getCharacter().get("wiseman"));
+        System.out.println("Knight2: " + this.getCharacter().get("knight2"));
     }
 }

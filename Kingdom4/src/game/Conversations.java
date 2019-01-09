@@ -38,6 +38,7 @@ public class Conversations {
         gameEngine.getCharacter().put("fisherman", 0);
         gameEngine.getCharacter().put("blacksmith", 0);
         gameEngine.getCharacter().put("knight", 0);
+        gameEngine.getCharacter().put("knight2", 0);
         gameEngine.getCharacter().put("wiseman", 0);
 
         this.fillWisemanWithWisdom();
@@ -320,7 +321,7 @@ public class Conversations {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25300), ae -> gameEngine.findRemovePickedUpItem("F")));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27900), ae -> this.showSpeechBubble(triggerX, triggerY, "Lauf, bevor ich es mir\nanders überlege!", 2.5, Color.NAVY, Color.WHITE)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.changeKnight()));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.getCharacter().put("knight", 3)));
+                        //timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.getCharacter().put("knight2", 3)));
                     }
                     timeline.play();
                 }
@@ -342,7 +343,12 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14500), ae -> gameEngine.getCharacter().put("knight", 3)));
                     timeline.play();
                 }
-                else if (gameEngine.getCharacter().get("knight2") == 3) {
+                this.setStatusSpeechBubble(true);
+            }
+        }
+        else if (trigger.getName().contentEquals("knight2")) {
+            if(!this.getStatusSpeechBubble()) {
+                if (gameEngine.getCharacter().get("knight2") == 3) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Ähm...", 1.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1600), ae -> this.showSpeechBubble(triggerX, triggerY, "Ich esse. Verschwinde!", 2, Color.NAVY, Color.WHITE)));
                     timeline.play();
