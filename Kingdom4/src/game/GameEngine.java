@@ -80,6 +80,11 @@ public class GameEngine extends Observable {
     private ImageView influencer;
     private ImageView stoney;
     private ImageView treehugger;
+    private ImageView clumsy_s;
+    private ImageView confused_s;
+    private ImageView influencer_s;
+    private ImageView stoney_s;
+    private ImageView treehugger_s;
     private ImageView rabbit;
     private ImageView sword;
     private ImageView fish;
@@ -97,9 +102,7 @@ public class GameEngine extends Observable {
     private Hud hud;
     
     public GameEngine() {
-
-
-        this.conversations = new Conversations(this);
+    	this.conversations = new Conversations(this);
     }
     
     public void setFanfare(MediaPlayer fanfare) {
@@ -397,6 +400,37 @@ public class GameEngine extends Observable {
     	return this.confused;
     }
     
+    public void setClumsy_s(ImageView clumsy) {
+    	this.clumsy_s = clumsy;
+    }
+    public ImageView getClumsy_s() {
+    	return this.clumsy_s;
+    }
+    public void setInfluencer_s(ImageView influencer) {
+    	this.influencer_s = influencer;
+    }
+    public ImageView getInfluencer_s() {
+    	return this.influencer_s;
+    }
+    public void setTreehugger_s(ImageView treehugger) {
+    	this.treehugger_s = treehugger;
+    }
+    public ImageView getTreehugger_s() {
+    	return this.treehugger_s;
+    }
+    public void setStoney_s(ImageView stoney) {
+    	this.stoney_s = stoney;
+    }
+    public ImageView getStoney_s() {
+    	return this.stoney_s;
+    }
+    public void setConfused_s(ImageView confused) {
+    	this.confused_s = confused;
+    }
+    public ImageView getConfused_s() {
+    	return this.confused_s;
+    }
+    
     public void setTransparent(ImageView transparent) {
     	this.transparent = transparent;
     }
@@ -410,7 +444,7 @@ public class GameEngine extends Observable {
     }
     
     public void setMovement(Boolean state) {
-    	//System.out.println("setzestate :" +state);
+    	//System.out.println("setze state :" +state);
     	this.movement=state;
     	
     }
@@ -540,7 +574,7 @@ public class GameEngine extends Observable {
 	
 	public void changeKnight() {
 		knightChanged = true;
-		getCharacter().put("knight", 3);
+		//getCharacter().put("knight", 3);
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);

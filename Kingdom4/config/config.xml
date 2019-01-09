@@ -813,4 +813,59 @@
         <npc>false</npc>
         <information>I'm a placeholder, please use me.</information>
     </element> 
+        <element>
+        <id>74</id>
+        <symbol>42</symbol>
+        <name>clumsy_s</name>
+        <type>trophy</type>
+        <image>trophy_clumsy_s.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a clumsy, sorry.</information>
+    </element>  
+    <element>
+        <id>75</id>
+        <symbol>42</symbol>
+        <name>confused_s</name>
+        <type>trophy</type>
+        <image>trophy_confused_s.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm confused, please let me alone.</information>
+    </element>  
+    <element>
+        <id>76</id>
+        <symbol>42</symbol>
+        <name>influencer_s</name>
+        <type>trophy</type>
+        <image>trophy_influencer_s.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a an influencer, please talk with me.</information>
+    </element>  
+    <element>
+        <id>77</id>
+        <symbol>42</symbol>
+        <name>stoney_s</name>
+        <type>trophy</type>
+        <image>trophy_stoney_s.png</image>
+        <walkable>true</walkable>
+        <portable>true</portable>
+        <npc>false</npc>
+        <information>I'm a stoney, I love stones.</information>
+    </element>  
+    <element>
+        <id>78</id>
+        <symbol>42</symbol>
+        <name>treehugger_s</name>
+        <type>trophy</type>
+        <image>trophy_treehugger_s.png</image>
+        <walkable>true</walkable>
+        <portable>false</portable>
+        <npc>false</npc>
+        <information>I'm a treehugger, please give me trees.</information>
+    </element>  
 </root>

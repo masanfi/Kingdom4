@@ -9,7 +9,6 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -29,6 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -37,6 +37,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -58,7 +59,7 @@ public class Scenery {
 
     private GameEngine gameEngine;
     private Pane entities, textOver, hudPane, intro;
-    private GridPane outro;
+    private StackPane outro;
     private ScrollPane background;
     private BorderPane playground;
     private File cssFile = new File("css/style.css");
@@ -192,7 +193,8 @@ public class Scenery {
 		int paneWidth = gameEngine.getPaneWidth();
 		int paneHeight = gameEngine.getPaneHeight();
 
-		outro = new GridPane();
+		HBox row;
+		outro = new StackPane();
 		outro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
 		outro.setId("introscreen");
 		Text t = new Text();
@@ -216,17 +218,36 @@ public class Scenery {
 		Collections.sort(hs, Comparator.comparing(Highscore::getDuration)
 				.thenComparing(Highscore::getUserName).thenComparing(Highscore::getHighScoreTime));
 
-		outro.setPadding(new Insets(10, 10, 10, 10));
-		outro.setVgap(10);
-		outro.setHgap(10);
+		outro.setPadding(new Insets(0, 0, 0, 0));
+	//	outro.setVgap(10);
+		//outro.setHgap(10);
+		
+		GridPane hsTable = new GridPane();
+		hsTable.setStyle("-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10;");
+		hsTable.setMaxWidth(gameEngine.getPaneWidth() - 400);
+		hsTable.setMaxHeight(gameEngine.getPaneHeight() - 220);
+		//Setting size for the pane  
+		//hsTable.setMinSize(400, 200); 
+	       
+	      //Setting the padding  
+		hsTable.setPadding(new Insets(10, 10, 10, 10)); 
+	      
+	      //Setting the vertical and horizontal gaps between the columns 
+		hsTable.setVgap(5); 
+		hsTable.setHgap(5);  
 		
 		//HBox hsTable = new HBox();
-		
 		//int[] offsetRows = new int[] {100
 		int c=0;
 		String newUserName="";
 		String newDuration="";
 		
+		Text head = new Text();
+		head.setText("Highcore");
+		head.setFont(Font.font(null, FontWeight.BOLD, 24));
+		head.setTextAlignment(TextAlignment.CENTER);
+		hsTable.addRow(c, head);
+		c++;
 		for(Highscore h : hs)
 		{
 			Text user = new Text();
@@ -237,28 +258,33 @@ public class Scenery {
 				newUserName = h.getUserName();
 			}
 			user.setText(newUserName);
+			user.minWidth(120);
+			user.maxWidth(120);
+			user.setWrappingWidth(120);
+			user.setFont(Font.font(null, FontWeight.NORMAL, 14));
 			
 			newDuration = padRight(h.getDuration(), 20) + " ";
 			
 			Text duration = new Text();
 			duration.setText(newDuration);
-			
+			duration.setFont(Font.font(null, FontWeight.NORMAL, 14));
+			duration.setTextAlignment(TextAlignment.RIGHT);
+			duration.minWidth(70);
+			duration.maxWidth(70);
+			duration.setWrappingWidth(70);
 			Text hsTime = new Text();
 			hsTime.setText(h.getHighScoreTime());
+			hsTime.setFont(Font.font(null, FontWeight.NORMAL, 14));
+			hsTime.setTextAlignment(TextAlignment.RIGHT);
 			
 			HBox vboxTrophy = renderTrophys(h.getTrophy(),c);
-			HBox row = new HBox();
-			
+			row = new HBox();
+			row.maxHeight(25);
+			row.prefHeight(25);
 			
 			row.getChildren().addAll(user,vboxTrophy,duration,hsTime);
-			
-			//Text colum1 = new Text();
-			
-			//colum1.setText(newUserName + "\t" + h.getTrophy() + "\t" + h.getDuration() + "\t" + h.getHighScoreTime());
+			hsTable.addRow(c, row);
 
-			outro.addRow(c, row);
-
-			
 			if(c==9) {
 				break;
 			}
@@ -297,7 +323,7 @@ public class Scenery {
 		table.setItems(hs);
 
 		GridPane.setConstraints(table, 0,25);
-		outro.getChildren().addAll(table,t);
+		outro.getChildren().addAll(hsTable,t);
 		
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
@@ -305,8 +331,6 @@ public class Scenery {
     	
     }
     
-
-
 	private HBox renderTrophys(String trophy,int c) {
     	ImageView influencer;
     	ImageView confused;
@@ -315,46 +339,50 @@ public class Scenery {
     	ImageView clumsy;
     	
     	HBox vboxTrophys = new HBox();
+    	vboxTrophys.maxHeight(20);
+    	vboxTrophys.prefHeight(20);
+    	vboxTrophys.setMinWidth(200);
+    	vboxTrophys.setPrefWidth(200);
     	int tCounter = 0;
     	String[] parts = trophy.split("§");
 		for (int i = 0; i<parts.length;i++) {
 			if(parts[i].startsWith("B*")) {
-				confused = gameEngine.getConfused();
+				confused  = new ImageView(gameEngine.getConfused_s().getImage());
 				confused.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(confused);
 				tCounter++;
 			}else if(parts[i].startsWith("N*")) {
-				influencer = gameEngine.getInfluencer();
+				influencer  = new ImageView(gameEngine.getInfluencer_s().getImage());
 				influencer.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(influencer);
 				tCounter++;
 			}else if(parts[i].startsWith("T*")) {
-				treehugger = gameEngine.getTreehugger();
+				treehugger  = new ImageView(gameEngine.getTreehugger_s().getImage());
 				treehugger.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(treehugger);
 				tCounter++;
 			}else if(parts[i].startsWith("S*")) {
-				stoney = new ImageView(gameEngine.getStoney().getImage());
+				stoney = new ImageView(gameEngine.getStoney_s().getImage());
 				stoney.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(stoney);
 				tCounter++;
 			}else if(parts[i].startsWith("F*")) {
-				clumsy = gameEngine.getClumsy();
+				clumsy  = new ImageView(gameEngine.getClumsy_s().getImage());
 				clumsy.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(clumsy);
 				tCounter++;
 			}
 		}
-		//System.out.println("Found " + tCounter + " Trophys");
+
 		if(tCounter<5) {
 			for(int i = 0;i<(5-tCounter);i++) {
 				//System.out.println("Addiere");
 				ImageView placholder = new ImageView(gameEngine.getTransparent().getImage());
-				//ImageView placholder = gameEngine.getTransparent();
+				placholder.maxHeight(20);
+				placholder.relocate(0, 0);
 				vboxTrophys.getChildren().add(placholder);
 			}
 		}
-		System.out.println(vboxTrophys.getWidth());
     	return vboxTrophys;
     }
     
