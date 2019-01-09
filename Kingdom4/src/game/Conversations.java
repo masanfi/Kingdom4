@@ -321,7 +321,6 @@ public class Conversations {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25300), ae -> gameEngine.findRemovePickedUpItem("F")));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27900), ae -> this.showSpeechBubble(triggerX, triggerY, "Lauf, bevor ich es mir\nanders überlege!", 2.5, Color.NAVY, Color.WHITE)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.changeKnight()));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.getCharacter().put("knight2", 3)));
                     }
                     timeline.play();
                 }
@@ -340,7 +339,6 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9300), ae -> gameEngine.findRemovePickedUpItem("F")));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(11900), ae -> this.showSpeechBubble(triggerX, triggerY, "Lauf, bevor ich es mir\nanders überlege!", 2.5, Color.NAVY, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14500), ae -> gameEngine.changeKnight()));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14500), ae -> gameEngine.getCharacter().put("knight2", 3)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(14500), ae -> gameEngine.getCharacter().put("blacksmith", 3)));
                     timeline.play();
                 }
