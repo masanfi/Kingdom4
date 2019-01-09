@@ -38,21 +38,11 @@ public class Highscore {
 		return trophy.get();
 	}
 
-	public String getDuration() {
-	    String sek;
-	    long millis= duration.get();
-	    long secs = millis / 1000;
-	    long mins = secs / 60;
-	    long restsecs = secs % 60;
-	    if(restsecs<10) {
-	    	sek = "0" + restsecs; 
-	    }else {
-	    	sek = ""+restsecs;
-	    }
-	    return mins + ":" + sek;
+	public long getDuration() {
+	    
 	    	
 	    
-		//return duration.get();
+		return duration.get();
 	}
 
 	public String getHighScoreTime() {

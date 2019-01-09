@@ -380,6 +380,7 @@ public class Conversations {
 
         gameEngine.getTextOver().getChildren().addAll(littlePointer, bubble, text);
         gameEngine.getTextOver().setVisible(true);
+        gameEngine.getTextOver().toFront();
 
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.seconds(duration),
