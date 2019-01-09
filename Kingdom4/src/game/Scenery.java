@@ -13,10 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -180,8 +177,7 @@ public class Scenery {
             gameEngine.getBackground().getChildren().add(gameEngine.getPlayer()[i]);
         }
     }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+
     /**
      * This prepares the final outro as a scene
      * 
@@ -219,28 +215,16 @@ public class Scenery {
 				.thenComparing(Highscore::getUserName).thenComparing(Highscore::getHighScoreTime));
 
 		outro.setPadding(new Insets(0, 0, 0, 0));
-	//	outro.setVgap(10);
-		//outro.setHgap(10);
-		
+
 		GridPane hsTable = new GridPane();
 		hsTable.setStyle("-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10;");
 		hsTable.setMaxWidth(gameEngine.getPaneWidth() - 400);
-		hsTable.setMaxHeight(gameEngine.getPaneHeight() - 220);
-		//Setting size for the pane  
-		//hsTable.setMinSize(400, 200); 
-	       
-	      //Setting the padding  
+		hsTable.setMaxHeight(gameEngine.getPaneHeight() - 220); 
 		hsTable.setPadding(new Insets(10, 10, 10, 10)); 
-	      
-	      //Setting the vertical and horizontal gaps between the columns 
 		hsTable.setVgap(5); 
 		hsTable.setHgap(5);  
-		
-		//HBox hsTable = new HBox();
-		//int[] offsetRows = new int[] {100
+
 		int c=0;
-		String newUserName="";
-		String newDuration="";
 		
 		Text head = new Text();
 		head.setText("Highscore");
@@ -251,78 +235,55 @@ public class Scenery {
 		for(Highscore h : hs)
 		{
 			Text user = new Text();
-			if(h.getUserName().length()<20) {
-				newUserName = padRight(h.getUserName(), 20) + " ";
-				
-			}else {
-				newUserName = h.getUserName();
-			}
-			user.setText(newUserName);
-			user.minWidth(120);
-			user.maxWidth(120);
-			user.setWrappingWidth(120);
+			user.setText(h.getUserName());
+			user.minWidth(200);
+			user.maxWidth(200);
+			user.setWrappingWidth(200);
 			user.setFont(Font.font(null, FontWeight.NORMAL, 14));
-			
-			newDuration = padRight(h.getDuration(), 20) + " ";
-			
+		
+			String sek;
+		    long millis= h.getDuration();
+		    long secs = millis / 1000;
+		    long mins = secs / 60;
+		    long restsecs = secs % 60;
+		    if(restsecs<10) {
+		    	sek = "0" + restsecs; 
+		    }else {
+		    	sek = ""+restsecs;
+		    }
+
 			Text duration = new Text();
-			duration.setText(newDuration);
+			duration.setText(mins + ":" +  sek);
 			duration.setFont(Font.font(null, FontWeight.NORMAL, 14));
+			duration.minWidth(50);
+			duration.maxWidth(50);
+			duration.setWrappingWidth(50);
 			duration.setTextAlignment(TextAlignment.RIGHT);
-			duration.minWidth(70);
-			duration.maxWidth(70);
-			duration.setWrappingWidth(70);
+
 			Text hsTime = new Text();
 			hsTime.setText(h.getHighScoreTime());
 			hsTime.setFont(Font.font(null, FontWeight.NORMAL, 14));
 			hsTime.setTextAlignment(TextAlignment.RIGHT);
+			hsTime.minWidth(200);
+			hsTime.maxWidth(200);
+			hsTime.setWrappingWidth(200);
 			
 			HBox vboxTrophy = renderTrophys(h.getTrophy(),c);
+			
 			row = new HBox();
-			row.maxHeight(25);
-			row.prefHeight(25);
+			row.maxHeight(30);
+			row.minHeight(30);
+			row.setPrefHeight(30);
 			
 			row.getChildren().addAll(user,vboxTrophy,duration,hsTime);
 			hsTable.addRow(c, row);
 
-			if(c==9) {
+			if(c==10) {
 				break;
 			}
 				c++;
 		}
 
-		// table for Highscore
-		TableView table = new TableView();
-		//table.setEditable(true);
-
-		TableColumn userNameCol = new TableColumn("Username");
-		TableColumn trophyCol = new TableColumn("Trophys");
-		TableColumn durationCol = new TableColumn("Duration");
-		TableColumn dateCol = new TableColumn("Highscore Date");
-
-		table.getColumns().addAll(userNameCol, trophyCol, durationCol, dateCol);
-		table.setMinWidth(paneWidth - 20);
-		double cellWidth = (paneWidth) / 4;
-		userNameCol.setMinWidth(cellWidth);
-		userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
-		trophyCol.setMinWidth(cellWidth);
-		trophyCol.setCellValueFactory(new PropertyValueFactory<>("trophy"));
-		durationCol.setMinWidth(cellWidth);
-		durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
-		dateCol.setMinWidth(cellWidth);
-		dateCol.setCellValueFactory(new PropertyValueFactory<>("highScoreTime"));
-
-		userNameCol.setSortable(false);
-		trophyCol.setSortable(false);
-		durationCol.setSortable(false);
-		dateCol.setSortable(false);
-		
-		durationCol.setStyle( "-fx-alignment: CENTER-RIGHT;");
-		dateCol.setStyle( "-fx-alignment: CENTER-RIGHT;");
-		
-		table.setItems(hs);
-
-		GridPane.setConstraints(table, 0,25);
 		outro.getChildren().addAll(hsTable,t);
 		
         //return eady scene
@@ -341,8 +302,8 @@ public class Scenery {
     	HBox vboxTrophys = new HBox();
     	vboxTrophys.maxHeight(20);
     	vboxTrophys.prefHeight(20);
-    	vboxTrophys.setMinWidth(200);
-    	vboxTrophys.setPrefWidth(200);
+    	vboxTrophys.setMinWidth(130);
+    	vboxTrophys.setPrefWidth(130);
     	int tCounter = 0;
     	String[] parts = trophy.split("§");
 		for (int i = 0; i<parts.length;i++) {
