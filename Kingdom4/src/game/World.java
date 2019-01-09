@@ -207,8 +207,27 @@ private Boolean provTrigger = false;
     				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
         			gameEngine.setTreehugger(image);
     			}else if(item.getName().equals("transparent")) {
-    				ImageView image = new ImageView(new Image(item.getImage(), 50, 50, true, false));
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
         			gameEngine.setTransparent(image);
+    			}else if(item.getName().equals("clumsy_s")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
+        			gameEngine.setClumsy_s(image);
+    				
+    			}else if(item.getName().equals("confused_s")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
+        			gameEngine.setConfused_s(image);
+    				
+    			}else if(item.getName().equals("influencer_s")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
+        			gameEngine.setInfluencer_s(image);
+    				
+    			}else if(item.getName().equals("stoney_s")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
+        			gameEngine.setStoney_s(image);
+    				
+    			}else if(item.getName().equals("treehugger_s")) {
+    				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
+        			gameEngine.setTreehugger_s(image);
     			}
     			
     		}else if (item.getName().equals("sword")) {
@@ -218,7 +237,6 @@ private Boolean provTrigger = false;
     			ImageView image = new ImageView(new Image(item.getImage(), gameEngine.getTileSize(), gameEngine.getTileSize(), true, false));
     			gameEngine.setFish(image);
     		}
-    		
     	});
     	
     }
