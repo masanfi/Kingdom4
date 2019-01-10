@@ -927,7 +927,7 @@ public class GameEngine extends Observable {
         this.character = character;
     }
 
-    public void showCharacterStates() {
+    public void showAllStates() {
         System.out.println(" ");
         System.out.println("Character states:");
         System.out.println("-----------------");
@@ -937,5 +937,12 @@ public class GameEngine extends Observable {
         System.out.println("Fisherman: " + this.getCharacter().get("fisherman"));
         System.out.println("Wise man: " + this.getCharacter().get("wiseman"));
         System.out.println("Knight2: " + this.getCharacter().get("knight2"));
+        System.out.println(" ");
+        System.out.println("Inventory states:");
+        System.out.println("-----------------");
+        System.out.println("Rabbit: " + this.findItemInInventory("R"));
+        System.out.println("Sword: " + this.findItemInInventory("S"));
+        System.out.println("Key: " + this.findItemInInventory("K"));
+        System.out.println("Fish: " + this.findItemInInventory("F"));
     }
 }
