@@ -69,7 +69,7 @@ public class Hero {
                 case D: gameEngine.getEntities().setVisible(true); break;
                 case M: gameEngine.toggleMusic(); break;
                 case K: gameEngine.changeKnight(); break;
-                case S: gameEngine.showCharacterStates(); break;
+                case S: gameEngine.showAllStates(); break;
                 default:
                     break;
             }
