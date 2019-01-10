@@ -3,6 +3,8 @@ package game;
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
+
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -21,12 +23,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -160,6 +157,7 @@ public class Scenery {
         playground.setBottom(hudPane);
 
         Scene scene = new Scene(playground, gameEngine.getPaneWidth(), gameEngine.getPaneHeight());
+        scene.setFill(Color.web("#eee"));
         gameEngine.setScene(scene);
     }
  
@@ -353,34 +351,18 @@ public class Scenery {
 
     
     private void introAction(TextField playerNameField,VBox vbox,Stage primaryStage) {
-        int paneWidth = gameEngine.getPaneWidth();
-       	int paneHeight = gameEngine.getPaneHeight();
     	gameEngine.setUserName(playerNameField.getText());
-    	
-    	WritableImage wi = new WritableImage(paneWidth, paneHeight);
-    	
-        Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
-        ImageView firstImageView= new ImageView(firstImage);
-        
-        wi = new WritableImage(paneWidth, paneHeight);
-        Image secondImage = gameEngine.getScene().snapshot(wi);
-        ImageView secondImageView= new ImageView(secondImage);
-        firstImageView.relocate(0, 0);
-        //firstImageView.setTranslateX(0);
-        //secondImageView.setTranslateX(paneWidth);
-        secondImageView.setOpacity(0);
-        
-        Pane pane= new Pane(firstImageView,secondImageView);
-        pane.setPrefSize(paneWidth,paneHeight);
-        pane.setStyle("-fx-background-insets: 0; -fx-padding: 0; -fx-border-insets:0;");
-        intro.getChildren().setAll(pane);
+
+    	/* Establishes a timeline that fades the intro scene to zero opacity
+         * switches the scenes and fades the new scene to full opacity
+         */
+
         Timeline fadeInTimeline = new Timeline();
-        KeyFrame fadeInKey = new KeyFrame(Duration.millis(3000), new KeyValue(secondImageView.opacityProperty(), 1));
-        fadeInTimeline.getKeyFrames().add(fadeInKey);
-        fadeInTimeline.setOnFinished(t->{
-        	intro.getChildren().setAll(vbox);
-        	primaryStage.setScene(gameEngine.getScene());
-        });
+        fadeInTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.5), new KeyValue(intro.opacityProperty(), 0.0)));
+        fadeInTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3), new KeyValue(gameEngine.getScene().getRoot().opacityProperty(), 0.0)));
+        fadeInTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.5), ae -> primaryStage.setScene(gameEngine.getScene())));
+        fadeInTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.5), ae -> intro.getChildren().setAll(vbox)));
+        fadeInTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1.0), new KeyValue(gameEngine.getScene().getRoot().opacityProperty(), 1.0)));
         fadeInTimeline.play();
     }
     
@@ -388,8 +370,8 @@ public class Scenery {
      * This renders the intro of Kingdom 4.
      */
     public void renderIntro() {
-        //int paneWidth = gameEngine.getPaneWidth();
-       	//int paneHeight = gameEngine.getPaneHeight();
+        int paneWidth = gameEngine.getPaneWidth();
+       	int paneHeight = gameEngine.getPaneHeight();
     	intro = new Pane();
     	intro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
     	intro.setId("introscreen");
@@ -400,9 +382,6 @@ public class Scenery {
         playerStart.setStartTime(new Duration(0));
         playerStart.setCycleCount(MediaPlayer.INDEFINITE);
         playerStart.play();
-        
-        int paneWidth = gameEngine.getPaneWidth()-10;
-    	int paneHeight = gameEngine.getPaneHeight()-10;
     	
     	TextField playerNameField = new TextField();
     	playerNameField.setMaxWidth(200);
@@ -438,6 +417,7 @@ public class Scenery {
         vbox.setAlignment(Pos.CENTER);        
         intro.getChildren().addAll(vbox);
     	Scene scene = new Scene(intro, paneWidth, paneHeight);
+        scene.setFill(Color.web("#eee"));
         gameEngine.setIntro(scene);
     }
     
