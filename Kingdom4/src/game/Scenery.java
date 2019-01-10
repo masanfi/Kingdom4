@@ -192,7 +192,7 @@ public class Scenery {
 		HBox row;
 		outro = new StackPane();
 		outro.getStylesheets().add("file:///" + cssFile.getAbsolutePath().replace("\\", "/"));
-		outro.setId("introscreen");
+		outro.setId("outroscreen");
 		Text t = new Text();
 		if (connectError) {
 			// Texthinweis
