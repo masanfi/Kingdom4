@@ -29,6 +29,8 @@ public class Conversations {
     private List<String> heroText = new ArrayList<String>();
     private boolean statusSpeechBubble = false;
     private Random random;
+    private List<Integer> wisemanSpoken = new ArrayList<Integer>();
+    private List<Integer> heroSpoken = new ArrayList<Integer>();
 
     public Conversations(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -43,6 +45,50 @@ public class Conversations {
 
         this.fillWisemanWithWisdom();
         this.fillHeroWithNonsense();
+    }
+    
+    private int generateRandomWiseman() {
+    	Integer rand;
+    	
+    	if(wisemanSpoken.size()==wisemanText.size()) {
+    		wisemanSpoken.clear();
+    		//System.out.println("Liste voll");
+    	}
+    	
+    	//System.out.println(wisemanSpoken.toString());
+
+    	do {
+    		rand = random.nextInt(wisemanText.size());
+    		//System.out.println("Berechne : " + rand);
+    	}while(wisemanSpoken.contains(rand));
+    	
+    	   	
+    	//System.out.println("Noch nicht vorhanden" + rand);
+		wisemanSpoken.add(rand);
+		return rand;
+
+    }
+    
+    private int generateRandomHero() {
+    	Integer rand;
+    	
+    	if(heroSpoken.size()==heroText.size()) {
+    		heroSpoken.clear();
+    		//System.out.println("Liste voll");
+    	}
+    	
+    	//System.out.println(wisemanSpoken.toString());
+
+    	do {
+    		rand = random.nextInt(heroText.size());
+    		//System.out.println("Berechne : " + rand);
+    	}while(heroSpoken.contains(rand));
+    	
+    	   	
+    	//System.out.println("Noch nicht vorhanden" + rand);
+		heroSpoken.add(rand);
+		return rand;
+
     }
 
     private void fillWisemanWithWisdom() {
@@ -131,9 +177,12 @@ public class Conversations {
             }
         }
         else if (trigger.getName().contentEquals("wiseman")) {
-        	int randomNum = random.nextInt(wisemanText.size());
-            int randomNumHero = random.nextInt(heroText.size());
+        	//int randomNum = random.nextInt(wisemanText.size());
+        	
             if(!this.getStatusSpeechBubble()) {
+            	this.setStatusSpeechBubble(true);
+            	int randomNum = generateRandomWiseman();
+                int randomNumHero = generateRandomHero();
                 if (gameEngine.getCharacter().get("wiseman") == 0) {
                     if (gameEngine.getCharacter().get("lady") <= 1) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 3, Color.WHITE, Color.BLACK)));
@@ -153,7 +202,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6300), ae -> gameEngine.getCharacter().put("wiseman", 0)));
                     timeline.play();
                 }
-                this.setStatusSpeechBubble(true);
+                //this.setStatusSpeechBubble(true);
             }
         }
         else if (trigger.getName().contentEquals("blacksmith")) {
