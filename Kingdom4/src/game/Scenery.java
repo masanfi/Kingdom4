@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -37,7 +36,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 
 /**
  *
@@ -150,8 +148,7 @@ public class Scenery {
         background.setContent(gameEngine.getBackground());
         background.addEventFilter(InputEvent.ANY, (event)-> {
                 event.consume();
-        });
-        
+        });        
         
         background.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         background.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -207,7 +204,6 @@ public class Scenery {
 			t.setFill(Color.RED);
 			t.setText("Failed connect to Server ...");
 			t.setFont(Font.font(null, FontWeight.BOLD, 32));
-
 		}
 
 		// Sort the highscore
@@ -288,8 +284,7 @@ public class Scenery {
 		
         //return eady scene
     	Scene scene = new Scene(outro, paneWidth, paneHeight);
-    	return scene;
-    	
+    	return scene;  	
     }
     
 	private HBox renderTrophys(String trophy,int c) {
@@ -418,6 +413,7 @@ public class Scenery {
         playerStart.play();
     	
     	TextField playerNameField = new TextField();
+    	playerNameField.setMinWidth(200);
     	playerNameField.setMaxWidth(200);
     	playerNameField.setText("Enter Playername...");
     	playerNameField.setId("namefield");
@@ -461,6 +457,5 @@ public class Scenery {
     	else {
     		playerMain.stop();
     	}
-    }
-    
+    }   
 }

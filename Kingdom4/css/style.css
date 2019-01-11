@@ -21,7 +21,7 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Monaco";
     -fx-cursor: hand;
 }
 #startbutton:hover {
@@ -47,7 +47,7 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Monaco";
 }
 #namefield:hover {
     -fx-background-color: 
