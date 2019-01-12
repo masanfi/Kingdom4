@@ -18,7 +18,7 @@ import java.util.Random;
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.2
  *
  */
 
@@ -103,7 +103,7 @@ public class Conversations {
     	heroText.add("Ich habe das Gefühl,\ndiese Sprüche erzählst du\nnach dem Zufallsprinzip.");
     	heroText.add("Hold on.\nIch komme gleich wieder!");
     	heroText.add("Manchmal habe ich das\nGefühl, ich habe das\nschon einmal gehört.");
-    	heroText.add("Ich danke dir, aber\njetzt muss ich eine\nPrizessin retten.");
+    	heroText.add("Ich danke dir, aber\njetzt muss ich eine\nPrinzessin retten.");
     }
 
     public void startConversation(Trigger trigger) {
@@ -165,7 +165,9 @@ public class Conversations {
             	int randomWiseman = generateRandomWiseman();
                 int randomHero = generateRandomHero();
                 if (gameEngine.getCharacter().get("wiseman") == 0) {
-                    if (gameEngine.getCharacter().get("lady") <= 1) {
+                    if (gameEngine.getCharacter().get("lady") == 0) {
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Junger Mann!\nSie sollten dringend mit\nDerni Ydal sprechen, Sie\nfinden sie an der Burg.\nUnd...", 3, Color.web("#744D34"), Color.WHITE)));
+                    }else if (gameEngine.getCharacter().get("lady") <= 1) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 3, Color.WHITE, Color.BLACK)));
                     }
                     else {
