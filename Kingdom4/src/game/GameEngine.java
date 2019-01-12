@@ -963,7 +963,7 @@ public class GameEngine extends Observable {
      */
     public void showTrophyCollectionMessage(String textString) {
         ImageView trophyImageView = new ImageView();
-        String trophyCollectionMessage = "Pokal gewonnen:\n";
+        String trophyCollectionMessage = "Orden gewonnen:\n";
         String trophyCollectionDescriptionMessage = "";
         if (textString.contentEquals("C")) {
             System.out.println("Achievment Trampel");
@@ -982,7 +982,7 @@ public class GameEngine extends Observable {
             trophyImageView = influencer;
         }
         else if (textString.contentEquals("S")) {
-            trophyCollectionMessage += "Steinhart";
+            trophyCollectionMessage += "Steinliebhaber";
             trophyCollectionDescriptionMessage = "Du bist gegen " + trophy.getTrophyStonesMaxCount() + " Steine gelaufen.";
             trophyImageView = stoney;
         }
@@ -998,25 +998,25 @@ public class GameEngine extends Observable {
         }
 
         Rectangle trophyCollectionBox = new Rectangle(this.getPaneWidth() - 320, 20, 300, 100);
-        trophyCollectionBox.setFill(Color.GRAY);
+        trophyCollectionBox.setFill(Color.rgb(255, 234, 188, 0.92));
 
         trophyImageView.setTranslateX(this.getPaneWidth() - 310);
         trophyImageView.setTranslateY(50);
 
         Text text = new Text(this.getPaneWidth() - 250, 50, trophyCollectionMessage);
-        text.setFont(Font.font ("Bree Serif", 17));
-        text.setFill(Color.WHITE);
+        text.setFont(Font.font ("Copperplate", 17));
+        text.setFill(Color.BLACK);
 
         Text description = new Text(this.getPaneWidth() - 250, 100, trophyCollectionDescriptionMessage);
-        description.setFont(Font.font ("Bree Serif", 14));
-        description.setFill(Color.WHITE);
+        description.setFont(Font.font ("Noteworthy", 14));
+        description.setFill(Color.BLACK);
 
         this.getTrophies().getChildren().addAll(trophyCollectionBox, trophyImageView, text, description);
         this.getTrophies().setVisible(true);
         this.getTrophies().toFront();
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(5),
+                Duration.seconds(7),
                 ae -> {
                     this.getTrophies().setVisible(false);
                     this.getTrophies().getChildren().clear();
