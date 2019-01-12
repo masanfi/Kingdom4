@@ -211,23 +211,23 @@ private Boolean provTrigger = false;
         			gameEngine.setTransparent(image);
     			}else if(item.getName().equals("clumsy_s")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
-        			gameEngine.setClumsy_s(image);
+        			gameEngine.setClumsySmall(image);
     				
     			}else if(item.getName().equals("confused_s")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
-        			gameEngine.setConfused_s(image);
+        			gameEngine.setConfusedSmall(image);
     				
     			}else if(item.getName().equals("influencer_s")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
-        			gameEngine.setInfluencer_s(image);
+        			gameEngine.setInfluencerSmall(image);
     				
     			}else if(item.getName().equals("stoney_s")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
-        			gameEngine.setStoney_s(image);
+        			gameEngine.setStoneySmall(image);
     				
     			}else if(item.getName().equals("treehugger_s")) {
     				ImageView image = new ImageView(new Image(item.getImage(), 20, 20, true, false));
-        			gameEngine.setTreehugger_s(image);
+        			gameEngine.setTreehuggerSmall(image);
     			}
     			
     		}else if (item.getName().equals("sword")) {
