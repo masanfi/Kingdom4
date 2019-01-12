@@ -40,11 +40,11 @@ import javafx.util.Duration;
 /**
  *
  * Creates different scenes that are switched during the game-play.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.3
  *
  * StartScreen Music: Eric Skiff - A Night Of Dizzy Spells - Resistor Anthems - Available at http://EricSkiff.com/music
  * Gameplay Music: Eric Skiff - Underclocked - Resistor Anthems - Available at http://EricSkiff.com/music
@@ -53,7 +53,7 @@ import javafx.util.Duration;
 public class Scenery {
 
     private GameEngine gameEngine;
-    private Pane entities, textOver, hudPane, intro;
+    private Pane entities, textOver, trophies, hudPane, intro;
     private StackPane outro;
     private ScrollPane background;
     private BorderPane playground;
@@ -78,7 +78,9 @@ public class Scenery {
 
         textOver = new Pane();
         gameEngine.setTextOver(this.textOver);
-        //gameEngine.getTextOver().setVisible(false);
+
+        trophies = new Pane();
+        gameEngine.setTrophies(this.trophies);
 
         gameEngine.getBackground().getChildren().addAll(gameEngine.getEntities(), gameEngine.getTextOver());
         playground = new BorderPane();
@@ -155,6 +157,7 @@ public class Scenery {
         background.setStyle("-fx-background-insets: 0; -fx-padding: 0;");
         playground.setCenter(background);
         playground.setBottom(hudPane);
+        playground.getChildren().add(this.trophies);
 
         Scene scene = new Scene(playground, gameEngine.getPaneWidth(), gameEngine.getPaneHeight());
         gameEngine.setScene(scene);
@@ -303,27 +306,27 @@ public class Scenery {
     	String[] parts = trophy.split("§");
 		for (int i = 0; i<parts.length;i++) {
 			if(parts[i].startsWith("B*")) {
-				confused  = new ImageView(gameEngine.getConfused_s().getImage());
+				confused  = new ImageView(gameEngine.getConfusedSmall().getImage());
 				confused.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(confused);
 				tCounter++;
 			}else if(parts[i].startsWith("N*")) {
-				influencer  = new ImageView(gameEngine.getInfluencer_s().getImage());
+				influencer  = new ImageView(gameEngine.getInfluencerSmall().getImage());
 				influencer.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(influencer);
 				tCounter++;
 			}else if(parts[i].startsWith("T*")) {
-				treehugger  = new ImageView(gameEngine.getTreehugger_s().getImage());
+				treehugger  = new ImageView(gameEngine.getTreehuggerSmall().getImage());
 				treehugger.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(treehugger);
 				tCounter++;
 			}else if(parts[i].startsWith("S*")) {
-				stoney = new ImageView(gameEngine.getStoney_s().getImage());
+				stoney = new ImageView(gameEngine.getStoneySmall().getImage());
 				stoney.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(stoney);
 				tCounter++;
 			}else if(parts[i].startsWith("F*")) {
-				clumsy  = new ImageView(gameEngine.getClumsy_s().getImage());
+				clumsy  = new ImageView(gameEngine.getClumsySmall().getImage());
 				clumsy.relocate(c*30, 0);
 				vboxTrophys.getChildren().add(clumsy);
 				tCounter++;

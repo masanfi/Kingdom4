@@ -9,7 +9,7 @@ import java.util.ArrayList;
 * @author Fabian Schmidt
 * @author Martin Sanfilippo
 * @author Boris Bischoff
-* @version 1.0
+* @version 1.2
 *
 */
 
@@ -46,6 +46,26 @@ public class Trophy {
         trophyCollisionWithStones = new ArrayList<>();
         trophyCollisionWithNPCs = new ArrayList<>();
         trophyCollisionWithBridge = new ArrayList<>();
+	}
+
+	public int getTrophyFlowersMaxCount() {
+		return trophyFlowersMaxCount;
+	}
+
+	public int getTrophyTreesMaxCount() {
+		return trophyTreesMaxCount;
+	}
+
+	public int getTrophyStonesMaxCount() {
+		return trophyStonesMaxCount;
+	}
+
+	public int getTrophyBridgeMaxCount() {
+		return trophyBridgeMaxCount;
+	}
+
+	public int getTrophyNPCsMaxCount() {
+		return trophyNPCsMaxCount;
 	}
 	
 	public void setlastCollisionName(String name) {

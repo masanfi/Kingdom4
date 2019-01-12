@@ -4,14 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,11 +28,11 @@ import javafx.util.Duration;
 /**
  *
  * This is the core class and the heart of the game. It is the toolkit for all the mechanics and both the object and the value store.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.5
  *
  */
 public class GameEngine extends Observable {
@@ -52,6 +61,7 @@ public class GameEngine extends Observable {
     private Rectangle actionSquare;
     private Pane entities;
     private Pane textOver;
+    private Pane trophies;
     private double viewFactorX, viewFactorY;
     private double actionSquareOffsetX = 16;
     private double actionSquareOffsetY = 16;
@@ -80,11 +90,11 @@ public class GameEngine extends Observable {
     private ImageView influencer;
     private ImageView stoney;
     private ImageView treehugger;
-    private ImageView clumsy_s;
-    private ImageView confused_s;
-    private ImageView influencer_s;
-    private ImageView stoney_s;
-    private ImageView treehugger_s;
+    private ImageView clumsySmall;
+    private ImageView confusedSmall;
+    private ImageView influencerSmall;
+    private ImageView stoneySmall;
+    private ImageView treehuggerSmall;
     private ImageView rabbit;
     private ImageView sword;
     private ImageView fish;
@@ -400,35 +410,35 @@ public class GameEngine extends Observable {
     	return this.confused;
     }
     
-    public void setClumsy_s(ImageView clumsy) {
-    	this.clumsy_s = clumsy;
+    public void setClumsySmall(ImageView clumsy) {
+    	this.clumsySmall = clumsy;
     }
-    public ImageView getClumsy_s() {
-    	return this.clumsy_s;
+    public ImageView getClumsySmall() {
+    	return this.clumsySmall;
     }
-    public void setInfluencer_s(ImageView influencer) {
-    	this.influencer_s = influencer;
+    public void setInfluencerSmall(ImageView influencer) {
+    	this.influencerSmall = influencer;
     }
-    public ImageView getInfluencer_s() {
-    	return this.influencer_s;
+    public ImageView getInfluencerSmall() {
+    	return this.influencerSmall;
     }
-    public void setTreehugger_s(ImageView treehugger) {
-    	this.treehugger_s = treehugger;
+    public void setTreehuggerSmall(ImageView treehugger) {
+    	this.treehuggerSmall = treehugger;
     }
-    public ImageView getTreehugger_s() {
-    	return this.treehugger_s;
+    public ImageView getTreehuggerSmall() {
+    	return this.treehuggerSmall;
     }
-    public void setStoney_s(ImageView stoney) {
-    	this.stoney_s = stoney;
+    public void setStoneySmall(ImageView stoney) {
+    	this.stoneySmall = stoney;
     }
-    public ImageView getStoney_s() {
-    	return this.stoney_s;
+    public ImageView getStoneySmall() {
+    	return this.stoneySmall;
     }
-    public void setConfused_s(ImageView confused) {
-    	this.confused_s = confused;
+    public void setConfusedSmall(ImageView confused) {
+    	this.confusedSmall = confused;
     }
-    public ImageView getConfused_s() {
-    	return this.confused_s;
+    public ImageView getConfusedSmall() {
+    	return this.confusedSmall;
     }
     
     public void setTransparent(ImageView transparent) {
@@ -444,7 +454,6 @@ public class GameEngine extends Observable {
     }
     
     public void setMovement(Boolean state) {
-    	//System.out.println("setze state :" +state);
     	this.movement=state;
     	
     }
@@ -506,8 +515,6 @@ public class GameEngine extends Observable {
 	        
 	        this.notifyObservers();
 	
-	        //this.checkForTriggers();
-	
 	        // Processes the isCollision flag set by the collision detection.
 	        if (!isCollision) {
 	            this.getActionSquare().setX(viewFactorX);
@@ -524,7 +531,7 @@ public class GameEngine extends Observable {
     }
 
     private void setTriggerStop() {
-    	triggerStop=true;
+    	triggerStop = true;
     }
     
     /**
@@ -575,6 +582,7 @@ public class GameEngine extends Observable {
 	public void changeKnight() {
 		knightChanged = true;
 		this.getCharacter().put("knight2", 3);
+        this.showTrophyCollectionMessage("K");
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
@@ -582,37 +590,40 @@ public class GameEngine extends Observable {
     	trigger.add(knight2Trigger);
     	collision.remove(knightCollision);
     	trigger.remove(knightCollision);
-    	
     	System.out.println("Knight verschoben");
 	}
 	
 	public void collectTrophyClumsy() {
-		
 		hud.setCollectedTrophy(clumsy.getImage(), "C");
+        this.showTrophyCollectionMessage("C");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyConfused() {
 		hud.setCollectedTrophy(confused.getImage(), "O");
+        this.showTrophyCollectionMessage("O");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyInfluencer() {
 		hud.setCollectedTrophy(influencer.getImage(), "I");
+        this.showTrophyCollectionMessage("I");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyStoney() {
 		hud.setCollectedTrophy(stoney.getImage(), "S");
+        this.showTrophyCollectionMessage("S");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
 	}
 	public void collectTrophyTreehugger() {
 		hud.setCollectedTrophy(treehugger.getImage(), "T");
+        this.showTrophyCollectionMessage("T");
 		fanfare.stop();
 		fanfare.setStartTime(new Duration(0));
 		fanfare.play();
@@ -944,5 +955,80 @@ public class GameEngine extends Observable {
         System.out.println("Sword: " + this.findItemInInventory("S"));
         System.out.println("Key: " + this.findItemInInventory("K"));
         System.out.println("Fish: " + this.findItemInInventory("F"));
+    }
+
+    /**
+     * Shows a speech bubble of a conversation.
+     * @param textString
+     */
+    public void showTrophyCollectionMessage(String textString) {
+        ImageView trophyImageView = new ImageView();
+        String trophyCollectionMessage = "Pokal gewonnen:\n";
+        String trophyCollectionDescriptionMessage = "";
+        if (textString.contentEquals("C")) {
+            System.out.println("Achievment Trampel");
+            trophyCollectionMessage += "Trampel";
+            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyFlowersMaxCount() + " Blumen zertreten.";
+            trophyImageView = clumsy;
+        }
+        else if (textString.contentEquals("O")) {
+            trophyCollectionMessage += "Verwirrt";
+            trophyCollectionDescriptionMessage = "Du bist " + trophy.getTrophyBridgeMaxCount() + " Mal über die Brücke gelaufen.";
+            trophyImageView = confused;
+        }
+        else if (textString.contentEquals("I")) {
+            trophyCollectionMessage += "Influencer";
+            trophyCollectionDescriptionMessage = "Du hast mit " + trophy.getTrophyNPCsMaxCount() + " Leuten gesprochen.";
+            trophyImageView = influencer;
+        }
+        else if (textString.contentEquals("S")) {
+            trophyCollectionMessage += "Steinhart";
+            trophyCollectionDescriptionMessage = "Du bist gegen " + trophy.getTrophyStonesMaxCount() + " Steine gelaufen.";
+            trophyImageView = stoney;
+        }
+        else if (textString.contentEquals("T")) {
+            trophyCollectionMessage += "Ökofreak";
+            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyTreesMaxCount() + " Bäume umarmt.";
+            trophyImageView = treehugger;
+        }
+        else if (textString.contentEquals("K")) {
+            trophyCollectionMessage += "Highest Highscore";
+            trophyCollectionDescriptionMessage = "Du bist sehr schnell unterwegs.";
+            trophyImageView = treehugger;
+        }
+
+        Rectangle trophyCollectionBox = new Rectangle(this.getPaneWidth() - 320, 20, 300, 100);
+        trophyCollectionBox.setFill(Color.GRAY);
+
+        trophyImageView.setTranslateX(this.getPaneWidth() - 310);
+        trophyImageView.setTranslateY(50);
+
+        Text text = new Text(this.getPaneWidth() - 250, 50, trophyCollectionMessage);
+        text.setFont(Font.font ("Bree Serif", 17));
+        text.setFill(Color.WHITE);
+
+        Text description = new Text(this.getPaneWidth() - 250, 100, trophyCollectionDescriptionMessage);
+        description.setFont(Font.font ("Bree Serif", 14));
+        description.setFill(Color.WHITE);
+
+        this.getTrophies().getChildren().addAll(trophyCollectionBox, trophyImageView, text, description);
+        this.getTrophies().setVisible(true);
+        this.getTrophies().toFront();
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(5),
+                ae -> {
+                    this.getTrophies().setVisible(false);
+                    this.getTrophies().getChildren().clear();
+                }));
+        timeline.play();
+    }
+
+    public void setTrophies(Pane trophies) {
+        this.trophies = trophies;
+    }
+
+    public Pane getTrophies() {
+        return trophies;
     }
 }
