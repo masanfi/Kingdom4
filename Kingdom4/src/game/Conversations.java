@@ -130,7 +130,7 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(9390), ae -> this.showSpeechBubble(playerX, playerY, "Ich war auf\nGeschäftsreise!\nHabe ich was verpasst?", 3, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12510), ae -> this.showSpeechBubble(triggerX, triggerY, "Unsere Prinzessin Adlez\nwurde aus der Burg\nentführt!\nDu musst sie finden!", 4, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16630), ae -> this.showSpeechBubble(playerX, playerY, "Schreck lass nach!\nWo könnte sie denn sein?", 2.5, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19250), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass du sie\nweit Weg, weit hinter den\nFluss, gebracht wurde.", 4, Color.RED, Color.WHITE)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(19250), ae -> this.showSpeechBubble(triggerX, triggerY, "Man munkelt, dass sie\nweit weg, weit hinter den\nFluss, gebracht wurde.", 4, Color.RED, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(23370), ae -> this.showSpeechBubble(playerX, playerY, "Das sehe ich mir sofort\nan!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(23490), ae -> gameEngine.getCharacter().put("lady", 1)));
                     timeline.play();
@@ -168,10 +168,14 @@ public class Conversations {
             	this.setStatusSpeechBubble(true);
             	int randomWiseman = generateRandomWiseman();
                 int randomHero = generateRandomHero();
-                if (gameEngine.getCharacter().get("wiseman") == 0) {
-                    if (gameEngine.getCharacter().get("lady") == 0) {
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(triggerX, triggerY, "Junger Mann!\nSie sollten dringend mit\nDerni Ydal sprechen, Sie\nfinden sie an der Burg.\nUnd...", 3, Color.web("#744D34"), Color.WHITE)));
-                    }else if (gameEngine.getCharacter().get("lady") <= 1) {
+                if (gameEngine.getCharacter().get("wiseman") == 0 && gameEngine.getCharacter().get("lady") == 0) {             
+                	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann.\nIch bin Oreh,\nein mächtiger Held!", 3, Color.WHITE, Color.BLACK)));
+                	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3100), ae -> this.showSpeechBubble(triggerX, triggerY, "Junger Mann!\nSie sollten dringend mit\nDerni Ydal sprechen, Sie\nfinden sie an der Burg.", 4.5, Color.web("#744D34"), Color.WHITE)));
+                	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7700), ae -> this.showSpeechBubble(triggerX, triggerY, "Los, los.\nJetzt nicht trödeln.\nHier passiert nichts\nvon allein!", 3.5, Color.web("#744D34"), Color.WHITE)));
+                    timeline.play();
+                }
+                else if (gameEngine.getCharacter().get("wiseman") == 0 && gameEngine.getCharacter().get("lady") != 0) {
+                	if (gameEngine.getCharacter().get("lady") == 1) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 3, Color.WHITE, Color.BLACK)));
                     }
                     else {
