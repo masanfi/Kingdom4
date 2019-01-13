@@ -50,7 +50,9 @@ public class Conversations {
     private int generateRandomWiseman() {
     	Integer rand;    	
     	if(wisemanSpoken.size()==wisemanText.size()) {
+    		int lastText = wisemanSpoken.get(wisemanSpoken.size()-1);
     		wisemanSpoken.clear();
+    		wisemanSpoken.add(lastText);
     	}
     	do {
     		rand = random.nextInt(wisemanText.size());
@@ -63,7 +65,9 @@ public class Conversations {
     private int generateRandomHero() {
     	Integer rand;    	
     	if(heroSpoken.size()==heroText.size()) {
+    		int lastText = heroSpoken.get(heroSpoken.size()-1);
     		heroSpoken.clear();
+    		heroSpoken.add(lastText);
     	}
     	do {
     		rand = random.nextInt(heroText.size());
