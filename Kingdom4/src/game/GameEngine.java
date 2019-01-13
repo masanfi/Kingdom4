@@ -973,7 +973,7 @@ public class GameEngine extends Observable {
         }
         else if (textString.contentEquals("O")) {
             trophyCollectionMessage += "Verwirrt";
-            trophyCollectionDescriptionMessage = "Du bist " + trophy.getTrophyBridgeMaxCount() + " Mal über die Brücke gelaufen.";
+            trophyCollectionDescriptionMessage = "Du bist " + trophy.getTrophyBridgeMaxCount() + " Mal über\ndie Brücke gelaufen.";
             trophyImageView = confused;
         }
         else if (textString.contentEquals("I")) {
@@ -1004,11 +1004,11 @@ public class GameEngine extends Observable {
         trophyImageView.setTranslateY(50);
 
         Text text = new Text(this.getPaneWidth() - 250, 50, trophyCollectionMessage);
-        text.setFont(Font.font ("Copperplate", 17));
+        text.setFont(Font.font ("COPPERPLATE", 17));
         text.setFill(Color.BLACK);
 
-        Text description = new Text(this.getPaneWidth() - 250, 100, trophyCollectionDescriptionMessage);
-        description.setFont(Font.font ("Noteworthy", 14));
+        Text description = new Text(this.getPaneWidth() - 250, 90, trophyCollectionDescriptionMessage);
+        description.setFont(Font.font ("ROCKWELL", 12));
         description.setFill(Color.BLACK);
 
         this.getTrophies().getChildren().addAll(trophyCollectionBox, trophyImageView, text, description);

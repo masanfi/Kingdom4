@@ -413,7 +413,7 @@ public class Conversations {
         bubble.setFill(backgroundColor);
 
         Text text = new Text(x, y - 90, textString);
-        text.setFont(Font.font ("MONACO", 12.5));
+        text.setFont(Font.font ("ROCKWELL", 13));
         text.setFill(textColor);
 
         gameEngine.getTextOver().getChildren().addAll(littlePointer, bubble, text);
