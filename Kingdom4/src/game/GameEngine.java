@@ -735,10 +735,10 @@ public class GameEngine extends Observable {
         this.getCamera().heightProperty().bind(this.getScene().heightProperty());
 
         this.getCamera().xProperty().bind(Bindings.createDoubleBinding(
-                () -> viewFactor(this.getActionSquare().getX() - this.getScene().getWidth() / 2, 0, this.getBackground().getWidth() - this.getScene().getWidth()),
+                () -> viewFactor(this.getActionSquare().getX() - this.getScene().getWidth() / 2 + 96, 0, this.getBackground().getWidth() - this.getScene().getWidth()),
                 this.getActionSquare().xProperty(), this.getScene().widthProperty()));
         this.getCamera().yProperty().bind(Bindings.createDoubleBinding(
-                () -> viewFactor(this.getActionSquare().getY() - this.getScene().getHeight() / 2, 0, this.getBackground().getHeight() - this.getScene().getHeight()),
+                () -> viewFactor(this.getActionSquare().getY() - this.getScene().getHeight() / 2 + 96, 0, this.getBackground().getHeight() - this.getScene().getHeight()),
                 this.getActionSquare().yProperty(), this.getScene().heightProperty()));
     	
     }
