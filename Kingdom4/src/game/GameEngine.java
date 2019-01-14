@@ -974,7 +974,7 @@ public class GameEngine extends Observable {
         }
         else if (textString.contentEquals("I")) {
             trophyCollectionMessage += "Influencer";
-            trophyCollectionDescriptionMessage = "Du hast mit " + trophy.getTrophyNPCsMaxCount() + " Mal mit\nLeuten gesprochen.";
+            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyNPCsMaxCount() + " Mal mit jemandem gesprochen.";
             trophyImageView = influencer;
         }
         else if (textString.contentEquals("S")) {
