@@ -411,6 +411,8 @@ public class Conversations {
         littlePointer.setFill(backgroundColor);
         Rectangle bubble = new Rectangle(x - 10, y - 2 * gameEngine.getTileSize() + 10, 210, 110);
         bubble.setFill(backgroundColor);
+        bubble.setArcHeight(10);
+        bubble.setArcWidth(10);
 
         Text text = new Text(x, y - 90, textString);
         text.setFont(Font.font ("ROCKWELL", 13));

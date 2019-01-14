@@ -996,6 +996,8 @@ public class GameEngine extends Observable {
 
         Rectangle trophyCollectionBox = new Rectangle(this.getPaneWidth() - 320, 20, 300, 100);
         trophyCollectionBox.setFill(Color.rgb(255, 234, 188, 0.92));
+        trophyCollectionBox.setArcHeight(10);
+        trophyCollectionBox.setArcWidth(10);
 
         trophyImageView.setTranslateX(this.getPaneWidth() - 310);
         trophyImageView.setTranslateY(50);
