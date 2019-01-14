@@ -351,7 +351,8 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(5700), ae -> this.showSpeechBubble(triggerX, triggerY, "Also, ernsthaft, ich hoffe\ndu hast dafür nichts\nbezahlt. Jedenfalls werde\nich damit nicht gegen\ndich kämpfen!", 4.5, Color.NAVY, Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10300), ae -> this.showSpeechBubble(playerX, playerY, "Ähm... schau mal\nein Ufo!", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12500), ae -> this.showSpeechBubble(triggerX, triggerY, "Bis ich nicht einen Fisch\ngefangen habe, schau ich\nnirgendwo hin.", 3.5, Color.NAVY, Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12600), ae -> gameEngine.getCharacter().put("knight", 2)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12600), ae -> gameEngine.getCharacter().put("fisherman", 1)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12700), ae -> gameEngine.getCharacter().put("knight", 2)));
                     if (gameEngine.findItemInInventory("F")) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16000), ae -> this.showSpeechBubble(playerX, playerY, "Ich habe zufällig einen\nFisch bei mir.", 2.5, Color.WHITE, Color.BLACK)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(18600), ae -> this.showSpeechBubble(triggerX, triggerY, "Heute scheint dein\nGlückstag zu sein!", 2.5, Color.NAVY, Color.WHITE)));
