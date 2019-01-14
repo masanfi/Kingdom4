@@ -579,7 +579,6 @@ public class GameEngine extends Observable {
 	public void changeKnight() {
 		knightChanged = true;
 		this.getCharacter().put("knight2", 3);
-        this.showTrophyCollectionMessage("K");
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
     	background.getChildren().add(fph);
@@ -975,7 +974,7 @@ public class GameEngine extends Observable {
         }
         else if (textString.contentEquals("I")) {
             trophyCollectionMessage += "Influencer";
-            trophyCollectionDescriptionMessage = "Du hast mit " + trophy.getTrophyNPCsMaxCount() + " Leuten gesprochen.";
+            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyNPCsMaxCount() + " Mal mit jemandem gesprochen.";
             trophyImageView = influencer;
         }
         else if (textString.contentEquals("S")) {
