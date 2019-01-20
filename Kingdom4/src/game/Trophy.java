@@ -32,11 +32,11 @@ public class Trophy {
 	private ArrayList<Integer> trophyCollisionWithNPCs;
 	private ArrayList<Integer> trophyCollisionWithBridge;
 	private long lastCollisionTime = 0;
-	private Boolean trophyBridge = false;
-	private Boolean trophyStones = false;
-	private Boolean trophyTrees = false;
-	private Boolean trophyFlowers = false;
-	private Boolean trophyNPCs = false;
+	private boolean trophyBridge = false;
+	private boolean trophyStones = false;
+	private boolean trophyTrees = false;
+	private boolean trophyFlowers = false;
+	private boolean trophyNPCs = false;
 	private String lastCollisionName;
 
 	public Trophy(GameEngine gameEngine, Hud hud) {

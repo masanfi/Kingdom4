@@ -72,14 +72,14 @@ public class GameEngine extends Observable {
     
     private long startTime=0;
     private long endTime=0;
-    private Boolean triggerStop = false;
+    private boolean triggerStop = false;
     private Scenery scenery;
     private static final char[][] world = Level.getLevel();
     private ImageView knight;
     private ImageView knight2;
-    private Boolean knightChanged= false;
-    private Boolean keyPickedUP= false;
-    private Boolean rabbitPickedUP= false;
+    private boolean knightChanged= false;
+    private boolean keyPickedUP= false;
+    private boolean rabbitPickedUP= false;
     private ImageView fph;
     private ImageView key;
     private ImageView keyGreen;
@@ -106,7 +106,7 @@ public class GameEngine extends Observable {
     private IEvent knight2Collision;
     private Trigger knight2Trigger;
     
-    private Boolean movement = true;
+    private boolean movement = true;
     private Map<String, Integer> character = new HashMap<>();
     private Trophy trophy;
     private Hud hud;
@@ -453,7 +453,7 @@ public class GameEngine extends Observable {
     	this.rabbitGreen = rabbitGreen;
     }
     
-    public void setMovement(Boolean state) {
+    public void setMovement(boolean state) {
     	this.movement=state;
     	
     }
@@ -538,7 +538,7 @@ public class GameEngine extends Observable {
      * This method prepares the outro and plays it.
      */
 	private void beginFinale() {
-    	Boolean connectError = false;
+    	boolean connectError = false;
     	Scene scene;
     	long timestamp = System.currentTimeMillis();
     	
