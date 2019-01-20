@@ -1,8 +1,11 @@
-package game;
+package graphics;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
+
+import game.GameEngine;
+import data.Highscore;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

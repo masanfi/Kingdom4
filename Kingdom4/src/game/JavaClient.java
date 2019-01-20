@@ -13,7 +13,7 @@ import java.util.List;
 /**
  *
  * Static Class opens Socket to Connect with Server - you send and get messages.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff

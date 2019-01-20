@@ -1,15 +1,15 @@
-package game;
+package data;
 
 import javafx.geometry.Point2D;
 
 /**
  *
  * This allows to create a collision object representing a non-walkable field or obstacle in the game world.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.2
  *
  */
 

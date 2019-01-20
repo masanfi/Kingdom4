@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import data.*;
+import graphics.Hud;
+import graphics.Scenery;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
@@ -126,9 +129,9 @@ public class GameEngine extends Observable {
     	this.scenery = scenery;
     }
     
-    public Scenery getScenery() {
+    /*public Scenery getScenery() {
     	return scenery;
-    }
+    }*/
     
     public void setStartTime() {
     	this.startTime = System.currentTimeMillis();
@@ -172,9 +175,9 @@ public class GameEngine extends Observable {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    /*public void setSpeed(int speed) {
         this.speed = speed;
-    }
+    }*/
 
     public void setPlayer(ImageView[] player) {
         this.player = player;

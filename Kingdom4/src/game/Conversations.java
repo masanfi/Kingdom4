@@ -1,5 +1,6 @@
 package game;
 
+import data.Trigger;
 import javafx.animation.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
