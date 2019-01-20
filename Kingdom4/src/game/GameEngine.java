@@ -950,7 +950,6 @@ public class GameEngine extends Observable {
         String trophyCollectionMessage = "Orden gewonnen:\n";
         String trophyCollectionDescriptionMessage = "";
         if (textString.contentEquals("C")) {
-            System.out.println("Achievment Trampel");
             trophyCollectionMessage += "Trampel";
             trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyFlowersMaxCount() + " Blumen zertreten.";
             trophyImageView = clumsy;
@@ -962,7 +961,7 @@ public class GameEngine extends Observable {
         }
         else if (textString.contentEquals("I")) {
             trophyCollectionMessage += "Influencer";
-            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyNPCsMaxCount() + " Mal mit jemandem gesprochen.";
+            trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyNPCsMaxCount() + " Mal mit\njemandem gesprochen.";
             trophyImageView = influencer;
         }
         else if (textString.contentEquals("S")) {
