@@ -20,11 +20,11 @@ import java.util.stream.IntStream;
 /**
  *
  * Toolkit to initialize the world
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 0.9
+ * @version 1.0
  *
  */
  
