@@ -338,7 +338,6 @@ public class Scenery {
 
 		if(tCounter<5) {
 			for(int i = 0;i<(5-tCounter);i++) {
-				//System.out.println("Addiere");
 				ImageView placeholder = new ImageView(gameEngine.getTransparent().getImage());
 				placeholder.maxHeight(20);
 				placeholder.relocate(0, 0);
