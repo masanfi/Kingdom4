@@ -2,7 +2,6 @@ package game;
 
 import data.Item;
 import graphics.Hud;
-
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,7 @@ public class Trophy {
 
 	GameEngine gameEngine;
 	Hud hud;
-
+	
 	private final int trophyFlowersMaxCount = 30;
 	private final int trophyTreesMaxCount = 20;
 	private final int trophyStonesMaxCount = 10;
@@ -103,6 +102,12 @@ public class Trophy {
 
 	}
 
+	/**
+	 * Public method to handle Trophy with Hud
+	 * 
+	 * @param object
+	 * @param item
+	 */
 	public void trophyManager(int object, Item item) {
 
 		if (this.getTrophyCollisionsWithFlowers().size() == trophyFlowersMaxCount) {
@@ -145,6 +150,7 @@ public class Trophy {
 			this.trophyBridge = true;
 		}
 
+		//Collison only count if last collision > 1sec
 		if ((System.currentTimeMillis() - lastCollisionTime) > 1000) {
 
 			// Collision with Trees
@@ -160,18 +166,20 @@ public class Trophy {
 					setlastCollisionName(item.getName());
 				}
 			}
-
+			//Collision with Stones
 			if (item.getName().contentEquals("stone")) {
 				this.getTrophyCollisionsWithStones().add(object);
 			}
-
+			
+			//Collision with Npc
 			if (item.isNpc()) {
 				if (!item.getName().equals(lastCollisionName)) {
 					this.getTrophyCollisionsWithNPCs().add(object);
 					setlastCollisionName(item.getName());
 				}
 			}
-
+			
+			//Collision with Bridge
 			if (item.getName().equals("river_bridge_l")) {
 				if (!item.getName().equals(lastCollisionName)) {
 					this.getTrophyCollisionsWithBridge().add(object);
