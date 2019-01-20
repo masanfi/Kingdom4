@@ -356,13 +356,13 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12600), ae -> gameEngine.getCharacter().put("fisherman", 1)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(12700), ae -> gameEngine.getCharacter().put("knight", 2)));
                     if (gameEngine.findItemInInventory("F")) {
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16000), ae -> this.showSpeechBubble(playerX, playerY, "Ich habe zufällig einen\nFisch bei mir.", 2.5, Color.WHITE, Color.BLACK)));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(18600), ae -> this.showSpeechBubble(triggerX, triggerY, "Heute scheint dein\nGlückstag zu sein!", 2.5, Color.NAVY, Color.WHITE)));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(21200), ae -> this.showSpeechBubble(triggerX, triggerY, "Wenn du mir den Fisch\nfür sagen wir... nichts\nverkaufst, dann lass ich\ndich rüber.", 4, Color.NAVY, Color.WHITE)));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25300), ae -> this.showSpeechBubble(playerX, playerY, "Dann nimm dieses\nGeschenk von Herzen.", 2.5, Color.WHITE, Color.BLACK)));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25300), ae -> gameEngine.findRemovePickedUpItem("F")));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(27900), ae -> this.showSpeechBubble(triggerX, triggerY, "Lauf, bevor ich es mir\nanders überlege!", 2.5, Color.NAVY, Color.WHITE)));
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30500), ae -> gameEngine.changeKnight()));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(16100), ae -> this.showSpeechBubble(playerX, playerY, "Ich habe zufällig einen\nFisch bei mir.", 2.5, Color.WHITE, Color.BLACK)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(18700), ae -> this.showSpeechBubble(triggerX, triggerY, "Heute scheint dein\nGlückstag zu sein!", 2.5, Color.NAVY, Color.WHITE)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(21300), ae -> this.showSpeechBubble(triggerX, triggerY, "Wenn du mir den Fisch\nfür sagen wir... nichts\nverkaufst, dann lass ich\ndich rüber.", 4, Color.NAVY, Color.WHITE)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25400), ae -> this.showSpeechBubble(playerX, playerY, "Dann nimm dieses\nGeschenk von Herzen.", 2.5, Color.WHITE, Color.BLACK)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(25400), ae -> gameEngine.findRemovePickedUpItem("F")));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(28000), ae -> this.showSpeechBubble(triggerX, triggerY, "Lauf, bevor ich es mir\nanders überlege!", 2.5, Color.NAVY, Color.WHITE)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30600), ae -> gameEngine.changeKnight()));
                     }
                     timeline.play();
                 }
