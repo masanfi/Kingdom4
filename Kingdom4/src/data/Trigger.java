@@ -1,15 +1,15 @@
-package game;
+package data;
 
 import javafx.geometry.Point2D;
 
 /**
  *
  * This allows to create a trigger object representing an action field in the game world that triggers a conversation or special event.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.2
  *
  */
 

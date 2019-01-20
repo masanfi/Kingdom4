@@ -1,12 +1,14 @@
 package game;
 
+import data.Item;
+import graphics.Hud;
+
 import java.util.ArrayList;
 
 /**
  *
- * This manages the trophies in Kingdom of Faboma Copyright (c) 2018-2019
- * Fantastic 4 Studios. All Rights Reserved.
- * 
+ * This manages the trophies in Kingdom of Faboma
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff

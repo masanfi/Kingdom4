@@ -1,5 +1,6 @@
-package game;
+package data;
 
+import game.GameEngine;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -353,7 +354,6 @@ private Boolean provTrigger = false;
                     if (nNode.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                         Element eElement = (Element) nNode;
                         Item item = new Item();
-                        //item.setId(Integer.parseInt("0" + eElement.getElementsByTagName("id").item(0).getTextContent()));
                         item.setSymbol((char)Integer.parseInt("0" + eElement.getElementsByTagName("symbol").item(0).getTextContent()));
                         item.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
                         item.setType(eElement.getElementsByTagName("type").item(0).getTextContent());
@@ -361,7 +361,6 @@ private Boolean provTrigger = false;
                         item.setWalkable(Boolean.parseBoolean(eElement.getElementsByTagName("walkable").item(0).getTextContent()));
                         item.setPortable(Boolean.parseBoolean(eElement.getElementsByTagName("portable").item(0).getTextContent()));
                         item.setNpc(Boolean.parseBoolean(eElement.getElementsByTagName("npc").item(0).getTextContent()));
-                        item.setInformation(eElement.getElementsByTagName("information").item(0).getTextContent());
                         items.add(item);
                     }
                 });

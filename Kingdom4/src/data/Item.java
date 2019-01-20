@@ -1,13 +1,13 @@
-package game;
+package data;
 
 /**
  *
  * This allows to create an item object that represents the different attributes a field in the game world can have.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 1.2
  *
  */
 
@@ -20,7 +20,6 @@ public class Item {
     private boolean walkable;
     private boolean portable;
     private boolean npc;
-    private String information;
 
     public char getSymbol() {
 		return symbol;
@@ -78,18 +77,10 @@ public class Item {
         this.npc = npc;
     }
 
-    public String getInformation() {
-        return information;
-    }
-
-    public void setInformation(String information) {
-        this.information = information;
-    }
-
     @Override
     public String toString() {
         return "Item [name=" + name + ", image=" + image + ", type=" + type + ", walkable=" + walkable + ", portable="
-                + portable + " npc=" + npc + ", information=" + information + "]";
+                + portable + " npc=" + npc + "]";
     }
 
 }

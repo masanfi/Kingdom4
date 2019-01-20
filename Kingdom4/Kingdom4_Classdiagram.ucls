@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="game.Trigger" project="Kingdom4" file="/Kingdom4/src/game/Trigger.java" 
+  <class id="1" language="java" name="data.Trigger" project="Kingdom4" file="/Kingdom4/src/game/Trigger.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="573" y="838"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -19,7 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="game.Scenery" project="Kingdom4" file="/Kingdom4/src/game/Scenery.java" 
+  <class id="3" language="java" name="graphics.Scenery" project="Kingdom4" file="/Kingdom4/src/game/Scenery.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1330" y="1238"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -37,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="game.Item" project="Kingdom4" file="/Kingdom4/src/game/Item.java" binary="false" 
+  <class id="5" language="java" name="data.Item" project="Kingdom4" file="/Kingdom4/src/game/Item.java" binary="false"
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="194" y="724"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,7 +55,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="game.World" project="Kingdom4" file="/Kingdom4/src/game/World.java" binary="false" 
+  <class id="7" language="java" name="data.World" project="Kingdom4" file="/Kingdom4/src/game/World.java" binary="false"
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="263" y="156"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -64,7 +64,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="8" language="java" name="game.IEvent" project="Kingdom4" file="/Kingdom4/src/game/IEvent.java" 
+  <interface id="8" language="java" name="data.IEvent" project="Kingdom4" file="/Kingdom4/src/game/IEvent.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="325" y="1168"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -82,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="game.Collision" project="Kingdom4" file="/Kingdom4/src/game/Collision.java" 
+  <class id="10" language="java" name="data.Collision" project="Kingdom4" file="/Kingdom4/src/game/Collision.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="27" y="565"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -91,7 +91,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="game.Highscore" project="Kingdom4" file="/Kingdom4/src/game/Highscore.java" 
+  <class id="11" language="java" name="data.Highscore" project="Kingdom4" file="/Kingdom4/src/game/Highscore.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1313" y="1607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="game.Level" project="Kingdom4" file="/Kingdom4/src/game/Level.java" 
+  <class id="12" language="java" name="data.Level" project="Kingdom4" file="/Kingdom4/src/game/Level.java"
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="116" width="112" x="547" y="1096"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 

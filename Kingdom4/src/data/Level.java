@@ -1,13 +1,13 @@
-package game;
+package data;
 
 /**
  *
  * Static class that provides the level structure for the World class.
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 1.0
+ * @version 2.0
  *
  */
 
