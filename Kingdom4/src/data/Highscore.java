@@ -39,20 +39,12 @@ public class Highscore {
 	}
 
 	public long getDuration() {
-	    
-	    	
-	    
 		return duration.get();
 	}
 
 	public String getHighScoreTime() {
-		
-		
 		String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(highScoreTime.get()));
-		
-		
 		return date;
-		//return highScoreTime.get();
 	}
 
 }

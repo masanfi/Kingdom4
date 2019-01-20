@@ -49,7 +49,7 @@ public class World {
     private ArrayList<Rectangle> obstacles;
     private ArrayList<IEvent> collisions;
     private ArrayList<Trigger> triggers;
-private Boolean provTrigger = false;
+    private Boolean provTrigger = false;
     
     public World(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -64,7 +64,6 @@ private Boolean provTrigger = false;
         amountVerticalTiles = gameEngine.getAmountVerticalTiles();
 
         readObjects();
-        //items.forEach(System.out::println);
 
         this.background = createBackground();
         gameEngine.setBackground(this.background);
@@ -108,11 +107,10 @@ private Boolean provTrigger = false;
     	this.backgroundCollection.add(image);
 
     	if(!provTrigger) {
-    	provTrigger = true;
-	        //Provisorisches Finale
+    		provTrigger = true;
+	        //Finale Trigger
 	    	Item finalItem = new Item();
 	    	finalItem.setName("Finale");
-	    	finalItem.setType("test");
 	        Trigger finale = new Trigger(finalItem, new Point2D(1972,1600), item.isWalkable(), item.isPortable(), item.isNpc());
 	        Rectangle finaleObstacle = new Rectangle(1972,1600, gameEngine.getTileSize(), gameEngine.getTileSize());
 	        finaleObstacle.setFill(Color.PURPLE);
@@ -120,8 +118,6 @@ private Boolean provTrigger = false;
 	        this.triggers.add(finale);
 	        gameEngine.setObstacle(this.obstacles);
 	        gameEngine.setTriggerObject(this.triggers);
-	        //Provisorisches Finale
-
     	}
         
         if (item.isNpc()) {
@@ -168,6 +164,11 @@ private Boolean provTrigger = false;
         
     }
     
+    /**
+     * Search symbol in items
+     * @param symbol
+     * @return item
+     */
     private Item findItem(char symbol) {
     	
     	items.forEach(item ->{
@@ -176,11 +177,14 @@ private Boolean provTrigger = false;
     		}
     	});
     	
-    	Item temp = this.foundItem;
+    	Item returnItem = this.foundItem;
     	this.foundItem = null;
-    	return temp;
+    	return returnItem;
     }
     
+    /**
+     * Handle items which are not shown in the game, like trophys and protable elements
+     */
     private void handleNotShownItems() {
     	
     	items.forEach(item->{

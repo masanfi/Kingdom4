@@ -26,7 +26,6 @@ public class JavaClient {
 	private static final int port = 3856;
 	private static final String server = "cloud.kleiner-heuler.de";
 
-	@SuppressWarnings("resource")
 	/**
 	 * Static method to communicate with the server
 	 * 
@@ -40,11 +39,10 @@ public class JavaClient {
 			throws UnknownHostException, IOException, ClassNotFoundException {
 
 		List<String> response = new ArrayList<String>();
-		//InetAddress host = InetAddress.getByName(server);
-		int timeout = 2000;
+		//set Timeout to 1sec
+		int timeout = 1000;
 		SocketAddress socketAddress = new InetSocketAddress(server, port);
 		
-		//Socket socket = new Socket(host.getHostName(), port);
 		Socket socket = new Socket();
 		socket.connect(socketAddress, timeout);
 
@@ -52,8 +50,7 @@ public class JavaClient {
 		socketOutput.writeObject("" + message);
 		ObjectInputStream socketInput = new ObjectInputStream(socket.getInputStream());
 		response = handleResponse(socketInput);
-		//System.out.println("Message: " + response.toString());
-		// close resources
+
 		socketOutput.close();
 		socketInput.close();
 		socket.close();
