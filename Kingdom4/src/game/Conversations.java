@@ -222,6 +222,7 @@ public class Conversations {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(33600), ae -> this.showSpeechBubble(playerX, playerY, "Hab Dank. Ich empfehle\ndich gerne weiter.", 2.5, Color.WHITE, Color.BLACK)));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(33600), ae -> gameEngine.pickUpSword()));
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(33700), ae -> gameEngine.getCharacter().put("blacksmith", 2)));
+                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(33700), ae -> gameEngine.getCharacter().put("fisherman", 1)));
                     }
                     else {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(21700), ae -> this.showSpeechBubble(playerX, playerY, "Hase! Geht klar!\nSo ein kleiner Klopfer\nsollte doch zu bekommen\nsein.", 4, Color.WHITE, Color.BLACK)));
@@ -267,7 +268,7 @@ public class Conversations {
         }
         else if (trigger.getName().contentEquals("fisherman")) {
             if(!this.getStatusSpeechBubble()) {
-                if (gameEngine.getCharacter().get("fisherman") == 0 && gameEngine.getCharacter().get("blacksmith") <= 2) {
+                if (gameEngine.getCharacter().get("fisherman") == 0 && gameEngine.getCharacter().get("blacksmith") < 2) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, edler Fischer!\nIch bin Oreh, ein...", 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2600), ae -> this.showSpeechBubble(triggerX, triggerY, "Wenn du jetzt sagst,\ndass du ein mächtiger\nHeld bist, gibt's was\nauf die Löffel!", 4, Color.YELLOW, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6700), ae -> this.showSpeechBubble(playerX, playerY, "Wollte ich nicht sagen!\nähm... Wie laufen die\nGeschäfte?", 3, Color.WHITE, Color.BLACK)));
