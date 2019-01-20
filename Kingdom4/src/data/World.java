@@ -20,11 +20,11 @@ import java.util.stream.IntStream;
 /**
  *
  * Toolkit to initialize the world
- * Copyright (c) 2018 Fantastic 4 Studios. All Rights Reserved.
+ * Copyright (c) 2018-2019 Fantastic 4 Studios. All Rights Reserved.
  * @author Fabian Schmidt
  * @author Martin Sanfilippo
  * @author Boris Bischoff
- * @version 0.9
+ * @version 1.0
  *
  */
  
@@ -153,10 +153,8 @@ private Boolean provTrigger = false;
             this.collisions.add(collision);
             gameEngine.setObstacle(this.obstacles);
             gameEngine.setCollisionObject(this.collisions);
-        }else if(item.getType().equals("terrain")){
-        	
-        	//System.out.println(item.getName());
-        	
+        }
+        else if (item.getType().equals("terrain")){
         	trigger = new Trigger(item, new Point2D(y * gameEngine.getTileSize(), x * gameEngine.getTileSize()), item.isWalkable(), item.isPortable(), item.isNpc());
             this.triggers.add(trigger);
         }
@@ -310,12 +308,10 @@ private Boolean provTrigger = false;
 
         for (x = 0; x < amountVerticalTiles; x++) {
             for (y = 0; y < amountHorizontalTiles; y++) {
-            	//System.out.println(world[this.x][this.y]);
             	
             	items.stream()
             	.filter(s -> world[this.x][this.y] == s.getSymbol())
             	.forEach(i -> {
-            		//System.out.println(i);
             		addToPane(this.x, this.y, i, pane);
             	}); 
             }

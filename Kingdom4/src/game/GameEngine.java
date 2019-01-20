@@ -559,7 +559,6 @@ public class GameEngine extends Observable {
     	try {
     		List<String> highscore = JavaClient.sendMessage("getHighScore");
     		highscore.forEach(item ->{
-    			//System.out.println(item + "\n\n");
     			String[] hsLine = item.split("\\|", -1);
     			hs.add(new Highscore(hsLine[0],hsLine[1], Integer.parseInt(hsLine[2]), Long.parseLong(hsLine[3])));
     		});
@@ -589,7 +588,6 @@ public class GameEngine extends Observable {
     	trigger.add(knight2Trigger);
     	collision.remove(knightCollision);
     	trigger.remove(knightCollision);
-    	System.out.println("Knight verschoben");
 	}
 	
 	public void collectTrophyClumsy() {
@@ -673,34 +671,21 @@ public class GameEngine extends Observable {
      * @param trigger
      */
     public void checkForTriggers(Trigger trigger) {
-    	//System.out.println(images);
         if (trigger != null) {
             if (this.isTrigger() && !triggerStop) {
                 if (trigger.isNpc()) {
                     conversations.startConversation(trigger);
-                    //this.movementStop = true;
-                }else if(trigger.getName().equalsIgnoreCase("finale")){
+                } else if(trigger.getName().equalsIgnoreCase("finale")){
                 	setEndTime(System.currentTimeMillis());
-                	System.out.println("Finale oh oh");
                 	beginFinale();
-                } else if(trigger.getName().equalsIgnoreCase("test")){
-                	if(!knightChanged) {
-                		changeKnight();
-                	}          	
-                }else if(trigger.getName().equalsIgnoreCase("key")){
+                } else if(trigger.getName().equalsIgnoreCase("key")){
                 	if(!keyPickedUP) {
-                		System.out.println("Schlüssel gefunden");
                 		pickUpKey();
                 	}
-                }else if(trigger.getName().equalsIgnoreCase("rabbit")){
+                } else if(trigger.getName().equalsIgnoreCase("rabbit")){
                 	if(!rabbitPickedUP) {
-                		System.out.println("Hase gefunden");
                 		pickUpRabbit();
                 	}
-                }
-                else {
-                	
-                    //System.out.println("Something's happening!");
                 }
             }
         }
