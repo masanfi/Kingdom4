@@ -23,7 +23,7 @@ public class Hero {
     private Rectangle actionSquare;
     private ImageView[] hero;
     private int tileSize;
-    public static Boolean movementStop = false;
+    public static boolean movementStop = false;
 
     public Hero(GameEngine gameEngine) {
         this.gameEngine = gameEngine;

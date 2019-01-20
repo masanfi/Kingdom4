@@ -188,7 +188,7 @@ public class Scenery {
      * @param connectError
      * @return Outro as Scene
      */
-	public Scene renderOutro(ObservableList<Highscore> hs, Boolean connectError) {
+	public Scene renderOutro(ObservableList<Highscore> hs, boolean connectError) {
 		int paneWidth = gameEngine.getPaneWidth();
 		int paneHeight = gameEngine.getPaneHeight();
 

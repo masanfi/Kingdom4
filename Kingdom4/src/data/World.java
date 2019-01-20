@@ -49,7 +49,7 @@ public class World {
     private ArrayList<Rectangle> obstacles;
     private ArrayList<IEvent> collisions;
     private ArrayList<Trigger> triggers;
-    private Boolean provTrigger = false;
+    private boolean provTrigger = false;
     
     public World(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -253,7 +253,7 @@ public class World {
      * @param image
      * @param trigger
      */
-    private Boolean handleSpecialItems(String itemName, ImageView image,Trigger trigger,int x,int y) {
+    private boolean handleSpecialItems(String itemName, ImageView image,Trigger trigger,int x,int y) {
     	
     	//Prepare the change of the knight, create Knight2
     	if(itemName.equals("knight2")) {
