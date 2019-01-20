@@ -950,7 +950,6 @@ public class GameEngine extends Observable {
         String trophyCollectionMessage = "Orden gewonnen:\n";
         String trophyCollectionDescriptionMessage = "";
         if (textString.contentEquals("C")) {
-            System.out.println("Achievment Trampel");
             trophyCollectionMessage += "Trampel";
             trophyCollectionDescriptionMessage = "Du hast " + trophy.getTrophyFlowersMaxCount() + " Blumen zertreten.";
             trophyImageView = clumsy;
