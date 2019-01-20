@@ -179,9 +179,6 @@ public class Conversations {
                 	if (gameEngine.getCharacter().get("lady") == 1) {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 3, Color.WHITE, Color.BLACK)));
                     }
-                    else {
-                        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nWas gibt's Neues?", 3, Color.WHITE, Color.BLACK)));
-                    }
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomWiseman), 4, Color.web("#744D34"), Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 2.5, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7300), ae -> gameEngine.getCharacter().put("wiseman", 1)));
@@ -191,7 +188,6 @@ public class Conversations {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Was ich noch fragen\nwollte...", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomWiseman), 4, Color.web("#744D34"), Color.WHITE)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 2.5, Color.WHITE, Color.BLACK)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6300), ae -> gameEngine.getCharacter().put("wiseman", 0)));
                     timeline.play();
                 }
             }
