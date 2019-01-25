@@ -109,6 +109,8 @@ public class Conversations {
     	heroText.add("Hold on.\nIch komme gleich wieder!");
     	heroText.add("Manchmal habe ich das\nGefühl, ich habe das\nschon einmal gehört.");
     	heroText.add("Ich danke dir, aber\njetzt muss ich eine\nPrinzessin retten.");
+    	heroText.add("Faboma ist ein Ort,\nder mich immer wieder\nbegeistert.");
+    	heroText.add("Danke für das Gespräch,\njetzt muss ich aber weiter\nzur Masterzone.");
     }
 
     public void startConversation(Trigger trigger) {
@@ -180,14 +182,14 @@ public class Conversations {
                         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Guten Tag, weiser Mann!\nIch suche die Prinzessin.\nWeißt du, wo sie sein\nkönnte?", 3, Color.WHITE, Color.BLACK)));
                     }
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(3100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomWiseman), 4, Color.web("#744D34"), Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 2.5, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 3, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(7300), ae -> gameEngine.getCharacter().put("wiseman", 1)));
                     timeline.play();
                 }
                 else if (gameEngine.getCharacter().get("wiseman") == 1) {
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1), ae -> this.showSpeechBubble(playerX, playerY, "Was ich noch fragen\nwollte...", 2, Color.WHITE, Color.BLACK)));
                     timeline.getKeyFrames().add(new KeyFrame(Duration.millis(2100), ae -> this.showSpeechBubble(triggerX, triggerY, wisemanText.get(randomWiseman), 4, Color.web("#744D34"), Color.WHITE)));
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 2.5, Color.WHITE, Color.BLACK)));
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(6200), ae -> this.showSpeechBubble(playerX, playerY, heroText.get(randomHero), 3, Color.WHITE, Color.BLACK)));
                     timeline.play();
                 }
             }
