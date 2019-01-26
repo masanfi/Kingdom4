@@ -77,7 +77,6 @@ public class GameEngine extends Observable {
     private static final char[][] world = Level.getLevel();
     private ImageView knight;
     private ImageView knight2;
-    private boolean knightChanged= false;
     private boolean keyPickedUP= false;
     private boolean rabbitPickedUP= false;
     private ImageView fph;
@@ -129,10 +128,6 @@ public class GameEngine extends Observable {
     	this.scenery = scenery;
     }
     
-    /*public Scenery getScenery() {
-    	return scenery;
-    }*/
-    
     public void setStartTime() {
     	this.startTime = System.currentTimeMillis();
     }
@@ -174,10 +169,6 @@ public class GameEngine extends Observable {
     public int getSpeed() {
         return speed;
     }
-
-    /*public void setSpeed(int speed) {
-        this.speed = speed;
-    }*/
 
     public void setPlayer(ImageView[] player) {
         this.player = player;
@@ -579,7 +570,6 @@ public class GameEngine extends Observable {
     }
 	
 	public void changeKnight() {
-		knightChanged = true;
 		this.getCharacter().put("knight2", 3);
 		background.getChildren().remove(knight);
     	background.getChildren().add(knight2);
