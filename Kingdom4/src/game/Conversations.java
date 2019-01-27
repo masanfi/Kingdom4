@@ -134,7 +134,7 @@ public class Conversations {
     private void fillHeroWithTextBegins() {
 		heroTextBeginn.add("Was ich noch fragen\nwollte...");
 		heroTextBeginn.add("Sag mal, weißt\ndu...");
-		heroTextBeginn.add("Weiser Mann,\nsagt mal...");
+		heroTextBeginn.add("Weiser Mann,\nsag mal...");
 		heroTextBeginn.add("Guten Tag! Ich bin Oreh,\nein mächtiger Held!");
     }
 

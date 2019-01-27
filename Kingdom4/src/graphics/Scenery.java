@@ -356,11 +356,6 @@ public class Scenery {
         int paneWidth = gameEngine.getPaneWidth();
        	int paneHeight = gameEngine.getPaneHeight();
     	gameEngine.setUserName(playerNameField.getText());
-    	
-    	//WritableImage wi = new WritableImage(paneWidth, paneHeight);
-    	
-        //Image firstImage = intro.snapshot(new SnapshotParameters(),wi);
-        //ImageView firstImageView= new ImageView(firstImage);
         
         WritableImage wi = new WritableImage(paneWidth, paneHeight);
         Image secondImage = gameEngine.getScene().snapshot(wi);
@@ -368,7 +363,6 @@ public class Scenery {
         secondImageView.setOpacity(0);
         
         Pane pane= new Pane(secondImageView);
-        //pane.setPrefSize(paneWidth,paneHeight);
         pane.setStyle("-fx-background-insets: 0; -fx-padding: 0; -fx-border-insets:0;");
         intro.getChildren().setAll(pane);
         Timeline fadeInTimeline = new Timeline();
